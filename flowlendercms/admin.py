@@ -1,5 +1,5 @@
 from django.contrib import admin
-from flowlendercms.models import Feedback,Service,New,Contect
+from flowlendercms.models import Feedback,Service,New,Contect,Apply
 from flowlendercms.models import ClientDetail
 
 
@@ -27,6 +27,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Service)
 admin.site.register(New)
+admin.site.register(Apply)
 admin.site.register(Contect)
 admin.site.register(Feedback,FeedbackAdmin)
 admin.site.register(ClientDetail,ClientDetailAdmin)
