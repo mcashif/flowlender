@@ -180,13 +180,13 @@
             {% csrf_token %}
             {% for apply in applylist %}
               <div class="col-md-4 col-sm-6 portfolio-item">
-                  <a TARGET="_blank" href="{{ news.pdf_file.url }}" class="portfolio-link" data-toggle="modal">
+                  <a TARGET="_blank" href="{{ apply.pdf_file.url }}" class="portfolio-link" data-toggle="modal">
                       <div class="portfolio-hover">
                           <div class="portfolio-hover-content">
                               <i class="fa fa-plus fa-3x"></i>
                           </div>
                       </div>
-                      <img src="{{ news.pdf_image.url }}"  class="img-responsive" alt="">
+                      <img src="{{ apply.pdf_image.url }}"  class="img-responsive" alt="">
                   </a>
                   <div class="portfolio-caption">
                       <h4>{{apply.title}}</h4>
