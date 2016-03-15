@@ -1,10 +1,10 @@
 from django.db import models
-from datetime import datetime 
+from datetime import datetime
 
 class Service(models.Model):
     title       = models.CharField(max_length=50)
     sub_tittle  = models.CharField(max_length=100)
-    deatil      = models.TextField(max_length=500)
+    deatil      = models.TextField(max_length=500,default="No")
     icon        = models.ImageField(upload_to='flowlenders', blank=True)
 
     def __str__(self):
@@ -14,9 +14,9 @@ class Service(models.Model):
 class New(models.Model):
     title       = models.CharField(max_length=50)
     sub_tittle  = models.CharField(max_length=100)
-    deatil      = models.TextField(max_length=500)
+    deatil      = models.TextField(max_length=500,default="No")
     pdf_image   = models.ImageField(upload_to='flowlenders', blank=True)
-    pdf_file    = models.ImageField(upload_to='flowlenders', blank=True)
+    pdf_file    = models.FileField(upload_to='flowlenders', blank=True)
 
     def __str__(self):
         return self.title
@@ -24,12 +24,32 @@ class New(models.Model):
 class Apply(models.Model):
     title       = models.CharField(max_length=50)
     sub_tittle  = models.CharField(max_length=100)
-    deatil      = models.TextField(max_length=500)
+    deatil      = models.TextField(max_length=500,default="No")
     pdf_image   = models.ImageField(upload_to='flowlenders', blank=True)
-    pdf_file    = models.ImageField(upload_to='flowlenders', blank=True)
+    pdf_file    = models.FileField(upload_to='flowlenders', blank=True)
 
     def __str__(self):
         return self.title
+
+class About(models.Model):
+    aboutTitle     = models.CharField(max_length=100)
+    aboutText      = models.TextField(max_length=500)
+    aboutHeading   = models.CharField(max_length=50)
+    aboutSubHeading= models.CharField(max_length=100)
+    aboutDetail    = models.TextField(max_length=500)
+    introText      = models.CharField(max_length=50)
+    introFlash     = models.CharField(max_length=50)
+    serviceTitle   = models.CharField(max_length=100)
+    serviceText    = models.CharField(max_length=100)
+    newsTile       = models.CharField(max_length=100)
+    newsText       = models.CharField(max_length=100)
+    applyTitle     = models.CharField(max_length=100)
+    applyText      = models.CharField(max_length=100)
+    contactText    = models.CharField(max_length=50)
+    about_image    = models.ImageField(upload_to='flowlenders', blank=True)
+
+    def __str__(self):
+        return self.aboutTitle
 
 class Contect(models.Model):
     mailing_address = models.TextField(max_length=200)
@@ -37,6 +57,8 @@ class Contect(models.Model):
     toll_number     = models.CharField(max_length=50)
     fax_number      = models.CharField(max_length=50)
     email           = models.EmailField(max_length=254)
+    work_time       = models.CharField(max_length=50)
+    work_day        = models.CharField(max_length=50)
 
     def __str__(self):
         return self.mailing_address

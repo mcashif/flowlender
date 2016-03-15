@@ -3,7 +3,8 @@
 <html lang="en">
 
 <head>
-
+  {% csrf_token %}
+  {% for about in aboutlist %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,8 +84,8 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Flow Lenders</div>
-                <div class="intro-heading text-blue">CALL 1.877.659.2131 </div>
+                <div class="intro-lead-in">{{about.introText}}</div>
+                <div class="intro-heading text-blue">{{about.introFlash}}</div>
                 <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
             </div>
         </div>
@@ -95,53 +96,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">A Simplified Process to Get the Right Capital for your Business</h3>
+                    <h2 class="section-heading">{{about.serviceTitle}}</h2>
+                    <h3 class="section-subheading text-muted">{{about.serviceText}}</h3>
                 </div>
             </div>
             <div class="row text-center">
+              {% csrf_token %}
+              {% for service in sevicelist %}
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
-                        <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/2.png' %}" alt="">
+                        <img class="img-circle img-responsive" src="{{ service.icon.url }}" alt="">
                     </span>
-                    <h4 class="service-heading">NON-PROFIT ORGANIZATIONS</h4>
-                    <p class="text-muted">We at Flow Lending realize that without utilizing the right capital at the correct time, all worthwhile endeavors are at risk for not accomplishing all they need to do with proper use of monetary assets. All of our available programs are customized to meet each Non-Profit, Religious Organization or Charities needs.</p>
+                    <h4 class="service-heading">{{service.title}}</h4>
+                    <p class="text-muted">{{service.deatil}}</p>
                 </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/5.png' %}" alt="">
-                    </span>
-                    <h4 class="service-heading">RELIGIOUS ORGANIZATIONS</h4>
-                    <p class="text-muted">We handle all alternative financings that allow your organization to truly grow and keep doing the good deeps that benefit all. We do all this irrespective of the credit worthiness of any of the given entities.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                      <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/6.png' %}" alt="">
-                    </span>
-                    <h4 class="service-heading">SPORTS AGENTS AND ATHLETES</h4>
-                    <p class="text-muted">Flow Lending offers sports lending services for sports agencies, professional athletes and entire teams. We specialize in unsecured low-cost advances to Professional Athletes based on their signed contracts. We can customize these advances to meet the needs of each individual athlete and their unique needs.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                      <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/1.png' %}" alt="">
-                    </span>
-                    <h4 class="service-heading">CASH ADVANCES</h4>
-                    <p class="text-muted">Follow our simple funding process. We are simply acquiring a portion of your future sales. If you are currently in business, want to be pre-approved within 24-48 hours and want funding to take place within 72 hours (depending on the amount of the transaction and the time it takes to receive the necessary documents required to fund). Your monthly sales volume dictates how much you qualify for. Start building your business credit today.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                      <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/3.png' %}" alt="">
-                    </span>
-                    <h4 class="service-heading">ASSET BASED LENDINGS</h4>
-                    <p class="text-muted">Flow Lending provides businesses with immediate funds and ongoing cash flow in the form of a revolving line of credit based on a percentage of the value of the company's assets, such as commercial accounts receivable and inventory. There is a cost on only the funds that are taken, so overall it's less expensive than a traditional term loan. How does Asset-Based Lending provide working capital? Flow Lending assigns your business a revolving line of credit based on a percentage of each of the qualifying asset classes. You may draw on your line of credit whenever needed and pay back to increase availability for future use. You only pay interest on the funds you’ve </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                      <img class="img-circle img-responsive" src="{% static 'bootstrap/img/services/4.png' %}" alt="">
-                    </span>
-                    <h4 class="service-heading">CREDIT CARD PROCESSING</h4>
-                    <p class="text-muted">Flow Lending works with several industry-leading credit card processing companies. These relationships enable us to give your business the ability to accept Visa, MasterCard, American Express and Discover. You can apply for and get the most competitive discount rates. We’ll provide you with the latest card swiping technology and help you understand all the details to get setup properly. </p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -151,66 +120,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">News</h2>
-                    <h3 class="section-subheading text-muted">We are in Top Ranking News</h3>
+                    <h2 class="section-heading">{{about.newsTile}}</h2>
+                    <h3 class="section-subheading text-muted">{{about.newsText}}</h3>
                 </div>
             </div>
             <div class="row">
+              {% csrf_token %}
+              {% for news in newslist %}
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a TARGET="_blank" href="{% static 'pdf/Reuters.pdf' %}" class="portfolio-link" data-toggle="modal">
-                        <img src="{% static 'bootstrap/img/news/1.jpeg' %}"  class="img-responsive" alt="">
+                    <a TARGET="_blank" href="{{ news.pdf_file.url }}" class="portfolio-link" data-toggle="modal">
+                        <img src="{{ news.pdf_image.url }}"  class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>REUTERS</h4>
-                        <p class="text-muted">The Most Innovative One Stop Business Funding</p>
+                        <h4>{{news.title}}</h4>
+                        <p class="text-muted">{{news.sub_tittle}}</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a TARGET="_blank" href="{% static 'pdf/New York Business Journal.pdf' %}" class="portfolio-link" data-toggle="modal">
-                        <img src="{% static 'bootstrap/img/news/2.jpeg' %}" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>NEW YORK BUSINESS JOURNAL</h4>
-                        <p class="text-muted">Flow Lending LLC Expands</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <a TARGET="_blank" href="{% static 'pdf/MarketWatch.pdf' %}" class="portfolio-link" data-toggle="modal">
-                          <img src="{% static 'bootstrap/img/news/3.jpeg' %}" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>MARKETWATCH</h4>
-                        <p class="text-muted">Flow Lending Is Quickly Becoming The Gold Standard</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                  <a TARGET="_blank" href="{% static 'pdf/Latin Business Today.pdf' %}" class="portfolio-link" data-toggle="modal">
-                        <img src="{% static 'bootstrap/img/news/4.jpeg' %}"  class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>LATIN BUSINESS</h4>
-                        <p class="text-muted">The Gold Standard In The Merchant Cash Advanced Industry</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                  <a TARGET="_blank" href="{% static 'pdf/IBITimes.pdf' %}" class="portfolio-link" data-toggle="modal">
-                        <img src="{% static 'bootstrap/img/news/5.jpeg' %}"  class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>INTERNATIONAL BUSINESS TIMES</h4>
-                        <p class="text-muted">The Gold Standard</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                  <a TARGET="_blank" href="{% static 'pdf/Business.pdf' %}" class="portfolio-link" data-toggle="modal">
-                        <img src="{% static 'bootstrap/img/news/6.jpg' %}"  class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>BUSINESS.COM</h4>
-                        <p class="text-muted">Funding to Grow and Expand any Business in any Sector.</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -220,20 +146,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">A simplified process to get the right capital for your business.</h3>
+                    <h2 class="section-heading">{{about.aboutTitle}}</h2>
+                    <h3 class="section-subheading text-muted">{{about.aboutText}}</h3>
                 </div>
             </div>
 
                             <div class="timeline-panel">
-                              <img src="{% static 'bootstrap/img/about/1.jpg' %}" class="img-responsive img-circle" alt="">
+                              <img src="{{ about.about_image.url }}"  class="img-responsive img-circle" alt="">
                                 <div class="timeline-heading">
-                                    <h4>About Us</h4>
-                                    <h4 class="subheading">We treat every client as a top priority</h4>
+                                    <h4>{{about.aboutHeading}}</h4>
+                                    <h4 class="subheading">{{about.aboutSubHeading}}</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Flow Lending is a leading provider of capital to businesses in the United States with innovative and transparent funding solutions. Our primary objective is to provide business owners with the capital they need to run a lucrative business. As a result of the dynamic and often challenging nature of running a business, we make absolutely certain that qualified business owner can get the help they need for increasing their cash flow, and in turn, their profits.</p>
-                                    <p class="text-muted">If you are looking for an organization with integrity that treats every client as a top priority, contact us. We are a professional group dedicated to providing the absolute best possible service to all clients in all sectors. Successful repayments build business credit for long term growth. Nothing to pay as far as ongoing or application costs. There is no interest rate. The programs we offer are sort of similar to factoring, there is no interest rate, just a set cost.</p>
+                                    <p class="text-muted">{{about.aboutDetail}}</p>
+
                                 </div>
                             </div>
 
@@ -245,25 +171,29 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">Apply</h2>
-                  <h3 class="section-subheading text-muted">Requirements: Adobe Reader, if you dont have this software, you can Download Adobe Reader <a href="https://get.adobe.com/reader/">here</a></h3>
+                  <h2 class="section-heading">{{about.applyTitle}}</h2>
+                  <h3 class="section-subheading text-muted">{{about.applyText}}<a href="https://get.adobe.com/reader/">here</a></h3>
               </div>
           </div>
           <div class="row">
+
+            {% csrf_token %}
+            {% for apply in applylist %}
               <div class="col-md-4 col-sm-6 portfolio-item">
-                  <a TARGET="_blank" href="{% static 'pdf/Flow Lending Business Finance Application.pdf' %}" class="portfolio-link" data-toggle="modal">
+                  <a TARGET="_blank" href="{{ news.pdf_file.url }}" class="portfolio-link" data-toggle="modal">
                       <div class="portfolio-hover">
                           <div class="portfolio-hover-content">
                               <i class="fa fa-plus fa-3x"></i>
                           </div>
                       </div>
-                      <img src="{% static 'bootstrap/img/apply/1.jpeg' %}"  class="img-responsive" alt="">
+                      <img src="{{ news.pdf_image.url }}"  class="img-responsive" alt="">
                   </a>
                   <div class="portfolio-caption">
-                      <h4>BUSINESS FINANCE APPLICATION</h4>
-                      <p class="text-muted">Please fill out our application to begin the process on getting the working capital for your business.</p>
+                      <h4>{{apply.title}}</h4>
+                      <p class="text-muted">{{apply.sub_tittle}}</p>
                   </div>
               </div>
+            {% endfor %}
 
     </section>
 
@@ -272,15 +202,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-primary"><p>61-43 186th Street Fresh Meadows, NY 11365</p>
-                                                              <p>Office Number: 1.631.613.1400</p>
-                                                              <p>Toll-Free Number: 1.877.659.2131</p>
-                                                              <p>Fax Number: 1.631.613.1166</p>
-                                                              <p>E-mail Address: Info@flowlenders.com</p>
-                                                              <p>Hours of Operation: 9 AM - 6 PM</p>
-                                                              <p>( Monday - Friday )</p>
+                    <h2 class="section-heading">{{about.contactText}}</h2>
+                    {% csrf_token %}
+                    {% for contact in contacts %}
+                    <h3 class="section-subheading text-primary"><p>{{contact.mailing_address}}</p>
+                                                              <p>Office Number: {{contact.office_number}}</p>
+                                                              <p>Toll-Free Number: {{contact.toll_number}}</p>
+                                                              <p>Fax Number: {{contact.fax_number}}</p>
+                                                              <p>E-mail Address: {{contact.email}}</p>
+                                                              <p>Hours of Operation: {{contact.work_time}}</p>
+                                                              <p>( {{contact.work_time}} )</p>
                                                                </h3>
+                  {% endfor %}
                 </div>
             </div>
             <div class="row">
@@ -318,7 +251,6 @@
             </div>
         </div>
     </section>
-
     <footer>
         <div class="container">
             <div class="row">
@@ -347,7 +279,7 @@
         </div>
     </footer>
 
-
+{% endfor %}
 
     <!-- jQuery -->
     <script src="{% static 'bootstrap/js/jquery.js' %}"></script>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from flowlendercms.models import Feedback
+from flowlendercms.models import Feedback,Service,New,Contect,Apply,About
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
@@ -20,5 +20,20 @@ def index(request):
 
             return JsonResponse(data)
 
+    contacts    = Contect.objects.filter(pk=1)
+    applylist   = Apply.objects.all()
+    sevicelist  = Service.objects.all()
+    newslist    = New.objects.all()
+    aboutlist   = About.objects.filter(pk=1)
+
     template = loader.get_template('flowlendercms/index.html')
-    return HttpResponse(template.render(request))
+
+    context = {
+        'contacts': contacts,
+        'applylist': applylist,
+        'sevicelist': sevicelist,
+        'newslist': newslist,
+        'aboutlist': aboutlist,
+    }
+
+    return HttpResponse(template.render(context, request))
