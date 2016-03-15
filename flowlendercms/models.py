@@ -3,8 +3,8 @@ from datetime import datetime
 
 class Service(models.Model):
     title       = models.CharField(max_length=50)
-    sub_tittle  = models.CharField(max_length=100)
-    deatil      = models.TextField(max_length=500,default="No")
+    sub_tittle  = models.CharField(max_length=100,default="No")
+    deatil      = models.TextField(max_length=1000)
     icon        = models.ImageField(upload_to='flowlenders', blank=True)
 
     def __str__(self):
