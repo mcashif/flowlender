@@ -4,6 +4,12 @@ from django.http import HttpResponse
 from flowlendercms.models import Feedback,Service,New,Contect,Apply,About
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from .forms import ClientDetailForm
+
+
+def data(request):
+    form = ClientDetailForm()
+    return render(request, 'flowlendercms/clientdetail.html', {'form': form})
 
 # Create your views here.
 @csrf_exempt

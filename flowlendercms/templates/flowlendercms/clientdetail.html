@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<head>
+	<title>Flowlenders &middot; Client Data Entry Application</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'gridforms/gridforms.css' %}">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'gridforms/gridforms.js' %}"></script>
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<style type="text/css">
+	body {font-family:arial, sans-serif}
+	</style>
+</head>
+<body>
+	<h1>Client Detail Application</h1>
+	<form class="grid-form">
+		<br><br>
+		<fieldset>
+			<legend>Business Details</legend>
+			<div data-row-span="4">
+				<div data-field-span="3">
+					<label>Businees Name*</label>
+					<input type="text">
+				</div>
+			</div>
+			<div data-row-span="2">
+				<div data-field-span="1">
+					<label>Reffering Party*</label>
+					<input type="text">
+				</div>
+				<div data-field-span="1">
+					<label>Or/Select Refering Party</label>
+					<select>
+						<option value="Party-1" title="Party-1">Party-1</option>
+						<option value="Party-2" title="Party-2">Party-2</option>
+						<option value="Party-3" title="Party-3">Party-3</option>
+					</select>
+				</div>
+			</div>
+			<div data-row-span="4">
+				<div data-field-span="2" data-field-error="Please enter a valid email address">
+					<label>E-mail</label>
+					<input type="text">
+				</div>
+				<div data-field-span="1">
+					<label>Contact No.</label>
+					<input type="text">
+				</div>
+				<div data-field-span="1">
+					<label>Address</label>
+					<input type="text">
+				</div>
+			</div>
+</fieldset>
+
+	<br><br>
+		<fieldset>
+			<legend>Fund's Detail</legend>
+			<div data-row-span="1">
+        <div data-field-span="1">
+          <label>Payment Plan*</label>
+          <input id="r1" name="payment-title" type="radio"><label for="r1"> Weekly</label>
+          <input id="r2" name="payment-title" type="radio"><label for="r2"> Bi-Weekly</label>
+          <input id="r3" name="payment-title" type="radio"><label for="r3"> Monthly</label>
+        </div>
+			</div>
+      <div data-row-span="4">
+				<div data-field-span="2">
+					<label>Amount Requested*</label>
+					<input type="number">
+				</div>
+				<div data-field-span="1">
+					<label>Debit For*</label>
+					<input type="number">
+				</div>
+				<div data-field-span="1">
+					<label>Cedit Score*</label>
+					<input type="number">
+				</div>
+			</div>
+		</fieldset>
+
+		<br><br>
+
+		<fieldset>
+			<legend>Current Status</legend>
+      <div data-row-span="1">
+        <div data-field-span="1">
+          <label>Select Status*</label>
+          <input id="l1" name="Status-title" type="radio"><label for="l1"> Submitted</label>
+          <input id="l2" name="Status-title" type="radio"><label for="l2"> Funded</label>
+          <input id="l3" name="Status-title" type="radio"><label for="l3"> Declined</label>
+          <input id="l4" name="Status-title" type="radio"><label for="l4"> Waiting for Further Documents</label>
+        </div>
+      </div>
+		</fieldset>
+
+		<br><br>
+
+		<fieldset>
+      <legend>Contact Details</legend>
+			<div data-row-span="4">
+
+				<div data-field-span="3">
+					<label>Contact Name*</label>
+					<input type="text">
+				</div>
+			</div>
+
+			</div>
+			<div data-row-span="4">
+				<div data-field-span="2" data-field-error="Please enter a valid email address">
+					<label>E-mail</label>
+					<input type="text">
+				</div>
+				<div data-field-span="1">
+					<label>Contact No.</label>
+					<input type="text">
+				</div>
+				<div data-field-span="1">
+					<label>Address</label>
+					<input type="text">
+				</div>
+			</div>
+    </fieldset>
+    <button type="submit" class="btn btn-xl">Save</button>
+	</form>
+	<br><br><br><br><br>
+</body>
+</html>

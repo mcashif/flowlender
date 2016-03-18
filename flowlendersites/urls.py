@@ -21,5 +21,6 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^data/', 'flowlendercms.views.data', name='data'),
     url(r'^$', 'flowlendercms.views.index', name='index'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
