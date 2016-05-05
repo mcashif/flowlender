@@ -1,13 +1,26 @@
 from django.contrib import admin
-from flowlendercms.models import Feedback,Service,New,Contect,Apply,About
 from flowlendercms.models import ClientDetail
+from import_export.admin import ImportExportModelAdmin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from flowlendercms.models import Profile
+
+class UserProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'profile'
+
+# Define a new User admin
+class UserAdmin(UserAdmin):
+    inlines = (UserProfileInline, )
 
 
-class ClientDetailAdmin(admin.ModelAdmin):
+
+class ClientDetailAdmin(ImportExportModelAdmin):
         fieldsets = (
             (None, {
-                'fields': ('business_name', 'reffering_party', 'data_date','payment_plan','ammount_request','debit_for','credit_score'
-                ,'current_status', 'contact_name')
+                'fields': ('business_name', 'reffering_party', 'data_date','payment_plan','ammount_request','debit_for','credit_score',
+                'debit_ratio','current_status', 'contact_name')
             }),
             ('More Contact Info', {
                 'classes': ('collapse',),
@@ -19,16 +32,9 @@ class ClientDetailAdmin(admin.ModelAdmin):
         list_display_links = ('business_name', 'reffering_party')
         search_fields = ['business_name', 'reffering_party']
         list_filter = ('business_name', 'reffering_party', 'current_status')
+        pass
 
-class FeedbackAdmin(admin.ModelAdmin):
-        list_display = ('name','email','phone', 'data_date')
-        search_fields = ['name', 'message']
-
-# Register your models here.
-admin.site.register(Service)
-admin.site.register(About)
-admin.site.register(New)
-admin.site.register(Apply)
-admin.site.register(Contect)
-admin.site.register(Feedback,FeedbackAdmin)
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(ClientDetail,ClientDetailAdmin)

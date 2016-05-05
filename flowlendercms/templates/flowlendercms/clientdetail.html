@@ -1,5 +1,187 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+
+
+<style>
+
+	.button {
+		  position: relative;
+			background-color: #fc6; /* Green */
+			border: none;
+			color: white;
+			padding: 6px 3px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 14px;
+			margin: 4px 2px;
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			cursor: pointer;
+	}
+
+	.button1 {
+	width: 150px;
+			background-color: #fff;
+			color: black;
+			border: 2px solid #000;
+	}
+
+	.button1:hover {
+			background-color: #000;
+			color: white;
+	}
+</style>
+
+
+<script>
+
+function validateForm() {
+
+    var x = document.forms["clientForm"]["bname"].value;
+		var y = document.forms["clientForm"]["rparty"].value;
+
+		var a = document.forms["clientForm"]["amount"].value;
+		var b = document.forms["clientForm"]["debit"].value;
+		var c = document.forms["clientForm"]["credit"].value;
+
+		var d = document.forms["clientForm"]["cname"].value;
+
+
+		if (x == null || x == "") {
+        document.getElementById("bname").focus();
+        return false;
+    }
+
+		if (y == null || y == "") {
+				document.getElementById("rparty").focus();
+				return false;
+		}
+
+		if (a == null || a == "") {
+        document.getElementById("amount").focus();
+        return false;
+    }
+
+		if (b == null || b == "") {
+				document.getElementById("debit").focus();
+				return false;
+		}
+
+		if (c == null || c == "") {
+				document.getElementById("credit").focus();
+				return false;
+		}
+
+		if (d == null || d == "") {
+				document.getElementById("cname").focus();
+				return false;
+		}
+
+	}
+
+	function bNameValidate() {
+			var bname = document.forms["clientForm"]["bname"].value;
+			if (bname == null || bname == "") {
+					document.getElementById("bname").focus();
+					return false;
+			}
+	}
+
+
+	function ValidateAmount() {
+			var amount = document.forms["clientForm"]["amount"].value;
+			if (amount == null || amount == "") {
+					document.getElementById("amount").focus();
+					return false;
+			}
+	}
+
+	function ValidateDebit() {
+			var credit = document.forms["clientForm"]["credit"].value;
+			if (credit == null || credit == "") {
+					document.getElementById("credit").focus();
+					return false;
+			}
+	}
+
+	function ValidateCredit() {
+			var debit = document.forms["clientForm"]["debit"].value;
+			if (debit == null || debit == "") {
+					document.getElementById("debit").focus();
+					return false;
+			}
+	}
+
+
+
+
+	function bRPValidate() {
+
+			var rparty = document.forms["clientForm"]["rparty"].value;
+
+			if (rparty == null || rparty == "") {
+
+					var e = document.getElementById("rpSelect");
+					var strUser = e.options[e.selectedIndex].value;
+
+					if (strUser == null || strUser == "") {
+							document.getElementById("rparty").focus();
+							return false;
+					}
+
+					document.getElementById("rparty").value=strUser;
+				}
+	}
+
+	function bDDValidate(value) {
+
+			document.getElementById("rparty").value=value;
+
+	}
+
+	function ValidateEmail()
+	{
+
+		 var email = document.forms["clientForm"]["email"].value;
+
+		 if(email) {
+				 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+				  {
+				    return (true)
+				  }
+
+						document.getElementById("email").focus();
+				    return (false)
+			}
+	}
+
+	function cNameValidate() {
+			var cname = document.forms["clientForm"]["cname"].value;
+			if (cname == null || cname == "") {
+					document.getElementById("cname").focus();
+					return false;
+			}
+	}
+
+	function ValidateEmail2()
+	{
+
+		 var email = document.forms["clientForm"]["email2"].value;
+
+		 if(email) {
+				 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+					{
+						return (true)
+					}
+
+						document.getElementById("email2").focus();
+						return (false)
+			}
+	}
+
+</script>
+
 <head>
 	<title>Flowlenders &middot; Client Data Entry Application</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'gridforms/gridforms.css' %}">
@@ -12,42 +194,44 @@
 </head>
 <body>
 	<h1>Client Detail Application</h1>
-	<form class="grid-form">
+	<form class="grid-form" method="POST" name="clientForm" onsubmit="return validateForm()">{% csrf_token %}
 		<br><br>
 		<fieldset>
 			<legend>Business Details</legend>
 			<div data-row-span="4">
 				<div data-field-span="3">
 					<label>Businees Name*</label>
-					<input type="text">
+					<input type="text" name="bname" id="bname" onblur="bNameValidate()">
 				</div>
 			</div>
 			<div data-row-span="2">
 				<div data-field-span="1">
 					<label>Reffering Party*</label>
-					<input type="text">
+					<input type="text" id="rparty" name="rparty" onblur="bRPValidate()">
 				</div>
 				<div data-field-span="1">
 					<label>Or/Select Refering Party</label>
-					<select>
-						<option value="Party-1" title="Party-1">Party-1</option>
-						<option value="Party-2" title="Party-2">Party-2</option>
-						<option value="Party-3" title="Party-3">Party-3</option>
-					</select>
+
+					<select name="rpSelect" id="rpSelect" onchange="bDDValidate(this.value);">
+							{% for detail in clientDetailRP %}
+				    		<option value="{{ detail.reffering_party }}">{{ detail.reffering_party }}</option>
+							{% endfor %}
+				</select>
+
 				</div>
 			</div>
 			<div data-row-span="4">
 				<div data-field-span="2" data-field-error="Please enter a valid email address">
 					<label>E-mail</label>
-					<input type="text">
+					<input type="email" id="email" name="email"  onblur="ValidateEmail()">
 				</div>
 				<div data-field-span="1">
 					<label>Contact No.</label>
-					<input type="text">
+					<input type="text" id="cnumber">
 				</div>
 				<div data-field-span="1">
 					<label>Address</label>
-					<input type="text">
+					<input type="text" id="address">
 				</div>
 			</div>
 </fieldset>
@@ -58,23 +242,25 @@
 			<div data-row-span="1">
         <div data-field-span="1">
           <label>Payment Plan*</label>
-          <input id="r1" name="payment-title" type="radio"><label for="r1"> Weekly</label>
-          <input id="r2" name="payment-title" type="radio"><label for="r2"> Bi-Weekly</label>
-          <input id="r3" name="payment-title" type="radio"><label for="r3"> Monthly</label>
+					<select  name="fdSelect" id="fdSelect" >
+						<option value="Weekly" title="Weekly">Weekly</option>
+						<option value="Bi-Weekly" title="Bi-Weekly">Bi-Weekly</option>
+						<option value="Monthly" title="Monthly">Monthly</option>
+					</select>
         </div>
 			</div>
       <div data-row-span="4">
 				<div data-field-span="2">
 					<label>Amount Requested*</label>
-					<input type="number">
+					<input type="number" id="amount" name="amount" onblur="ValidateAmount()">
 				</div>
 				<div data-field-span="1">
 					<label>Debit For*</label>
-					<input type="number">
+					<input type="number" id="debit" name="debit" onblur="ValidateDebit()">
 				</div>
 				<div data-field-span="1">
 					<label>Cedit Score*</label>
-					<input type="number">
+					<input type="number" id="credit" name="credit" onblur="ValidateCredit()">
 				</div>
 			</div>
 		</fieldset>
@@ -86,10 +272,12 @@
       <div data-row-span="1">
         <div data-field-span="1">
           <label>Select Status*</label>
-          <input id="l1" name="Status-title" type="radio"><label for="l1"> Submitted</label>
-          <input id="l2" name="Status-title" type="radio"><label for="l2"> Funded</label>
-          <input id="l3" name="Status-title" type="radio"><label for="l3"> Declined</label>
-          <input id="l4" name="Status-title" type="radio"><label for="l4"> Waiting for Further Documents</label>
+					<select name="csSelect" id="csSelect" >
+						<option value="Submitted" title="Submitted">Submitted</option>
+						<option value="Funded" title="Funded">Funded</option>
+						<option value="Declined" title="Declined">Declined</option>
+						<option value="Waiting for Further Documents" title="Waiting for Further Documents">Waiting for Further Documents</option>
+					</select>
         </div>
       </div>
 		</fieldset>
@@ -102,7 +290,7 @@
 
 				<div data-field-span="3">
 					<label>Contact Name*</label>
-					<input type="text">
+					<input type="text" id="cname" name="cname" onblur="cNameValidate()">
 				</div>
 			</div>
 
@@ -110,19 +298,19 @@
 			<div data-row-span="4">
 				<div data-field-span="2" data-field-error="Please enter a valid email address">
 					<label>E-mail</label>
-					<input type="text">
+					<input type="text" id="email2" name="email2" onblur="ValidateEmail2()">
 				</div>
 				<div data-field-span="1">
 					<label>Contact No.</label>
-					<input type="text">
+					<input type="text" id="contact2">
 				</div>
 				<div data-field-span="1">
 					<label>Address</label>
-					<input type="text">
+					<input type="text" id="address2">
 				</div>
 			</div>
     </fieldset>
-    <button type="submit" class="btn btn-xl">Save</button>
+		<button type="submit" class="button button1">Save</button>
 	</form>
 	<br><br><br><br><br>
 </body>
