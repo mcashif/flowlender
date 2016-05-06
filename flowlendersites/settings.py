@@ -126,3 +126,9 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 STATIC_URL = '/static/'
+
+# url to redirect after successfull login
+LOGIN_REDIRECT_URL = '/data'
+
+# URL of the login page.
+LOGIN_URL = '/login/'

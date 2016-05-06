@@ -9,5 +9,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # index page
+    url(r'^login/$', flowlendercmsviews.user_login, name='login'),
     url(r'^$', 'flowlendercms.views.data', name='data'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

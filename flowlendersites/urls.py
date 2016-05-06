@@ -21,5 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', 'flowlendercms.views.data', name='data'),
+    url(r'^data/', 'flowlendercms.views.data', name='data'),
+    url(r'^$', 'django.contrib.auth.views.login', {'template_name': 'flowlendercms/login.html'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name': 'flowlendercms/logout.html'}),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
