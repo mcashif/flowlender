@@ -9,6 +9,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 
+
+def viewdata(request):
+
+    clientData   = ClientDetail.objects.all()
+
+
+    template = loader.get_template('flowlendercms/viewdata.html')
+
+    context = {
+        'clientData': clientData,
+    }
+
+    return HttpResponse(template.render(context, request))
+
 @login_required(login_url='/login/')
 def data(request):
 
