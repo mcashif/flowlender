@@ -37,12 +37,12 @@ class ClientDetail(models.Model):
     business_name   = models.CharField(max_length=50)
     reffering_party = models.CharField(max_length=50)
     data_date = models.DateTimeField(default=datetime.now, blank=True)
-    ammount_request = models.DecimalField(max_digits=5, decimal_places=2)
-    debit_for = models.DecimalField(max_digits=5, decimal_places=2)
+    ammount_request = models.DecimalField(max_digits=15, decimal_places=2)
+    debit_for = models.DecimalField(max_digits=15, decimal_places=2)
     payment_plan    = models.CharField(max_length=16,
                                         choices=PAYMENT_PLAN,
                                         default=WK)
-    credit_score    = models.DecimalField(max_digits=5, decimal_places=2)
+    credit_score    = models.DecimalField(max_digits=15, decimal_places=2)
     current_status  = models.CharField(max_length=16,
                                         choices=CURRENT_STATUS,
                                         default=SBT)
@@ -52,7 +52,7 @@ class ClientDetail(models.Model):
     mobile_number   = models.CharField(max_length=50,default="NIL")
     fax_number      = models.CharField(max_length=50,default="NIL")
     email           = models.EmailField(max_length=254,default="def@def.def")
-    debit_ratio     = models.DecimalField(max_digits=5, decimal_places=2)
+    debit_ratio     = models.DecimalField(max_digits=10, decimal_places=2)
 
 
     def __str__(self):

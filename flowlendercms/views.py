@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='/login/')
 def viewdata(request):
 
     clientData   = ClientDetail.objects.all()
@@ -31,7 +31,9 @@ def data(request):
         bname       = request.POST.get("bname")
         rparty      = request.POST.get("rparty")
         amount      = request.POST.get("amount")
+        amount=str(amount).replace(",","")
         debit       = request.POST.get("debit")
+        debit= str(debit).replace(",","")
         fdSelect    = request.POST.get("fdSelect")
         credit      = request.POST.get("credit")
         csSelect    = request.POST.get("csSelect")
@@ -47,12 +49,12 @@ def data(request):
         email2      = request.POST.get("email2")
         if not email2:
             contact2="NIL@NIL.com"
-        debitX      = int(debit)/int(amount)
+        debitX      = float(debit)/float(amount)
 
         fd=ClientDetail(business_name=bname,
                         reffering_party=rparty,
-                        ammount_request=amount,
-                        debit_for=debit,
+                        ammount_request=float(amount),
+                        debit_for=float(debit),
                         payment_plan=fdSelect,
                         credit_score=credit,
                         current_status=csSelect,
