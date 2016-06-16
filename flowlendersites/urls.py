@@ -21,8 +21,10 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^viewdata/', 'flowlendercms.views.viewdata', name='viewdata'),
-    url(r'^data/', 'flowlendercms.views.data', name='data'),
-    url(r'^$', 'django.contrib.auth.views.login', {'template_name': 'flowlendercms/login.html'}),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name': 'flowlendercms/logout.html'}),
+    url(r'^$', 'flowlendercms.views.index', name='index'),
+    url(r'^index/', 'flowlendercms.views.index', name='index'),
+    url(r'^index-detail/', 'flowlendercms.views.indexdetail', name='indexdetail'),
+    url(r'^index-list/', 'flowlendercms.views.indexlist', name='indexlist'),
+    url(r'^index-login/', 'flowlendercms.views.indexlogin', name='indexlogin'),
+    url(r'^index-addrecord/', 'flowlendercms.views.indexaddrecord', name='indexaddrecord'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

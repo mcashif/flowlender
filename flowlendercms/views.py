@@ -85,3 +85,24 @@ def logout(request):
 
 def login(request):
     return HttpResponseRedirect('/login')
+
+
+def index(request):
+    template = loader.get_template("flowlendercms/index.html")
+    return HttpResponse(template.render())
+
+def indexdetail(request):
+    template = loader.get_template("flowlendercms/index-detail.html")
+    return HttpResponse(template.render())
+
+def indexlist(request):
+    template = loader.get_template("flowlendercms/index-list.html")
+    return HttpResponse(template.render())
+
+def indexlogin(request):
+    template = loader.get_template("flowlendercms/index-login.html")
+    return HttpResponse(template.render())
+
+def indexaddrecord(request):
+    template = loader.get_template("flowlendercms/index-addrecord.html")
+    return HttpResponse(template.render())
