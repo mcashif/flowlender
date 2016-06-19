@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+import json
 
 @login_required(login_url='/login/')
 def viewdata(request):
@@ -90,6 +91,12 @@ def login(request):
 def index(request):
     template = loader.get_template("flowlendercms/index.html")
     return HttpResponse(template.render())
+
+def getjson(request):
+    if request.method == 'GET':
+            with open('/Users/Apple/pythoneprojects/items.txt') as data_file:
+                 jdata = json.load(data_file)
+            return HttpResponse(jdata, content_type = 'application/json')
 
 def indexdetail(request):
     template = loader.get_template("flowlendercms/index-detail.html")

@@ -1,0 +1,359 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "category": "real_estate",
+            "title": "Decatur Central High School",
+            "location": "Throwback EGO",
+            "latitude": 40.94554564607652,
+            "longitude":-74.14876356562502,
+            "url": "item-detail.html",
+            "type": "760.24 Miles",
+            "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+            "rating": 4,
+            "gallery":
+                [
+                    "/static/assets/img/items/imgp.jpg"
+                ]
+        },
+        {
+          "id": 2,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 45.466751481830826,
+          "longitude": -75.66487684687502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 3,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 41.70457402349661,
+          "longitude":-76.55476942500002,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 4,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 42.65706455427807,
+          "longitude": -73.76424208125002,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 5,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 44.36202756319656,
+          "longitude": -73.68733778437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 6,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 38.5727285412762,
+          "longitude": -80.98225965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 7,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 8,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 40.202869368654596,
+          "longitude": -78.16975965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 9,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 10,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 39.3925595374766,
+          "longitude": -79.13655653437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 11,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 41.92565269297569,
+          "longitude": -75.35725965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 12,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 13,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 40.0011873731205,
+          "longitude": -79.83968153437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 14,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 15,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 45.17320239118332,
+          "longitude": -77.55452528437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 16,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 17,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 39.324603199987635,
+          "longitude": -86.78304090937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 18,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 33.604181673967695,
+          "longitude":-82.21272840937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 19,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 20,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 39.52827380959531,
+          "longitude": -78.96077528437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+
+        {
+          "id": 21,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 35.127629611726,
+          "longitude": -82.30061903437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 22,
+          "category": "real_estate",
+          "title": "Decatur Central High School",
+          "location": "Throwback EGO",
+          "latitude": 39.12033775845048,
+          "longitude": -82.91585340937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        }
+
+
+    ]
+}

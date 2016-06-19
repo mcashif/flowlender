@@ -1,28 +1,47 @@
-#page-footer {
-  .inner { display: table; width: 100%;
-    h3 { color: $color-grey-dark; font-weight: normal; margin-bottom: 30px; margin-top: 0; }
-    #footer-main { background-color: $color-grey-light; padding: 40px 0; }
-    #footer-copyright { background-color: $color-default-darker; color: #fff; display: table; padding: 20px 0; width: 100%;
-      a { color: #fff;
-        &:hover { color: $color-default; }
+#page-footer { display: table-row; background-color: #fff; border-top: 2px solid $color-grey-light; height: 1px; margin-top: 30px; padding-top: 50px; position: relative;
+  .inner { padding-top: 60px; //display: table; width: 100%;
+    address {
+      figure { margin-top: 20px; }
+    }
+    article { margin-bottom: 30px; }
+    p { font-size: 12px; }
+    .subscribe { background-color: transparent; padding: 0;
+      input { font-size: 14px; }
+      .input-group-btn {
+        button { background-color: darken($color-grey-light, 5%); font-size: 14px;
+          i { color: $color-default; margin-left: 0; }
+        }
       }
     }
-    .property {
-      &:last-child { margin-bottom: 0 !important; }
-    }
-    // Property thumbnail
-    .property-thumbnail { background-color: $color-default; float: left; height: 60px; overflow: hidden;
-      &:hover {
-        img { @include opacity(1); }
+    .footer-bottom { border-bottom: 2px solid $color-default; border-top: 1px solid rgba(0,0,0,.08); margin-top: 20px; padding: 30px;
+      .left { float: left; line-height: 30px; }
+      .right { float: right; }
+      .to-top { @include border-radius(50%); border: 2px solid $color-default; display: block; font-size: 18px; height: 30px; line-height: 22px; position: relative; text-align: center; width: 30px;
+        &:hover { cursor: pointer; }
+        i { color: $color-default; left: 0px; position: relative; }
       }
-      img { -moz-backface-visibility: hidden; -webkit-backface-visibility:hidden; @include transition(.4s); @include opacity(.2); width: 100%; }
+    }
+  }
+  .item-horizontal { border: none; margin-bottom: 40px; padding: 0;
+    &:last-child { border-bottom: none; }
+  }
+  .review {  margin-bottom: 40px;
+    &:last-child { border-bottom: none; }
+    p { margin-top: 5px; }
+    .info { margin-top: 5px;
+      .rating { float: left; }
+      .type { margin: 3px; }
+    }
+  }
+  .social { margin-bottom: 20px;
+    a { display: inline-block; margin-bottom: 0;
+      i { color: $color-grey-dark; margin-right: 5px; }
     }
   }
 }
 
 // Sticky footer
 
-body, html { height: 100%; margin: 0; }
-.wrapper { display: table; height: 100%; width: 100%; }
 #page-content { height: auto; }
-#page-footer { display: table-row; height: 1px; }
+#outer-wrapper, #inner-wrapper, #page-canvas { display: table; height: 100%; width: 100%; }
+#inner-wrapper { @include transition(.4s ease-in-out all); left: 0; position: relative; }

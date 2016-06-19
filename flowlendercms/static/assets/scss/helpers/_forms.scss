@@ -1,110 +1,62 @@
-.form-group { margin-bottom: 10px; }
+//----------------------------------------------------------------------------------------------------------------------
+// B
+//----------------------------------------------------------------------------------------------------------------------
 
-input[type="text"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control { @include box-shadow(none); @include border-radius(0px); @include transition(.3s); @include box-shadow(0px 1px 1px rgba(0,0,0,.2) inset); -webkit-appearance: none; background-color: $color-grey-light; border: none; font-size: 14px; outline: none !important; padding: 10px 9px 11px 9px; width: 100%; height: inherit;
-  &:active, &:focus { @include box-shadow(inset 0px 1px 1px rgba(0,0,0,.2)); }
-  &:hover { background-color: rgba(0,0,0,.02); }
-}
+// Buttons and Select --------------------------------------------------------------------------------------------------
 
-.btn, select { @include box-shadow(none); @include border-radius(0px); @include transition(.3s); @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); background-color: $color-grey-light; border: none; color: $color-grey-medium; font-size: 14px; outline: none !important; padding: 10px 9px 9px 9px; width: auto;
-  &:hover { background-color: darken($color-grey-light, 3%); color: $color-grey-medium; }
-  &:active, &:focus { @include box-shadow(0px 1px 2px rgba(0,0,0,0), inset 0px 2px 2px rgba(0,0,0,.2)); background-color: darken($color-grey-light, 3%); color: $color-grey-medium;  }
+.btn, select { @include box-shadow(none); @include border-radius(0px); @include transition(.3s); @include box-shadow(none); @include rounded-border; @include shadow; background-color: $color-grey-light; border: none; color: $color-grey-dark; font-size: 14px; font-weight: bold; outline: none !important; padding: 10px 11px 9px 11px; width: auto;
+  &:hover { background-color: darken($color-grey-light, 3%);  }
+  &:active, &:focus { @include box-shadow(none); background-color: darken($color-grey-light, 3%); }
 
-  &.btn-default { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); @include transition(.2s); background-color: $color-default; color: #fff;
+  &.btn-default { @include box-shadow(none); @include transition(.2s); background-color: $color-default; color: #fff;
     &:hover { background-color: darken($color-default, 3%); }
-    &:active { @include box-shadow(0px 2px 2px rgba(0,0,0,0), inset 0px 2px 2px rgba(0,0,0,.2)); }
+    &:active { @include box-shadow(none); }
+    i { color: #fff; }
   }
   &.btn-grey-dark { background-color: $color-grey-dark; color: #fff;
     &:hover { background-color: lighten($color-grey-dark, 6%); }
   }
-  &.btn-danger { background-color: #C9302C; color: #fff;
-    &:hover { background-color: darken(#C9302C, 5%); }
-  }
-  &.btn-success { background-color: #5CB85C; color: #fff;
-    &:hover { background-color: darken(#5CB85C, 5%); }
-  }
-  &.btn-info { background-color: #31B0D5; color: #fff;
-    &:hover { background-color: darken(#31B0D5, 5%); }
-  }
-  &.btn-warning { background-color: #EC971F; color: #fff;
-    &:hover { background-color: darken(#EC971F, 5%); }
+
+  &.btn-small { font-size: 12px; font-weight: bold; padding: 5px 12px; }
+  &.btn-large { font-size: 14px; padding: 15px 20px; }
+
+  &.icon {
+    i { color: #fff; margin-left: 10px; }
   }
 
-  &.small { font-size: 12px; padding: 5px 12px 5px; }
-
-  &.large { font-size: 18px; padding: 15px 20px; }
-}
-
-// Checkboxes
-
-.checkbox, .radio { padding-left: 0px; }
-
-.checkbox {
-  &.switch { margin: 0; padding: 0; z-index: 2;
-    .icheckbox { @include border-radius(3px); @include box-shadow(none); @include transition(.3s); border: 2px solid #cdcdcd; background-color: #fff; display: inline-block; height: 25px; margin-left: 10px; position: relative; width: 45px; top: -1px;
-      &:hover { border-color: $color-default;
-        &:before { @include opacity(1); }
-      }
-      &:after { @include transition(.3s); @include opacity(0); @include font-awesome; color: $color-default-darker; content: "\f00c"; font-size: 11px; position: absolute; left: 5px; line-height: 20px; }
-      &:before { @include transition(.3s); @include border-radius(2px); background-color: $color-default; content: ""; height: 17px; width: 17px; position: absolute; left: 2px; top: 2px; }
-      &.checked { border-color: $color-default;
-        &:before { @include opacity(1); background-color: $color-default-darker; left: 22px; }
-      }
-    }
-  }
-  .icheckbox { @include box-shadow(inset 0px 1px 1px rgba(0,0,0,.2)); position: relative; display: inline-block; vertical-align: middle; background-color: $color-grey-light; display: inline-block; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
-    &:after { @include transition(.3s); @include opacity(0); @include font-awesome; color: $color-grey-dark; content: "\f00c"; position: absolute;  line-height: 20px; left: 4px; }
-    &.checked {
-      &:after { @include opacity(1); }
+  &.framed { background-color: transparent; border: 2px solid rgba(0,0,0,.06); color: $color-grey-dark;
+    &:hover { border-color: rgba(0,0,0,.1); background-color: transparent; }
+    &:active, &:focus, &.active { @include box-shadow(none); border-color: rgba(0,0,0,.05); background-color: transparent; }
+    i { color: $color-default; }
+    &.btn-color-default { border-color: $color-default; color: $color-default; }
+    &.icon {
+      &:hover { background-color: transparent; border-color: darken($color-grey-light, 5%); }
     }
   }
 }
 
-.iradio { @include shadow-inner; @include border-radius(50%); position: relative; display: inline-block; vertical-align: middle; background-color: $color-grey-light; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
-  &:after { @include transition(.3s); @include opacity(0); @include border-radius(50%); width: 8px; height: 8px; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; content: ""; background-color: $color-grey-dark; }
-  &.checked {
-    &:after { @include opacity(1); }
-  }
-}
-
-.input-group-addon { @include border-radius(0px); border: none; }
-
-.input-group {
-  .search { @include box-shadow(none); position: relative; width: 40px; z-index: 2; }
-}
-
-.form-group { position: relative; }
-
-form {
-  #form-status { line-height: 1; position: relative; top: -28px;
-    #valid { position: relative; top: -10px;
-      .icon { font-size: 24px; margin-right: 10px; vertical-align: middle; }
-    }
-    #invalid { color: red; position: relative; top: -10px; }
-  }
-  label.error { background-color: red; bottom: -30px; color: #fff;  font-size: 12px; left: 0;  padding: 5px; position: absolute; z-index: 2;
-    &:before { border-style: solid; border-width: 0 3.5px 5px 3.5px; border-color: transparent transparent red transparent; content: ""; height: 0px; left: 5px; position: absolute; top: -5px; width: 0px; }
-  }
-}
-
-.form-submit {
-  .file-input { border: 2px solid $color-grey-light; padding: 15px; position: relative; width: 100%;
-    .file-preview { @include border-radius(0px); border: none; padding: 0; margin-bottom: 20px;
-      .close { position: absolute; right: 10px; top: 5px; }
-      .file-preview-frame { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); border: none; height: inherit;
-        .file-preview-image { height: 100px; }
-      }
-    }
-  }
-}
-
-// SELECT
+// Bootstrap Select ----------------------------------------------------------------------------------------------------
 
 .bootstrap-select { width: 100% !important; margin-bottom: 0 !important;
-  .selectpicker { @include box-shadow(none); @include border-radius(0px); @include transition(.3s); @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); background-color: $color-grey-light; color: $color-grey-medium;
-    &:focus, &:active { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); outline: none !important; }
-    &:hover { background-color: darken($color-grey-light, 3%); }
+  &.framed {
+    .selectpicker { border: 2px solid rgba(0,0,0,.08); background-color: transparent; //border: 2px solid rgba(0,0,0,.06);
+      &:hover { background-color: transparent; }
+    }
+    .bootstrap-select-searchbox {
+      input { border: none; }
+    }
+  }
+  .bootstrap-select-searchbox {
+    &:after { @include font-awesome;  content: "\f002"; display: block; color: $color-grey-medium; position: absolute; right: 16px; top: 18px; }
+    input { @include box-shadow(none); border: 2px solid rgba(0,0,0,.06); margin-top: 5px; padding: 5px;
+      &:focus, &:active, &:hover { @include box-shadow(none); }
+    }
+  }
+  .selectpicker { @include shadow; @include rounded-border; background-color: #fff; @include transition(.3s); color: $color-grey-medium; font-weight: normal; // @include border-color; @include border-radius(0px); @include transition(.3s); background-color: #fff; color: $color-grey-medium; font-weight: normal;
+    &:focus, &:active { outline: none !important; }
+    &:hover { background-color: #fff; }
     .caret { border: none;
-      &:after { @include font-awesome; color: $color-default; content: "\f107"; font-size: 18px; position: absolute; top: -7px; right: -2px; }
+      &:after { @include font-awesome; color: $color-grey-dark; content: "\f107"; font-size: 19px; position: absolute; top: -7px; right: -2px; }
     }
     .filter-option { @include transition(.3s); padding-left: 0px; position: relative;
       &:before { @include opacity(0); @include font-awesome; @include transition(.3s); color: $color-default; content: "\f00c"; font-size: 14px; position: absolute; left: 0px; top: 2px; }
@@ -116,170 +68,304 @@ form {
       &:before { border: none; }
     }
   }
-  .dropdown-menu { @include border-radius(0px);  border: none; margin-top: 3px; padding: 0; padding-left: 0 !important;
-    &.selectpicker { background-color: #fff !important; }
-    li {
-      &:first-child, &.selected {
-        a { background-color: transparent; color: #9c9c9c; padding-left: 15px;
-          &:hover { background-color: transparent; padding-left: 15px; }
-        }
-      }
-      a { @include transition(.2s); color: $color-grey-medium; padding: 8px 15px;
-        &:hover { background-color: $color-grey-light; padding-left: 20px; }
-      }
-    }
-  }
-  &.open {
-    .selectpicker { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); @include transition(.3s); }
-  }
-}
-
-.form-search {
-  .bootstrap-select {
-    .selectpicker { font-weight: bold; }
-  }
-}
-
-// DISPLAY TICK ICON AFTER OPTION IS SELECTED
-
-.selected-option-check-a {
-  padding-left: 20px;
-  &:before { @include opacity(1); }
-}
-.selected-option-check {
-  .selectpicker {
-    .filter-option { padding-left: 20px;
-      &:before { @include opacity(1); }
-    }
-  }
-}
-
-.jslider { font-family: 'Roboto', sans-serif; top: 12px;
-  .jslider-value { background-color: transparent; color: #fff;  font-size: 12px; font-weight: bold; }
-  .jslider-bg {
-    i { height: 2px; }
-    .l { background: none; background-color: #fff; }
-    .f { background: none; background-color: #fff;  }
-    .r { background: none; background-color: #fff; }
-    .v { background: none; background-color: $color-default; height: 2px; }
-  }
-  .jslider-pointer { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); background: url("../img/price-range-dragger.png") no-repeat 50% 50% $color-default; height: 14px; width: 14px; top: 12px;
-    &:before { border-style: solid; border-width: 0 7px 8px 7px; border-color: transparent transparent $color-default transparent; content: ""; height: 0px;  width: 0px; position: absolute; top: -8px; left: 0; }
-  }
-  .jslider-label { color: #fff; }
-}
-
-.price-range { @include transition(.3s); @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); background-color: $color-grey-light; margin-bottom: 20px; padding: 15px 15px 10px;
-  .jslider-label, .jslider-value { color: $color-grey-medium; }
-}
-
-// SEARCHBOX
-
-.search-box-wrapper { z-index: 100; }
-.search-box { @include transition(.4s); @include opacity(0); padding-right: 15px; position: absolute; width: 100%; z-index: 1;
-  &.show-search-box { @include opacity(1); }
-  h2 { border: none; padding-bottom: 0; }
-  .btn { width: 100%; }
-  .nav-pills {
-    li {
-      a { @include border-radius(0px); background-color: transparent; color: $color-grey-dark; }
-    }
-  }
-  .form-map { @include transition(.4s); background-color: rgba(255,255,255,.3); padding: 5px 10px 1px 10px;
-    &:hover { background-color: rgba(255,255,255,.9); }
-    input[type="text"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], textarea, select, .selectpicker, .price-range {
-       background-color: $color-default-darker; border: none; color: #fff; font-size: 14px; font-weight: bold; min-height: 40px; padding: 10px 9px 9px 9px; width: 100%;
-        &:hover { background-color: darken($color-default-darker, 3%); }
-    }
-    .selectpicker {
-      .caret {
-        &:after { color: #fff; }
-      }
-    }
-    .price-range { @include transition(.3s); @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); margin-bottom: 20px; padding: 15px 15px 10px; }
-    .jslider-label, .jslider-value { color: #fff; }
-  }
-}
-.horizontal-search {
-  .search-box-wrapper { padding: 20px 0; position: relative !important; top: inherit !important; background-color: $color-default; //background-color: $color-default-darker;
-    .search-box { padding-right: 0; position: relative;
-      hr { margin-bottom: 10px; margin-top: 10px; }
-      .advanced-search-toggle { padding: 10px 0px; color: #fff; position: absolute; top: 0; right: 0; //float: right;
-        .fa { color: $color-default-darker; margin-left: 5px;  }
-      }
-      .nav-pills {
-        li {
-          &.active {
-            a { @include opacity(1); background-color: $color-default-darker; color: #fff;
-              &:after { @include opacity(1); }
+  &.stars {
+    &.btn-group {
+      .dropdown-menu {
+        li { overflow: hidden;
+          a { height: 35px; padding: 0 10px;
+            .text { display: block; top: -29px; position: relative;
+              small { padding-left: 5px; color: $color-default; font-size: 48px; position: relative; top: 8px; letter-spacing: -5px; }
             }
           }
-          a { @include transition(.4s); color: #fff; position: relative;
-            &:after { @include opacity(0); @include transition(.4s); width: 0; border-style: solid; border-width: 5px 3.5px 0 3.5px; border-color: $color-default-darker transparent transparent transparent; content: ""; position: absolute; left: 0; right: 0; margin: auto; bottom: -5px; }
+        }
+      }
+    }
+  }
+  .dropdown-menu { @include border-radius(0px); border: none; margin-top: 3px; padding: 0; padding-left: 0 !important;
+    &.selectpicker { background-color: #fff !important; }
+    li {
+      &.selected {
+        a { background-color: transparent; //color: #9c9c9c;
+          &:hover { background-color: transparent;  }
+        }
+      }
+      a { @include transition(.2s); color: $color-grey-dark; padding: 8px 15px;
+        &:hover { background-color: $color-grey-light; color: $color-grey-dark;  }
+      }
+    }
+
+    > li {
+      &:first-child {
+        a { border-top: none; }
+      }
+      a { border-top: 1px solid $color-grey-light; display: block;
+        &.sub-category { @include opacity(.8); border-top: none; font-size: 12px; padding: 5px 5px 5px 30px;
+          &:before { @include font-awesome; color: #e2e2e2; content: "\f111"; font-size: 5px; position: relative; top: -2px; left: -8px; }
+        }
+      }
+    }
+
+    > .active {
+      > a { background-color: $color-default; color: #fff; }
+    }
+
+  }
+  &.open {
+    .selectpicker { @include shadow; @include transition(.3s); background-color: #fff; }
+  }
+  &.btn-group.show-tick .dropdown-menu li.selected a i.check-mark { margin-top: 10px; }
+  &.btn-group.show-tick .dropdown-menu li.selected a.sub-category i.check-mark { margin-top: 5px; }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// F
+//----------------------------------------------------------------------------------------------------------------------
+
+// Form ----------------------------------------------------------------------------------------------------------------
+
+form {
+  section { margin-bottom: 30px; }
+  &.framed { border: 2px solid rgba(0,0,0,.06); padding: 20px;
+    .form-group {
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+  &.subscribe {
+    input { background-color: #fff; font-size: 18px; padding: 15px; }
+    .input-group-btn {
+      &:last-child {
+        button { margin-left: 0; }
+      }
+      button { font-size: 18px; font-weight: bold;
+        i { color: #fff; margin-left: 10px; }
+      }
+    }
+  }
+  &.main-search { display: table; height: 100%; padding: 10px 10px 0 10px; width: 100%;
+    button { padding-left: 12px; padding-right: 12px; }
+    .form-group { display: inline-block; float: left; margin-bottom: 0; margin-right: 10px; }
+    input[type="text"],input[type="date"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control, .selectpicker { background-color: #fff; }
+  }
+  &.background-color-grey-light { padding: 20px;
+    .bootstrap-select {
+      .selectpicker { background-color: #fff; }
+      &.open {
+        .selectpicker { @include box-shadow(none); @include transition(.3s); }
+      }
+    }
+  }
+  &.background-color-white { @include shadow; @include rounded-border; padding: 20px;
+    //.form-group {
+    //  .input-group {
+    //    &.location {
+    //      .input-group-addon { background-color: $color-grey-dark; color: #fff; }
+    //    }
+    //  }
+    //}
+  }
+  &.border-less-inputs {
+    input, textarea { @include box-shadow(none);
+      &:hover, &:focus, &:active { @include box-shadow(none); }
+    }
+  }
+  &.framed-inputs {
+    input, textarea { @include box-shadow(none); background-color: transparent; border: 2px solid rgba(0,0,0,.06);
+      &:hover { @include box-shadow(none); border-color: rgba(0,0,0,.1); }
+      &:active, &:focus { @include box-shadow(none); border-color: rgba(0,0,0,.12); }
+    }
+  }
+  &#form-review {
+    .user-rating { margin-bottom: 20px;
+      label { font-weight: normal; margin-bottom: 0px; }
+      .rating {
+        i {  font-size: 18px; }
+      }
+    }
+  }
+  &#form-submit {
+    section { margin-bottom: 50px;
+      h3 { font-size: 18px; font-weight: normal; margin-bottom: 20px; }
+      ul.checkboxes {
+        li { display: inline-block; width: 33%; }
+      }
+      #submit { padding: 15px 20px; font-size: 18px; }
+      .nav-pills {
+        &.nav-stacked {
+          li {
+            &:last-child {
+              a { border: none; }
+            }
+            a { border: none; border-bottom: 1px solid $color-grey-light; padding-left: 0; }
+            &.active {
+              a { position: relative;
+                &:after { content: ""; width: 0; height: 0; border-style: solid; border-width: 10px 10px 10px 0; border-color: transparent $color-grey-light transparent transparent; position: absolute; top: 0; bottom: 0; margin: auto; right: -32px; z-index: 1 }
+                &:before { content: ""; width: 0; height: 0; border-style: solid; border-width: 10px 10px 10px 0; border-color: transparent #fff transparent transparent; position: absolute; top: 0; bottom: 0; margin: auto; right: -34px; z-index: 2 }
+              }
+            }
           }
         }
       }
-      .form-map { background-color: transparent; padding: 0; margin-top: 20px;
-        input[type="text"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], textarea, select, .selectpicker, .price-range {
-          background-color: #fff; color: $color-grey-medium;
-          &:hover { background-color: $color-grey-light; }
-        }
-        button { background-color: $color-default-darker; }
-        .selectpicker {
-          .caret {
-            &:after { color: $color-default; }
+      .tab-content { background-color: #fff; padding: 20px;
+        article { margin-bottom: 20px; }
+        &.menu {
+          .menu-icon { position: relative;
+            i { color: $color-default; font-size: 18px; position: relative; top: 10px; }
+            span { @include border-radius(50%); background-color: $color-grey-dark; color: #fff; display: block; font-size: 10px; font-weight: bold; height: 17px; left: 10px; line-height: 17px; text-align: center; width: 17px; top: 0; position: absolute; }
           }
         }
-        .jslider-label, .jslider-value { color: $color-grey-medium; }
-      }
-      .advanced-search  { padding-bottom: 20px;
-        h3 { margin-top: 0; }
       }
     }
   }
-}
-.horizontal-search-float {
-  .search-box { padding-right: 0; position: inherit;
-    .nav-pills {
-      li {
-        &.active {
-          a { @include opacity(1); background-color: rgba(255,255,255,.9); color: $color-default-darker; }
+  .form-group { margin-bottom: 10px;
+    &.two-inputs {
+      .input-group { float: left; width: 47.5%; margin-right: 10px;
+        &:last-child { margin-right: 0; }
+        .bootstrap-select { width: 1% !important; }
+      }
+    }
+    .input-group { display: table; width: 100%;
+      &.location {
+        input { border-right: none; }
+      }
+      .input-group-addon { cursor: pointer; position: absolute; right: 0px; padding: 0px; width: 35px; display: table; bottom: 0px; z-index: 3; background-color: transparent;
+        &:hover { cursor: pointer;
+          i { color: $color-default; }
         }
-        a { @include opacity(.7); @include transition(.4s); background-color: rgba(255,255,255,.9); color: $color-grey-medium; }
+        i { line-height: 39px; width: 40px; }
+      }
+      &.input-daterange {
+        input { text-align: left; }
+        > span { display: table-cell; float: left; position: relative; margin-right: 10px; width: 48%;
+          &:last-child { margin-right: 0; }
+          .input-group-addon { pointer-events: none; }
+        }
       }
     }
-    .form-map { background-color: rgba(255,255,255,.9); padding: 15px 15px 5px 15px;
-      &:hover { background-color: rgba(255,255,255,1); }
-      input[type="text"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], textarea, select, .selectpicker, .price-range {
-        background-color: $color-default-darker; border: none; color: #fff; font-size: 14px; font-weight: bold; min-height: 40px; padding: inherit; padding-left: 10px; width: 100%;
-        &:hover { background-color: darken($color-default-darker, 3%); }
-      }
-      .price-range {  margin-bottom: 0; padding: 15px 15px 10px; }
-      .jslider-label, .jslider-value { color: #fff; }
+    &.large {
+      label { font-size: 18px; font-weight: normal; }
+      input { font-size: 16px; padding: 14px 12px; }
     }
   }
 }
 
-// FADE IN
-
-.animation-fade-in { @include animation-name(animation-fade-in); @include animation-duration(.2s); @include keyframes(animation-fade-in); }
-@include keyframes(animation-fade-in) {
-  0% {
-    @include opacity(0);
-  }
-  100% {
-    @include opacity(1);
+.search-bar {
+  &.horizontal {
+    .main-search {
+      &.narrow { padding: 0 170px;
+        &.inputs-1 {
+          .input-row > .form-group { width: 94.1%; }
+        }
+        &.inputs-2 {
+          .input-row > .form-group { width: 46.3%; }
+        }
+        &.inputs-3 {
+          .input-row > .form-group { width: 30.5%; }
+        }
+        &.inputs-4 {
+          .input-row > .form-group { width: 22.5%; }
+        }
+        &.inputs-5 {
+          .input-row > .form-group { width: 17.8%; }
+        }
+        .input-row > .form-group {
+          &:last-child { margin-right: 0; width: initial; }
+        }
+      }
+      &.inputs-1 {
+        .input-row > .form-group { width: 95%; }
+      }
+      &.inputs-2 {
+        .input-row > .form-group { width: 47%; }
+      }
+      &.inputs-3 {
+        .input-row > .form-group { width: 31.2%; }
+      }
+      &.inputs-4 {
+        .input-row > .form-group { width: 23.2%; }
+      }
+      &.inputs-5 {
+        .input-row > .form-group { width: 18.4%; }
+      }
+      .input-row > .form-group {
+        &:last-child { margin-right: 0; width: initial; }
+        //&.two-inputs {
+        //  .input-group { float: left; width: 47.5%; margin-right: 10px;
+        //    &:last-child { margin-right: 0; }
+        //    .bootstrap-select { width: 1% !important; }
+        //  }
+        //}
+      }
+      .input-row { display: table; margin-bottom: 10px; width: 100%; }
+    }
   }
 }
 
-// FADE OUT
+//----------------------------------------------------------------------------------------------------------------------
+// CH
+//----------------------------------------------------------------------------------------------------------------------
 
-.animation-fade-out { @include animation-name(animation-fade-out); @include animation-duration(.2s); @include keyframes(animation-fade-out); }
-@include keyframes(animation-fade-out) {
-  0% {
-    @include opacity(1);
+// Checkboxes ----------------------------------------------------------------------------------------------------------
+
+.checkbox, .radio { padding-left: 0px; }
+
+.checkbox {
+  &:hover {
+    .icheckbox { @include box-shadow(inset 0px 0px 0px 2px rgba(0,0,0,.12)); }
   }
-  100% {
-    @include opacity(0);
+  .icheckbox { @include transition(.3s); @include box-shadow(inset 0px 0px 0px 2px rgba(0,0,0,.08)); position: relative; display: inline-block; vertical-align: middle; background-color: #fff; display: inline-block; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
+    &:after { @include transition(.3s); @include opacity(0); @include font-awesome; color: $color-grey-dark; content: "\f00c"; position: absolute; font-size: 12px; line-height: 20px; left: 4px; }
+    &.checked {
+      &:after { @include opacity(1); }
+    }
+  }
+}
+
+.iradio { @include border-radius(50%); position: relative; display: inline-block; vertical-align: middle; background-color: $color-grey-light; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
+  &:after { @include transition(.3s); @include opacity(0); @include border-radius(50%); width: 8px; height: 8px; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; content: ""; background-color: $color-grey-dark; }
+  &.checked {
+    &:after { @include opacity(1); }
+  }
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+// I
+//----------------------------------------------------------------------------------------------------------------------
+
+input[type="text"],input[type="date"],input[type="email"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control { @include box-shadow(none); @include rounded-border; @include transition(.3s); @include shadow-inner;  -webkit-appearance: none; background-color: #fff; border: none; font-size: 14px; outline: none !important; padding: 10px 9px 9px; width: 100%; height: inherit; line-height: inherit; }
+
+.iradio { @include border-radius(50%); position: relative; display: inline-block; vertical-align: middle; background-color: $color-grey-light; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
+  &:after { @include transition(.3s); @include opacity(0); @include border-radius(50%); width: 8px; height: 8px; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; content: ""; background-color: $color-grey-dark; }
+  &.checked {
+    &:after { @include opacity(1); }
+  }
+}
+
+.input-group-addon { @include border-radius(0px); border: none; }
+
+.input-group {
+  &.counter {  background-color: #fff;
+    input, .btn { @include box-shadow(none); @include shadow; @include rounded-border; background-color: #fff; text-align: center; }
+    &:hover {
+      input, .btn {  }
+    }
+    i { color: $color-grey-dark; font-size: 8px; vertical-align: middle; }
+    .input-group-btn {
+      &:first-child {
+        .btn { border-right: none; }
+      }
+      &:last-child {
+        .btn { border-left: none; }
+      }
+      .btn { z-index: 3;
+        &:hover {
+          i { color: $color-default; }
+        }
+      }
+    }
+  }
+  .search { @include box-shadow(none); position: relative; width: 40px; z-index: 2; }
+  .input-group-btn {
+    .btn { margin: 0px; position: relative; top: 0; }
   }
 }

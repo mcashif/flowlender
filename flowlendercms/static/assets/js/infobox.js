@@ -288,7 +288,10 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
       e.stopPropagation();
     }
 
-    me.close();
+      setTimeout(function() {
+          me.close();
+      }, 350);
+    //me.close();
 
     /**
      * This event is fired when the InfoBox's close box is clicked.
@@ -769,4 +772,5 @@ InfoBox.prototype.close = function () {
   }
 
   this.setMap(null);
+
 };

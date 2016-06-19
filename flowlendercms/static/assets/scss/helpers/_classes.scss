@@ -1,371 +1,95 @@
-.page-sub-page {
-  #page-content {
-    &:after { @include page-content-gradient; content: ""; left: 0; height: 110px; position: absolute; top: 0; width: 100%; z-index: -1; }
+//----------------------------------------------------------------------------------------------------------------------
+// B
+//----------------------------------------------------------------------------------------------------------------------
+
+// Blog post
+
+.blog-post { border-bottom:  1px solid $color-grey-light; margin-bottom: 40px; padding-bottom: 30px;
+  header { border-bottom: none;
+    h2 { font-size: 24px; }
   }
-  &.page-submit {
-    h2 { border: none; margin-bottom: 25px; padding-bottom: 0; }
-    .submit-pricing { margin-bottom: 0; }
+  .meta { margin: 25px 0;
+    > a { margin-right: 30px;
+      i { margin-right: 10px; }
+    }
+    .tags { display: inline-block; float: right;
+      .tag { border: 2px solid $color-grey-light; font-size: 12px; font-weight: bold; padding: 6px; }
+    }
   }
-  &.page-create-account {
-    .radio { display: inline-block; margin-right: 50px; margin-bottom: 30px; }
-    h3 { margin-top: 0; }
-  }
-  &.page-create-agency {
-    #page-content {
-      form {
-        > section { margin-bottom: 30px; }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// C
+//----------------------------------------------------------------------------------------------------------------------
+
+// Carousel
+
+.carousel { position: relative;
+  &.wide { margin: 50px 0px;
+    .slide { padding: 0px 60px; position: relative; z-index: 1;
+      .inner { display: table; width: 100%;
+        &:hover { left: 20px;
+          .image {
+            > img { @include opacity(.05); }
+            .item-specific { left: 0px; }
+          }
+        }
+      }
+      .inner { @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) 0s); left: 0; position: relative;
+        .image { display: block; float: left; margin-right: 30px; position: relative; width: 300px;
+          > img { @include transition(.3s); @include opacity(1); @include rounded-border; @include shadow; display: block; }
+          .item-specific { @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) 0s); font-size: 12px; left: 10px; padding: 20px; position: absolute; top: 0; width: 100%; }
+        }
+      }
+      .wrapper { display: table-cell; vertical-align: middle;
+        figure {
+          i { color: $color-grey-medium; margin-bottom: 15px; }
+        }
+        h3 { font-size: 24px; margin-bottom: 5px; margin-top: 0; }
+        .info {
+          .rating { display: inline-block; margin-right: 20px; }
+          .type { display: inline-block;
+            img { display: inline-block; width: 20px; }
+            span { @include opacity(.6); font-size: 12px; }
+          }
+        }
+        p { padding: 10px 0; }
       }
     }
   }
-  &.page-contact {
-    #page-content {
-      section { margin-bottom: 30px; }
-    }
-  }
-  &.page-legal {
-    #page-content {
-      section { margin-bottom: 40px;
-        h3 { font-weight: normal; }
+}
+
+// Categories
+
+.categories { list-style: none; padding-left: 15px;
+  > li { float: left; margin-bottom: 20px; width: 32%;
+    > a { font-size: 16px; font-weight: bold; }
+    &:before { @include font-awesome; content: "\f111"; color: $color-default; font-size: 5px; position: relative; top: -3px; left: -15px; }
+    .sub-category { list-style: none; padding-left: 4px;
+      a { color: $color-grey-medium;
+        &:hover { color: $color-default; }
       }
-    }
-  }
-  &.page-agency-detail {
-    #page-content {
-      address { position: relative; }
-    }
-  }
-  &.page-about-us {
-    .background-image { overflow: visible; }
-    .agent {
-      .wrapper {
-        aside { display: none; }
-      }
-    }
-    #our-team {
-      .agent {
-        .wrapper { padding-left: 110px; }
-        .agent-image { width: 90px; }
-      }
-    }
-  }
-}
-
-#overlay {
-  background:rgba(0,0,0,0.3);
-  display:none;
-  width:100%; height:100%;
-  position:absolute; top:0; left:0; z-index:99998;
-}
-#similar-properties { padding-bottom: 20px;
-  h2 { margin-bottom: 10px !important; }
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Universal Classes
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.background-color-grey-light { background-color: $color-grey-light; }
-.background-color-grey-medium { background-color: $color-grey-medium; }
-.background-color-grey-dark { background-color: $color-grey-dark; }
-.background-color-default { background-color: $color-default; }
-.background-color-default-darker { background-color: $color-default-darker; }
-.background-image { left: 0; margin: auto; max-width: 100%; position: absolute; right: 0; top: 0;  z-index: -1; height: 100%; overflow: hidden; }
-.button-icon {
-  .fa { margin: 0 10px; }
-}
-.center { text-align: center; }
-.has-fullscreen-map { position: relative;
-  &:before { @include opacity(1); @include transition(.8s); @include font-awesome; animation: animate-loading 3s infinite linear; -webkit-animation: animate-loading 3s infinite linear; content: "\f013"; color: $color-grey-dark; font-size: 30px; position: absolute; top: 0; left: 0; z-index: 1000; width: 26px; height: 30px;  bottom: 0; right: 0; margin: auto; }
-  &:after { @include opacity(1); @include transition(.8s); background-color: #fff; content: ""; position: absolute; top: 0; left: 0; z-index: 999; width: 100%; height: 100%; }
-  &.loaded {
-    &:before, &:after { @include opacity(0); }
-  }
-}
-.has-dark-background { color: #fff;
-  a { color: #fff; }
-}
-.link-icon { color: $color-grey-dark;
-  .fa { color: $color-default; margin: 0 10px; }
-}
-.link-arrow { @include transition(.2s); color: $color-grey-dark; display: inline-block;
-  &:after { @include transition(.2s); @include font-awesome; content: "\f105"; color: $color-default; left: 0; font-size: 18px; margin-left: 10px; vertical-align: middle; position: relative; bottom: 2px; }
-  &:hover { color: $color-grey-dark; cursor: pointer;
-    &:after { color: $color-default-darker; left: 5px; }
-  }
-  &.geo-location {
-    &:after { content: "\f041"; top: -1px; }
-    &:hover {
-      &:after { left: 0; top: -5px; }
-    }
-  }
-  &.back {
-    &:after { display: none; }
-    &:before { @include transition(.2s); @include font-awesome; content: "\f104"; color: $color-default; right: 0; font-size: 18px; margin-right: 10px; vertical-align: middle; position: relative; bottom: 2px; }
-    &:hover { color: $color-grey-dark; cursor: pointer;
-      &:before { color: $color-default-darker; right: 5px; }
-    }
-  }
-}
-.no-border { border: none !important; }
-.no-bottom-margin { margin-bottom: 0 !important; }
-.opacity-10 { @include opacity(.1); }
-.opacity-20 { @include opacity(.2); }
-.text-align-right { text-align: right; }
-.text-underline { text-decoration: underline; }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Classes
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/****
-  A
-****/
-
-// About Us
-
-#about-us {
-  #ceo-section {
-    .cite-title { font-size: 36px; font-weight: lighter; }
-    h3 { color: $color-default-darker; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 0; }
-    .cite { display: inline-block; margin: 20px 0; width: 70%; }
-  }
-  .image { display: inline-block; margin-bottom: 10px;
-    img { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); }
-  }
-  .divider-image { @include opacity(.1); margin: 30px 0; max-width: 100%; }
-  .member { margin-bottom: 60px; }
-}
-
-// Account Profile
-
-.account-profile { position: relative;
-  h3 { margin-top: 0; margin-bottom: 30px; }
-  img { width: 100%; margin-bottom: 30px; }
-  form { position: relative; }
-  section { margin-bottom: 0px;
-    &#agency { @include transition(.4s);}
-    &#contact, &#agency {
-      label { display: block; line-height: 38px; }
-    }
-    &#social {
-      .input-group { width: 100%;
-        .input-group-addon { background-color: $color-grey-dark; width: 40px;
-          i { color: #fff; }
+      li { display: inline-block;
+        &:after { content: ","; }
+        &:last-child {
+          &:after { content: "..."; }
         }
       }
     }
   }
-  .contact-fields { display: table; width: 100%;
-    dt { clear: both }
-    dd { float: right; margin-bottom: 5px; width: 65%;
-    }
-  }
-  .switch { position: absolute; top: 0; right: 0;
-    label { line-height: 0 !important; }
-    .icheckbox { margin-right: 0; }
-  }
 }
 
-// Add your property button (on the map)
-
-.geo-location-wrapper { position: relative; z-index: 1; width: 100%;
-  &:hover {
-    .text { @include opacity(1); right: 50px; pointer-events: none; }
-  }
-  .btn { background-color: #fff; color: $color-default-darker; position: absolute; right: 0px; top: 60px; width: 38px;
-    &:hover { background-color: #fff; color: $color-default; }
-  }
-  .fa { font-size: 20px; }
-  .text { @include opacity(0); @include shadow; @include transition(.4s); color: #fff; background-color: $color-default-darker; padding: 10px; position: absolute; right: 40px; text-align: right; top: 0; pointer-events: none;
-    &:after { width: 0; height: 0; content: ""; border-style: solid; border-width: 4px 0 4px 4px; border-color: transparent transparent transparent $color-default-darker; position: absolute; top: 0; right: -4px; bottom: 0; margin: auto; }
-  }
-}
-
-// Agency
-
-.agency { border-bottom: 1px solid $color-grey-light; display: table; font-size: 12px; padding-bottom: 10px; margin-bottom: 30px; position: relative; width: 100%;
-  address { width: 30%; display: inline-block; vertical-align: top; margin-left: 40px;
-    h3 { margin-top: 0; margin-bottom: 10px; }
-  }
-  h2 { border: none; margin-bottom: 20px; margin-top: 0; padding: 0; }
-  dl { display: inline-block; width: 50%;
-    dd { margin-bottom: 4px; }
-  }
-  .agency-image { display: table-cell; vertical-align: middle; width: 30%; }
-  .wrapper { display: table-cell; width: 70%; }
-}
-
-.agency-image {
-  img { max-width: 100%; }
-}
-
-// Agent listing
-
-.agent { margin-bottom: 60px; position: relative; padding-left: 180px;
-  .agent-image { @include shadow; @include transition(.2s); left: 0; position: absolute; top: 0; width: 160px;
-    &:hover { top: -5px; }
-    img { width: 100%; }
-  }
-  .wrapper {
-    h2 { border: none; margin-bottom: 10px; margin-top: 0; padding-bottom: 0; }
-    aside { @include opacity(.6); }
-    dl { border-top: 1px solid $color-grey-light; margin-top: 10px; padding-top: 10px; font-size: 12px;
-      dd { margin-bottom: 4px; }
-    }
-  }
-}
-
-// Agent detail
-
-#agent-detail {
-  h3 { margin-bottom: 20px; margin-top: 0; }
-  .property {
-    h3  { margin: 5px 0 3px 0; }
-  }
-  .agent-image {
-    img { width: 100%; }
-  }
-  .agent-social {
-    .btn { width: 36px; }
-  }
-  .agency-logo { display: block; position: relative;
-    &:after { @include opacity(0); @include transition(.2s); @include font-awesome; content: "\f105"; color: $color-default; font-size: 18px; position: absolute; top: 0; bottom: 0; margin: auto; width: 15px; height: 20px; right: 20px; }
-    &:hover {
-      &:after { @include opacity(1); right: 5px; }
-    }
-    img { max-width: 100%; }
-  }
-}
-
-// Agent form
-
-.agent-form {
-  .agent-info { padding-left: 140px; position: relative;
-    h3 { margin-top: 0; }
-    hr { margin: 10px 0; }
-    figure { left: 0; position: absolute; top: 0;
-      img { width: 120px; }
-    }
-  }
-}
-
-/*
-#agent-info {
-  dl {
-    dd { text-align: left; margin-left: 80px; }
-  }
-}
-*/
-
-// Animate loading
-
-.animate-loading { @include animation-name(animate-loading); @include animation-duration(infinite); @include keyframes(animate-loading); }
-@include keyframes(animate-loading) {
-  0% {
-    @include rotate(0deg);
-  }
-  100% {
-    @include rotate(360deg);
-  }
-}
-
-/****
-  B
-****/
-
-// Banner
-
-.banner { @include transition(.4s); border: 2px solid $color-grey-light; display: table; width: 100%; height: 100%; padding: 30px; margin-bottom: 30px;
-  &:hover {  border-color: darken($color-grey-light, 10%); }
-  .title, .submit { display: table-cell; vertical-align: middle; }
-  .title { color: $color-grey-dark; font-size: 24px; font-weight: lighter; width: 70%; }
-  .submit { color: $color-default; font-size: 18px; text-align: right; width: 30%;
-    i { color: $color-default-darker; margin-left: 10px; }
-  }
-}
-
-// Breadcrumb
-
-.breadcrumb { @include opacity(.6); background-color: transparent; padding: 8px 0; font-size: 12px; margin-bottom: 10px;
-  a { color: $color-grey-medium; }
-}
-
-// Block
-
-.block { padding: 25px 0; }
-
-// Blog
-
-.blog-post { border-bottom: 1px solid $color-grey-light; margin-bottom: 60px; padding-bottom: 30px;
-  iframe { margin-bottom: 20px; }
-  img { max-width: 100%; }
-  header {
-    h2 { border: none; font-size: 36px; margin: 20px 0; padding-bottom: 0; }
-  }
-  p { margin-bottom: 20px; }
-  ul { padding-left: 25px; }
-  .meta { display: table; width: 100%; margin: 20px 0;
-    .link-icon {
-      &:first-child {
-        .fa { margin-left: 0; }
-      }
-    }
-    .tags { display: inline-block; float: right;
-      .tag { margin-left: 5px; }
-    }
-  }
-}
-
-// Bookmark icon
-
-.bookmark { position: relative;
-  &:before { @include transition(.4s); @include font-awesome; content: "\f08a"; color: $color-default; font-size: 18px; position: relative; }
-  &:hover {
-    &:before { color: $color-default-darker; }
-    .title-add { visibility: visible; @include opacity(1); right: 30px; }
-  }
-  .title-add, .title-added { @include transition(.4s); @include opacity(0); visibility: hidden; color: $color-grey-medium; font-size: 12px; pointer-events: none; position: absolute; top: 0px; right: 25px; text-align: right; width: 140px; }
-}
-.bookmark-added { position: relative;
-  &:before { content: "\f004"; }
-  &:after { @include font-awesome; @include opacity(0); animation: animate-bookmark 1s; -webkit-animation: animate-bookmark 1s; content: "\f055"; color: $color-default; left: 3px; font-size: 14px; position: absolute; z-index: 2; }
-  .title-add { -webkit-opacity: 0 !important; opacity: 0 !important; }
-  .title-added { @include opacity(1); visibility: visible; }
-}
-
-.animate-bookmark { @include animation-name(animate-bookmark); @include animation-duration(1s); @include keyframes(animate-bookmark); }
-@include keyframes(animate-bookmark) {
-  0% {
-    @include opacity(0);
-    top: 0px;
-  }
-  30% {
-    top: -20px;
-    @include opacity(1);
-  }
-  100% {
-    top: -20px;
-    @include opacity(0);
-  }
-}
-
-/****
-  C
-****/
-
-// Cite
-
-.cite { color: rgba(0,0,0,.5); font-family: "Georgia", serif; font-size: 18px; font-style: italic; margin: 10px 0; }
 
 // Comments
 
 .comments { list-style: none; padding-left: 0;
-  .comment { display: table; margin-bottom: 20px; padding-left: 80px; position: relative;
+  .comments-child { padding-left: 80px; }
+  .comment { display: table; margin-bottom: 20px; padding-left: 80px; position: relative; width: 100%;
+    &:last-child {
+      .comment-wrapper { border: none; }
+    }
     figure { left: 0; position: absolute; top: 0;
-      .image { background-color: $color-grey-medium; height: 70px; position: relative; overflow: hidden; width: 60px;
-        &:after { bottom: 0px; content: ""; height: 0px; border-style: solid; border-width: 10px 0 0 10px; border-color: transparent transparent transparent #fff; position: absolute; right: 0; width: 0px; }
-        &:before { background-color: #fff; bottom: 0; content: ""; height: 10px; left: 0; width: calc(100% - 10px); position: absolute; }
+      .image { @include border-radius(50%); background-color: $color-grey-light; height: 60px; position: relative; overflow: hidden; width: 60px;
         img { height: 100%; }
       }
     }
@@ -376,793 +100,1061 @@
     .reply { color: $color-grey-dark;
       .fa { color: $color-default; margin-right: 10px; }
     }
+    .tools { position: relative; float: right; top: -2px;
+      .fa { color: red; font-size: 14px; }
+    }
+  }
+  .comment-reply { padding-left: 0;
+    .comment { margin-bottom: 0; }
   }
 }
 
-/****
-  D
-****/
+//----------------------------------------------------------------------------------------------------------------------
+// D
+//----------------------------------------------------------------------------------------------------------------------
 
-// Display Lines
+// Datepicker
 
-.display-lines {
-  .property { border-bottom: 2px solid $color-grey-light; padding-left: 280px; padding-bottom: 30px; position: relative; overflow: visible;
-    &.no-border { padding-bottom: 0; }
-    &:hover {
-      img { top: inherit; }
-    }
-    .property-image { height: 195px; left: 0; position: absolute; top: 0; overflow: hidden; width: 260px; }
-    .type { top: 0; right: 0; }
-    .info { display: table; position: relative;
-      header {
-        a { display: inline-block; }
-        figure { margin-bottom: 10px; }
-        h3 { color: $color-default-darker; font-size: 28px; margin: 0; }
-      }
-      aside { margin-top: 10px;
-        p { float: left; max-height: 55px; font-size: 12px; width: 60%; overflow: hidden; padding-right: 10px; padding-bottom: 20px; }
-        dl { float: right; width: 40%; font-size: 12px;
-          dd { margin-bottom: 4px; }
+.datepicker {
+  &.datepicker-dropdown { @include border-radius(2px); @include shadow; border: none; font-size: 14px; margin-top: 10px; padding: 9px;
+    &:before { display: none; }
+    thead {
+      tr:first-child {
+        th { @include transition(.3s);
+          &:hover { @include border-radius(2px); @include shadow; background: $color-grey-light; }
         }
       }
-      .link-arrow { bottom: 0; left: 0; position: absolute; }
     }
-    .ribbon { margin: inherit; left: initial;  }
-  }
-}
-
-/****
-  E
-****/
-
-// Enable agency select box
-
-.enabled { @include transition(.4s); @include opacity(1); pointer-events: inherit; }
-.disabled { @include transition(.4s); @include opacity(.2); pointer-events: none; }
-
-// Error Pages
-
-.error-page { display: table; text-align: center; margin-top: 100px; width: 100%;
-  h2 { position: relative; z-index: 4; }
-  .title {
-    header { color: $color-default; font-size: 99px; font-weight: lighter; position: relative; z-index: 1; }
-  }
-  .top { bottom: 40px; left: 0; margin: auto; position: absolute; right: 0; z-index: 2; }
-  .bottom { bottom: 90px; left: 0; margin: auto; position: absolute; right: 0; z-index: 0; }
-}
-
-/****
-  F
-****/
-
-// FAQ
-
-.faq { position: relative; padding-left: 50px; margin-bottom: 50px;
-  .icon { background-color: $color-default; color: #fff; height: 35px; left: 0; width: 35px; position: absolute; top: 0; text-align: center; line-height: 35px;
-    &:after { bottom: -7px; content: ""; height: 0px; border-style: solid; border-width: 0px 10px 10px 10px; border-color: transparent $color-default transparent transparent; position: absolute; right: 0; width: 0px; }
-  }
-  header { color: $color-default-darker; font-size: 18px; margin-top: 6px; margin-bottom: 15px; }
-  p { border-bottom: 2px solid $color-grey-light; margin-bottom: 15px; padding-bottom: 15px; }
-  aside { font-size: 12px;
-    a { margin-left: 10px; }
-  }
-}
-
-// Feature box
-
-.feature-box { border: 2px solid $color-grey-light; margin-bottom: 30px; padding: 0 20px 15px 80px; position: relative;
-  .description {
-    h3 { border-bottom: 1px solid rgba(0,0,0,.1); color: $color-default-darker; font-weight: normal; padding-bottom: 10px; }
-  }
-  .icon { background-color: $color-default; height: 60px; left: -2px; padding: 20px; position: absolute; top: -2px; width: 60px;
-    &:after { bottom: -8px; content: ""; height: 0px; border-style: solid; border-width: 0 8px 8px 0; border-color: transparent $color-default transparent transparent; position: absolute; right: 0; width: 0px;  }
-    .fa { color: #fff; font-size: 20px; }
-  }
-}
-
-// Featured properties block
-
-.featured-properties { padding-bottom: 0; padding-top: 40px; }
-
-// Featured Property Carousel
-
-#featured-properties-carousel { background-color: #fff; }
-
-// Fun Facts
-
-.fun-facts { display: table; margin-bottom: 15px; padding: 30px 0; position: relative; width: 100%;
-  &:before { background-color: rgba(0,0,0,.07); bottom: 0; content: ""; height: 2px; left: 0; margin: auto; position: absolute; top: -15px; right: 0; width: 100%; z-index: -2; }
-  .number-wrapper { text-align: center;
-    figure { color: $color-default-darker; }
-    .number { color: $color-default; font-size: 48px; font-weight: lighter; position: relative;
-      &:before { background-color: #fff; bottom: 0; content: ""; padding: 20px; position: absolute; top: 0; left: 0; right: 0; margin: auto; width: 60%; z-index: -1; }
+    table {
+      tr {
+        td, th { @include border-radius(0); @include transition(.3s); padding: 4px 8px; background-color: transparent;
+          &:hover { @include shadow; background-color: $color-grey-light; }
+          &.selected { background: none; background-color: darken($color-default, 5%);
+            &:hover { background-color: darken($color-default, 5%); }
+            &.active { background: none; background-color: darken($color-default, 5%);
+              &:hover { background-color: darken($color-default, 5%); }
+            }
+          }
+          &.range { background-color: $color-default }
+          &.today { @include box-shadow(0px 0px 0px 2px $color-grey-dark inset); background: none;
+            &:hover { background: none; }
+            &.selected { background-color: darken($color-default, 5%); }
+          }
+        }
+      }
     }
   }
 }
 
-/****
-  I
-****/
+// Detail Sidebar
 
-.invoice { width: 100%;
-  aside { display: inline-block; width: 49%; }
-  address { line-height: 24px; margin: 20px 0;}
-  table { width: 100%; }
-  section { border-bottom: 2px solid #ccc; padding: 20px 0; }
-  dl {
-    dd { text-align: left; }
-    dt { width: 150px; }
-  }
-  h1 { border: none; font-size: 60px; font-weight: lighter; margin: 0; padding: 0; }
-  h2 { border: none; margin: 0; padding: 0; font-weight: bold; font-size: 24px; margin-bottom: 20px; }
-  h3 { border: none; margin: 0; padding: 0; font-weight: bold; font-size: 24px; }
-  h4 { font-weight: bold; }
-  .title { font-weight: bold; }
-  #description-table {
-    th { background-color: #e8e8e8; padding: 8px 0;
-      &:first-child { padding-left: 10px; width: 50%; }
-      &:last-child { text-align: right; padding-right: 10px; width: 18%; }
+#detail-sidebar {
+  dl { font-size: 12px; }
+  .person { display: table; width: 100%;
+    .image { width: 80px; float: left;
+      img { width: 100%; }
     }
-    td { padding: 10px 0;
-      &:first-child { padding-left: 10px; }
-      &:last-child { text-align: right; padding-right: 10px; }
-    }
-  }
-  #description { padding-bottom: 0; }
-  #subtotal {
-    aside {
-      &:last-child { width: 18%; }
-    }
-  }
-  #summary { text-align: right;
-    h2 { display: inline-block; }
-    figure { display: inline-block; font-size: 24px; width: 18%; }
-  }
-  #from-to {
-    > table > tbody > tr > td { width: 50%; vertical-align: top;
-    }
-  }
-  #underline { font-size: 12px; }
-}
-
-/****
-  L
-****/
-
-.language-bar { float: right; margin-left: 15px;
-  a { @include opacity(.4); @include transition(.4s); margin-left: 5px !important;
-    &.active { @include opacity(1); }
-    &:hover { @include opacity(1);}
+    .wrapper { display: table-cell; vertical-align: middle; }
   }
 }
 
-.layout-expandable { @include transition(.8s); overflow: hidden; }
+// Dropzone
 
-// Loading
+.dropzone { @include transition(.3s); @include border-radius(0px); background-color: transparent; border: 2px dashed rgba(0,0,0,.1); min-height: 130px; padding: 20px;
+  &:hover { border: 2px dashed rgba(0,0,0,.15);  }
+  input[type="file"] { display: none; }
+  a {
+    &.dz-remove { @include border-radius(0px); background-color: #fff; background-image: none; border: 2px solid rgba(0,0,0,.1); font-size: 12px; font-weight: bold; padding: 3px 4px; }
+  }
+  .dz-default{
+    &.dz-message { display: table;
+      span { color: $color-default; font-weight: bold; display: table-cell; vertical-align: middle; text-align: center; }
+    }
+  }
+  .dz-preview { @include box-shadow(none); border: none; background-color: $color-grey-light; margin: 10px;
+    .dz-details {
+      img { @include transition(.3s); }
+      .dz-size { font-size: 12px; }
+    }
+    .dz-error-mark, .dz-success-mark { @include border-radius(50%); @include font-awesome; border: 2px solid rgba(0,0,0,.1); background-color: #fff; height: 25px; width: 25px; font-size: 14px; line-height: 22px; }
+    .dz-success-mark {
+      &:after { color: green; content: "\f00c"; }
+    }
+    .dz-error-mark {
+      &:after { color: red; content: "\f00d"; }
+    }
+  }
+  &.profile-picture { padding: 0;
+    > img { position: relative; z-index: -2; }
+    .dz-default{
+      &.dz-message { background-color: rgba(255,255,255,.9); bottom: 0; height: auto; margin: 0; left: inherit; top: inherit; padding: 10px 0; width: 100%;
+        span { color: $color-grey-dark; font-size: 12px; }
+      }
+    }
+    &.dz-started {
+      > img { display: none; }
+    }
+    .dz-image-preview { background-color: transparent; margin: 0; padding: 0; width: 100%;
+      .dz-details { padding: 0; }
+    }
+  }
+}
 
-#loading-icon { bottom: 0; font-size: 28px; height: 25px; left: 0; margin: auto; position: absolute; right: 0; top: 0; width: 25px; z-index: 3; }
+//----------------------------------------------------------------------------------------------------------------------
+// E
+//----------------------------------------------------------------------------------------------------------------------
+
+// Expandable inner content
+
+.expandable-content { @include transition(.4s); }
+
+//----------------------------------------------------------------------------------------------------------------------
+// F
+//----------------------------------------------------------------------------------------------------------------------
+
+// FAQ form
+
+.faq-form { border: 2px solid rgba(0,0,0,.05); margin-bottom: 60px; padding: 20px;
+  i { color: $color-grey-medium; float: left; font-size: 34px; width: 40px; text-align: center; }
+  i, button { position: relative; top: 4px; }
+  form { padding: 30px 20px 20px 20px; }
+  > figure {
+    .wrapper {
+      h3 { font-size: 24px; font-weight: normal; margin: 0; }
+      strong { @include opacity(.6); }
+      button {
+        &.active, &:hover { background-color: $color-grey-light !important; color: $color-grey-dark; }
+      }
+    }
+  }
+}
+
+// FAQ Single
+
+.faq-single { margin-bottom: 80px;
+  i { @include border-radius(50%); @include border-color; color: $color-default; float: left; padding: 10px 11px; margin-right: 20px; }
+  .wrapper { overflow: visible; margin-left: 60px;
+    h4 { font-family: "Montserrat", sans-serif; font-size: 16px; font-weight: bold; line-height: 24px; margin-bottom: 30px; }
+    .answer { @include shadow; @include rounded-border; background-color: #fff; padding: 20px 20px 10px 20px; position: relative;
+      &:before { border-style: solid; border-width: 13px 0 0 13px; border-color: transparent transparent transparent #fff; content: ""; top: -13px; left: 0px; display: block; position: absolute; }
+      figure { @include opacity(.6); font-weight: bold; margin-bottom: 10px; }
+    }
+  }
+}
+
+// Feature Box
+
+.feature-box { display: table; width: 100%; margin: 20px 0;
+  i { @include border-radius(50%); border: 2px solid rgba(0,0,0,.1); color: $color-default; font-size: 28px; float: left; height: 70px; line-height: 65px; text-align: center; width: 70px; }
+  .description { margin-left: 100px;
+    h3 { font-size: 18px; font-weight: bold; margin-top: 25px; margin-bottom: 30px; }
+  }
+}
+
+// Filter in listing page
+
+.filter { margin-bottom: 10px;
+  .btn {
+    &.active { @include box-shadow(none); background-color: #fff;
+      &.icon {
+        i { color: $color-default; }
+      }
+    }
+    &.icon {
+      i { color: rgba(0,0,0,.3); margin-right: 10px; margin-left: 0px !important; }
+    }
+  }
+  .sorting {
+    > span { display: inline-block; font-weight: bold; margin-right: 15px; }
+    .form-group { display: inline-block; min-width: 200px; margin-bottom: 0; }
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// H
+//----------------------------------------------------------------------------------------------------------------------
+
+.hero-image { display: table; height: 700px; width: 100%; text-align: center;
+  .form-group { text-align: left; }
+  &.search-filter-bottom {
+    .inner { vertical-align: bottom; }
+  }
+  &.search-filter-middle {
+    .inner { vertical-align: middle; }
+  }
+  &.search-filter-top {
+    .inner { vertical-align: top; }
+  }
+  .inner { display: table-cell; height: 100%;
+    .main-search {
+      &.background-color-grey-dark { background-color: rgba(20,20,20,0.9) !important; padding: 20px 0; position: relative;
+        &:before { background-color: rgba(20,20,20, 0.9); display: block; content: ""; height: 100%; width: 1000px; position: absolute; top: 0; left: -1000px; }
+        &:after { background-color: rgba(20,20,20, 0.9); display: block; content: ""; height: 100%; width: 1000px; position: absolute; top: 0; right: -1000px; }
+      }
+    }
+    h1 { background-color: rgba(0,0,0,.5); display: inline-block; font-size: 42px; color: #fff; text-align: center; margin-bottom: 40px; margin-top: 50px; padding: 10px; }
+  }
+  .background { text-align: center; }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// I
+//----------------------------------------------------------------------------------------------------------------------
+
+.invisible { visibility: hidden; }
+
+// Item
+.item { @include rounded-border; @include shadow; background-color: #fff; display: block; margin-bottom: 60px; position: relative; height: auto;
+  &:hover, &:focus { color: $color-grey-dark;
+    .quick-view { @include opacity(1); }
+    .image {
+      a, .inner {
+        //&:after { @include opacity(0); }
+      }
+      .overlay { @include opacity(.95);
+        .content {
+          h4 { @include opacity(1); left: 0; }
+          p { @include opacity(.8); left: 0; }
+        }
+      }
+    }
+    .wrapper {
+      .info {
+        .rating {
+          .stars {
+            i.active { color: $color-default; }
+          }
+        }
+      }
+    }
+  }
+  .item-specific { bottom: 0; font-weight: bold; left: 0; width: 100%; height: auto; color: #fff; padding: 7px 0; text-align: center; position: absolute; z-index: 2;
+    span { font-size: 12px; margin: 0px 7px;
+      img { margin-right: 5px; vertical-align: baseline; width: auto; }
+    }
+  }
+  .info { border-top: 1px solid rgba(0,0,0,.05); margin-top: 15px; padding-top: 5px;
+    dl { font-size: 12px; margin-bottom: 0; margin-top: 5px; }
+    .type {
+      i { @include opacity(.6); display: inline-block; //width: 100%;
+        img { width: 20px; }
+      }
+      span { @include opacity(.6); display: inline-block; font-size: 9px; font-weight: bold; text-transform: uppercase; padding: 5px; }
+      &.date {
+        span { font-size: 12px; font-weight: normal; }
+      }
+    }
+  }
+  .quick-view { @include transition(.4s); @include opacity(0); background-color: $color-default; cursor: pointer; color: #fff; height: 30px; left: 0; width: 60px; position: absolute; top: 20px; z-index: 4 ;
+    &:hover {
+      span { @include opacity(1); left: 70px; }
+    }
+    i { text-align: right; font-size: 18px; line-height: 28px; margin-right: 10px; display: block; }
+    span { @include transition(.4s); @include opacity(0); position: absolute; width: 100px; top: 0; line-height: 30px; left: 60px; font-weight: bold; font-size: 12px; }
+  }
+  .image {
+    a, > .inner { display: block; position: relative; z-index: 2;
+      &:after { @include transition(1s); @include image-gradient; width: 100%; height: 45px; display: block; content: ""; position: absolute; bottom: 0;  }
+      > img { @include border-top-left-radius(1px); @include border-top-right-radius(1px); width: 100%; }
+      .icon { background-color: $color-default; height: 30px; position: absolute; right: 10px; top: -2px; width: 30px; text-align: center; z-index: 2;
+        i { color: #fff; line-height: 30px; }
+      }
+      .overlay { @include border-top-left-radius(2px); @include border-top-right-radius(2px); @include opacity(0); @include transition(.4s); color: $color-grey-dark; background-color: $color-grey-dark; height: 100%; padding: 30px; position: absolute; width: 100%;
+        .inner { display: table; height: 100%; }
+        .content { color: #fff; padding-top: 10px; display: table-cell; vertical-align: middle;
+          h4 { @include opacity(0); @include transition-delay(1s); @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) .1s); font-size: 10px; font-weight: bold; position: relative;  text-transform: uppercase; left: 10px; }
+          p { @include opacity(0); @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) 0s); @include opacity(1); font-size: 12px; max-height: 80px; overflow: hidden; position: relative; left: 10px; }
+        }
+      }
+    }
+  }
+  .price { @include rounded-border; @include shadow; background-color: $color-default; color: #fff; display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: bold; margin-top: 5px; text-align: center; padding: 4px 8px; }
+  .wrapper { padding: 20px 20px 10px; position: initial; text-align: center;
+    h3 { @include transition(.4s); font-size: 16px; font-weight: bold; margin-bottom: 8px; margin-top: 0; }
+    hr { border-color: rgba(0,0,0,.1); margin-bottom: 5px; margin-top: 10px; }
+    figure { @include opacity(.6); font-size: 12px; }
+    .info { // position: absolute; bottom: 5px; left: 0; width: 100%; padding: 5px 20px 5px;
+      &:after { background-color: rgba(0,0,0,.08); content: ""; height: 1px; width: 100%; position: absolute; top: 0; left: 20px; width: calc(100% - 40px); }
+      .arrow { color: $color-default; float: right; font-size: 16px; line-height: 23px; }
+      .rating { display: inline-block;
+        .stars {
+          i.active { color: $color-grey-medium; }
+        }
+      }
+    }
+  }
+
+  .ribbon { position: absolute; }
+
+  // Featured
+
+  &.featured { background-color: $color-grey-dark; color: #fff;
+    p, figure, a { color: #fff; }
+    a:hover { color: $color-default; }
+    .image {
+      .overlay {
+        .content {
+          h4 { color: #fff; }
+        }
+      }
+    }
+    .type { color: #fff;
+      i { @include opacity(1); //width: 100%;
+        img { @include border-radius(50%); background-color: #fff; margin: 5px 0; }
+      }
+    }
+    .info { border-top: 1px solid rgba(255, 255, 255, 0.05);
+      &:after { background-color: rgba(255,255,255,.08); }
+    }
+  }
+
+  // List
+
+  &.list { display: table; width: 100%; margin-bottom: 30px; padding-bottom: 0;
+    //&:last-child { margin-bottom: 60px; }
+    &:hover, &:focus {
+      .image {
+        > img { @include opacity(1); }
+      }
+    }
+    &:after { right: 0; }
+    &:before { display: none; }
+    .description { display: table-cell; vertical-align: middle; width: 30%; font-size: 12px; padding-right: 30px;
+      .info { border: none; }
+    }
+    .price { margin-top: 10px; }
+    .image { display: table-cell; width: 250px; margin-right: 20px; }
+    .type { display: inline-block; margin-top: 5px; }
+    .rating { float: left; margin: 7px 0px; padding-right: 15px; }
+    .wrapper { display: table-cell; padding: 30px; padding-bottom: 20px; text-align: left; vertical-align: middle;
+      p { margin-bottom: 0; font-size: 12px; padding-right: 20px; }
+      .arrow { bottom: 15px; color: $color-default; position: absolute; right: 15px; }
+      .info, .item-specific { bottom: 0; display: inline-block; left: 0; width: inherit; position: relative; padding: 3px 0px; margin-right: 0px; width: 100%;
+        &:after { display: none; }
+      }
+    }
+  }
+
+  // Admin view
+
+  &.admin-view {
+    &.is-hidden {
+      .image, .wrapper, .hide-item { @include opacity(.3); }
+    }
+    &:hover {
+      .image {
+        a {
+          &:after { @include opacity(1); }
+        }
+      }
+    }
+    .image { @include transition(.4s); width: 220px; }
+    .description { width: 180px; text-align: right;
+      li { display: inline-block;
+        a { @include circle-button; margin: 7px 3px;
+          i { color: $color-grey-dark; }
+          .fa-trash { color: red; }
+        }
+        .hide-item { @include transition(.4s); }
+      }
+    }
+    .overlay, .quick-view { display: none; }
+    .wrapper { @include transition(.4s);
+      .info { border: none; margin-top: 0px; }
+    }
+  }
+}
+
+// Item gallery
+
+.item-gallery {
+  .thumbnails { margin-top: 20px;
+    a { @include transition(.4s); @include opacity(.3); display: inline-block; margin-bottom: 8px;
+      &:hover, &.active { @include opacity(1); }
+      img { width: 85px; margin-right: 5px; }
+    }
+    .expand-content { @include opacity(1); float: right; padding: 20px 0; width: 85px;
+      i { font-size: 8px; vertical-align: middle; }
+    }
+  }
+}
+
+// Item horizontal
+
+.item-horizontal { @include shadow; @include border-radius(2px); height: inherit; background-color: #fff; display: table; margin-bottom: 20px; width: 100%; position: relative;
+  &:hover, &:focus { color: $color-grey-dark;
+    .image { background-color: rgba(255,255,255,.6);
+      //> img { @include transform(scale(.9)); @include opacity(.1); }
+      .icon { @include opacity(0); }
+    }
+    .item-specific { @include opacity(1); left: 0; }
+    h3 { color: $color-default; }
+    .rating {
+      .fa {
+        &.active { color: $color-default; }
+      }
+    }
+  }
+  .arrow { bottom: 11px; color: $color-default; position: absolute; right: 15px; }
+  .image { width: 240px; float: left; position: relative;
+    > img { @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) 0s); @include transform(scale(1.002)); width: 100%; }
+    .icon { @include opacity(1); @include transition(.2s); background-color: $color-default; height: 30px; position: absolute; right: 3px; top: -2px; width: 30px; text-align: center; z-index: 1;
+      i { color: #fff; line-height: 30px; }
+    }
+  }
+  .item-specific { @include opacity(0); @include transition(all 0.4s cubic-bezier(.42,0,.06,.99) 0s); font-size: 11px; left: -10px; padding: 20px; position: absolute; top: 0; z-index: 2;
+    dd { margin-bottom: 5px; padding-bottom: 2px; }
+  }
+  .wrapper { display: table-cell; padding: 15px 30px 15px 30px; width: 100%; vertical-align: middle;
+    figure { font-size: 12px;
+      i { color: $color-grey-medium; margin-bottom: 15px; }
+    }
+    h3 { @include transition(.4s); font-size: 16px; font-weight: bold; margin-bottom: 5px; margin-top: 0; }
+    .info { border-top: 1px solid rgba(0,0,0,.08); display: block; margin-top: 10px; padding-top: 5px; position: relative;
+      .rating { display: inline-block; float: left; margin-right: 10px; }
+      .type {
+        i { @include opacity(.6); display: inline-block;
+          img { width: 20px; }
+        }
+        span { @include opacity(.6); display: inline-block; font-size: 9px; font-weight: bold; text-transform: uppercase; padding: 5px; }
+      }
+    }
+    p { font-size: 12px; margin-bottom: 0px; padding: 0px; margin-top: 0px; height: 50px; overflow: hidden; }
+  }
+
+  &.small { @include box-shadow(none); background-color: transparent; border: 2px solid rgba(0,0,0,.05); padding: 15px 15px 0 15px;
+    &:hover, &:focus { background-color: #fff;
+      .stars {
+        i { color: $color-default; }
+      }
+    }
+    &:after { display: none; }
+    h3 { @include transition(.4s); margin-bottom: 2px; margin-top: 0; }
+    figure { font-size: 12px; }
+    .image { margin-right: 10px; width: 80px; overflow: hidden;
+      .type { @include opacity(.8); left: 3px; z-index: 2; }
+    }
+    .wrapper { display: block; margin-top: 10px; padding: 0;
+      .info { border: none; margin: 0; padding-top: 0px;
+        .stars {
+          i { color: $color-grey-medium; }
+        }
+      }
+    }
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// L
+//----------------------------------------------------------------------------------------------------------------------
+
+.listing { margin-bottom: 60px; }
+
+// Loading icon
 
 .loading {
-  &:before { background-color: #fff; content: ""; height: 100%; left: 0; width: 100%; position: absolute; top: 0; z-index: 2; }
+  &:after { @include font-awesome; @include opacity(.5); -webkit-animation: rotate 1s linear infinite; animation: rotate 1s linear infinite; bottom: 0; display: block; color: $color-grey-medium; content: "\f1ce"; margin: auto; left: 0; height: 14px; position: absolute; top: 0; right: 0; width: 14px; z-index: 2; }
 }
 
 // Logos
 
-.logos { display: block; line-height: 0; margin-top: 10px; padding: 30px 10px; text-align: justify;
-  &:after { content: ''; display: inline-block; width: 100%;}
-  .logo { display: inline-block; margin-bottom: 7px; position: relative;
+.logos { display: table; line-height: 0; margin-top: 10px; padding: 30px 10px; text-align: justify; width: 100%;
+  .logo { display: table-cell; margin-bottom: 7px; position: relative; text-align: center; vertical-align: middle;
     a { @include transition(.3s); @include opacity(.8); padding: 10px;
       &:hover { @include opacity(1); }
     }
   }
 }
 
+// List item
 
-/****
-  N
-****/
+.list-slider { //padding: 20px;
+  .slide { //padding: 20px;
+    header {
+      h3 { color: $color-default; font-size: 18px; font-weight: bold; margin-bottom: 30px; margin-top: 0; padding: 0;
+        i { @include opacity(.5); color: $color-grey-dark; margin-right: 10px; font-size: 14px; position: relative; top: -2px; }
+      }
+    }
+    .list-item { border-bottom: 1px solid rgba(0,0,0,.1); display: table; margin-bottom: 10px; padding-bottom: 10px; width: 100%;
+      &:last-child { border: none; margin: 0; padding: 0; }
+      h4 { font-size: 14px; font-weight: bold; margin-top: 0; margin-bottom: 2px; }
+      .left { float: left; }
+      .right { float: right; }
+    }
+  }
+  .owl-controls { margin: inherit; bottom: inherit; position: absolute; height: 0px; top: 0px; right: 0px; width: 65px; }
+}
 
-// Note
+//----------------------------------------------------------------------------------------------------------------------
+// M
+//----------------------------------------------------------------------------------------------------------------------
 
-.note { @include opacity(.7); font-size: 12px; margin: 10px 0; }
+// Main navigation
 
-/****
-  M
-****/
+.main-navigation { margin-bottom: 0; }
 
-.masonry-hide-other { @include opacity(.8); }
-.masonry-show { @include opacity(1); }
+.mCSB_inside > .mCSB_container { margin-right: 0px; padding-right: 20px; overflow: visible;
+  //&.mCS_no_scrollbar_y { height: 100%; }
+}
+
+.mCSB_scrollTools {
+  .mCSB_draggerContainer { right: 5px; }
+  .mCSB_dragger {
+    .mCSB_dragger_bar { background-color: rgba(0,0,0,.1); }
+  }
+  .mCSB_draggerRail { background-color: transparent; }
+}
+
+
+// Modal Window
+
+.modal { overflow:hidden; top: 50px;
+  .modal-dialog { width: 750px; margin: 80px auto;
+    .modal-content { @include box-shadow(none); @include border-radius(0px); border: none; padding: 25px;
+      hr { border-color: $color-grey-light; }
+      h3 { font-size: 14px; font-weight: bold; margin-top: 0; }
+      dl { font-size: 12px; }
+      .modal-header { border: none; border-bottom: 1px solid $color-grey-light; display: table; margin-bottom: 20px; padding: 0px; padding-bottom: 10px; width: 100%;
+        .close { @include opacity(1); right: 0px; position: absolute;  top: 2px; z-index: 3; }
+        .left { float: left; }
+        .right { float: right; position: relative; top: 25px;
+          .bookmark { @include border-radius(50%); border: 2px solid #fff; height: 25px; display: inline-block; margin-left: 10px; text-align: center; width: 25px;
+            &:hover { border: 2px solid $color-default; }
+            &:after { @include font-awesome; color: $color-default; content: "\f08a"; display: block; line-height: 22px; }
+          }
+          .type {
+            img { width: 20px; }
+            span { @include opacity(.6); font-size: 12px; }
+          }
+        }
+        h2 { font-size: 18px; font-weight: bold; margin-bottom: 0px; margin-top: 0; }
+        figure { @include opacity(.6); margin-bottom: 5px; }
+        .rating {
+          .fa-star{
+            &.active { color: $color-default; }
+          }
+        }
+      }
+    }
+    .modal-body { padding: 0px; padding-bottom: 15px; border-bottom: 1px solid $color-grey-light; margin-bottom: 20px;
+      p { font-size: 12px; }
+      .image {
+        img { width: 100%; }
+      }
+      .features { height: 70px; margin-top: 20px; overflow: hidden;
+        &.collapsed { height: 70px !important; }
+      }
+    }
+    .modal-footer { border: none; margin-top: 0; padding: 0;
+    }
+  }
+  &.register-sign-in {
+    .checkbox { margin: 0; }
+    .modal-dialog { width: 420px; }
+    .modal-body { border-bottom: 0; margin-bottom: 0; padding: 0; }
+    .modal-footer { text-align: left;
+      a { color: $color-default; }
+    }
+    .lost-password { position: relative; top: 20px; }
+    .btn { margin-top: 10px; }
+  }
+}
+
+// Modal multichoice
+
+.modal-window { @include opacity(0); height: 100%; position: fixed; z-index: 1000; width: 100%; top: 0; left: 0; text-align: center; overflow-y: auto;
+  .modal-wrapper { display: inline-block; width: auto; position: relative; top: 100px; z-index: 1;
+    > h2, > h3 { color: #fff; text-align: left; }
+    > h2 { font-size: 36px; text-transform: none; margin-bottom: 0px; margin-top: 0; }
+    //h5 { margin-top: 0; }
+    > figure { @include opacity(.6); color: #fff; text-align: left; }
+    .modal-body { background-color: darken($color-grey-dark, 5%); display: table; font-size: 12px; margin-top: 30px; padding: 0; text-align: left; width: 820px;
+      h3 { margin-top: 0 }
+      .gallery { width: 350px;
+        .features { padding: 30px; color: #fff;
+          ul { margin-bottom: 0; }
+        }
+        .image { position: relative;
+          .price { @include rounded-border; @include shadow; background-color: $color-default; color: #fff; font-size: 18px; font-family: 'Montserrat', sans-serif; font-weight: bold; left: 10px; padding: 3px 8px; position: absolute; top: -4px; z-index: 2; }
+          .type { background-color: #fff; padding: 4px; position: absolute; bottom: 0; left: 0; z-index: 2;
+            i { @include opacity(.6); display: inline-block;
+              img { width: 20px; }
+            }
+            span { @include opacity(.6); display: inline-block; font-size: 9px; font-weight: bold; text-transform: uppercase; padding: 5px; }
+          }
+        }
+        .owl-controls { bottom: 30px; top: inherit; right: 0; width: 60px;
+          .owl-next, .owl-prev { @include border-radius(0px); background-color: $color-default; border: none;
+            &:hover { background-color: darken($color-default, 5%); }
+            &:after { color: #fff; }
+          }
+        }
+      }
+      .modal-content { @include box-shadow(none); @include border-radius(0px); background-color: #fff; border: none; display: table-cell; vertical-align: top; padding: 30px; width: 100%;
+        section { margin-bottom: 30px;
+          h3 { border-bottom: 1px solid rgba(0,0,0,.05); padding-bottom: 10px; margin-bottom: 10px; }
+        }
+      }
+      .expandable-content { margin-bottom: 10px; }
+    }
+    .modal-close { cursor: pointer; position: absolute; right: 0; top: 0; z-index: 3; }
+  }
+  &.multichoice {
+    .modal-wrapper {
+      > h3 { @include opacity(.6); font-size: 18px; margin-bottom: 5px; text-transform: none; }
+      .modal-body { background-color: transparent; width: auto; }
+      .items {
+        li { display: inline-block; margin-right: 20px; width: 280px;
+          &:last-child { margin-right: 0; }
+        }
+      }
+    }
+  }
+  .modal-background { @include opacity(0); background-color: rgba(0,0,0,.7); height: 100%; position: fixed; z-index: 0; width: 100%; top: 0; left: 0; text-align: center; }
+}
+
+// Modal Window
+
+.modal-window {
+
+}
 
 // Member
 
-.member { position: relative; margin-bottom: 30px; padding-left: 130px;
-  h3 { color: $color-default-darker; font-size: 18px; font-weight: bold; margin-bottom: 5px; margin-top: 0; }
-  .image { left: 0; position: absolute; top: 0;
-    img { width: 110px; }
+.member { text-align: center; margin-bottom: 40px;
+  img { @include border-radius(50%); border: 2px solid $color-grey-light; margin-bottom: 10px; }
+  h4 { font-size: 24px; font-weight: normal; margin-bottom: 0px; }
+  figure { color: $color-default; font-weight: bold; }
+  .social {
+    i { @include border-radius(50%); border: 2px solid rgba(0,0,0,.1); color: $color-grey-dark; height: 30px; line-height: 28px; margin: 0 2px; text-align: center; width: 30px;
+      &:hover { border-color: $color-default; color: $color-default; }
+    }
   }
-  dl {  border-top: 2px solid $color-grey-light; font-size: 12px; margin-top: 10px; padding-top: 10px;
-    dd { margin-bottom: 4px; }
-  }
-  .tag { background-color: $color-default; color: #fff; font-size: 12px; font-weight: bold; position: absolute; right: 0; top: 0; }
 }
 
-// My Properties
+//----------------------------------------------------------------------------------------------------------------------
+// N
+//----------------------------------------------------------------------------------------------------------------------
 
-.my-properties {
-  table { width: 100%;
-    h2 { border: none; font-size: 18px; font-weight: bold; margin: 0 0 5px 0; padding: 0; }
-    thead { @include shadow;
-      tr {
-        th { background-color: $color-default-darker; border: none; color: #fff; padding: 10px 10px 10px 0px;
-          &:first-child { padding-left: 10px; }
+// Nav Pills
+
+.nav-pills {
+  &.nav-stacked {
+    li {
+      &.active {
+        a { @include border-radius(0px); background-color: transparent; border: 2px solid $color-default; color: $color-default;
+          &:hover { background-color: transparent; border: 2px solid $color-default; }
+        }
+      }
+      a { border: 2px solid transparent;
+        &:hover { @include border-radius(0px); background-color: transparent; border: 2px solid $color-grey-light; }
+      }
+    }
+  }
+}
+
+.nav-tabs {
+  &.tabs-left { border-right: 2px solid $color-grey-light;
+    > li { margin-right: -2px;
+      &.active {
+        a { @include border-radius(0px); border-color: $color-grey-light transparent $color-grey-light $color-grey-light; border-width: 2px; }
+      }
+    }
+  }
+}
+
+.navigation-sidebar {
+  li { border-bottom: 1px solid rgba(0,0,0,.05);
+    &.active {
+      a { @include opacity(1); color: $color-default;
+        &:hover { color: $color-default;
+          i { border: 2px solid $color-default; }
+        }
+        i { @include opacity(1); border: 2px solid $color-default; color: $color-default;
+          &:hover { color: $color-default; }
         }
       }
     }
-    tbody {
-      tr {
-        td { border-top: none; border-bottom: 2px solid $color-grey-light; padding: 20px 20px 20px 0px; vertical-align: middle;
-          &:last-child { padding-right: 5px; }
-          &.actions { text-align: right;
-            a { padding: 5px; }
-            .edit { float: left; color: $color-grey-dark;
-              &:hover {
-                i { color: $color-default-darker; }
-              }
-              i { @include transition(.4s); color: $color-default; margin-right: 5px; }
+    a { @include opacity(.8); display: block; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; padding: 12px 0;
+      &:hover { @include opacity(1); color: $color-grey-dark;
+        i { @include opacity(.6); border-color: rgba(0,0,0,.3); }
+      }
+      i { @include border-radius(50%); @include opacity(.5); border: 2px solid transparent; color: $color-grey-dark; font-size: 11px; line-height: 20px; margin-right: 10px; width: 25px; height: 25px; text-align: center; }
+    }
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// O
+//----------------------------------------------------------------------------------------------------------------------
+
+// Outer wrapper & off canvas animation
+#outer-wrapper { overflow: hidden;
+    &.show-nav {
+      #inner-wrapper { @include transform( translateX(-200px) );  }
+      .header {
+        .toggle-navigation {
+          .icon {
+            .line { background-color: $color-default;
+              &:first-child { @include rotate(45deg); position: relative; top: 5px; }
+              &:nth-child(2) { @include opacity(0); }
+              &:last-child { @include rotate(-45deg); position: relative; top: -5px; }
             }
-            .delete { color: red; position: relative; top: 5px; }
-          }
-          &.image { width: 125px;
-            img { width: 100%; }
-          }
-          img, .inner { display: inline-block;}
-          .inner {
-          figure { margin-bottom: 5px; }
           }
         }
       }
+      .off-canvas-navigation {
+        header, ul { @include opacity(1); }
+      }
+    }
+    #page-canvas { background-color: $color-grey-light; height: 100%; width: 100%; }
+  //}
+}
+
+.opening-hours {
+  .table {
+    td { border-bottom: 1px solid rgba(0,0,0,.05); border-top: none; padding: 10px; vertical-align: middle; }
+    .day-name { font-weight: bold; width: 25%; }
+    .from, .to { width: 15%; }
+    .day {
+      &:last-child {
+        td { border-bottom: none; }
+      }
+      &.weekend { background-color: rgba(0,0,0,.01); }
     }
   }
 }
 
-/****
-  O
-****/
-
-.owl-carousel {
-  .property { margin-bottom: 0; }
-  .owl-pagination { text-align: center;
-    .owl-page { @include border-radius(50%); @include transition(.4s); background-color: rgba(0,0,0,.3); display: inline-block; height: 10px; margin-right: 5px; width: 10px;
-      &:hover { background-color: rgba(0,0,0,.5); }
-      &.active { background-color: rgba(0,0,0,.6); }
-    }
+.owl-controls { position: absolute; top: -30px; bottom: 0; margin: auto; height: 0px; width: 100%;
+  .owl-prev, .owl-next { @include border-radius(50%); @include transition(.4s); border: 2px solid rgba(0,0,0,.1); height: 30px; width: 30px;
+    &:hover { border-color: $color-default; }
+    &:after { @include font-awesome; color: $color-default; font-size: 16px; height: 16px; top: 0; position: absolute; right: 0; bottom: 0; left: 0; margin: auto; width: 4px; }
   }
-  .owl-dots { text-align: center;
-    .owl-dot { @include border-radius(50%); @include transition(.4s); background-color: rgba(0,0,0,.3); display: inline-block; height: 10px; margin-right: 5px; width: 10px;
-      &:hover { background-color: rgba(0,0,0,.5); }
-      &.active { background-color: rgba(0,0,0,.6); }
-    }
+  .owl-prev { left: 0; position: absolute;
+    &:after { content: "\f104"; right: 1px; }
+  }
+  .owl-next { right: 0; position: absolute;
+    &:after { content: "\f105"; left: 1px; }
   }
 }
 
-/****
-  P
-****/
-
-// Page Content
-
-#page-content { padding-bottom: 10px; position: relative; }
+//----------------------------------------------------------------------------------------------------------------------
+// P
+//----------------------------------------------------------------------------------------------------------------------
 
 // Pagination
-
-.pagination {
+.pagination { margin: 10px 0px;
   li {
     &:first-child, &:last-child {
-      a { @include border-radius(0px); }
+      a { @include border-radius(50%); }
     }
     &.active {
-      a { background-color: transparent; border-color: $color-default-darker; color: $color-default-darker;
-        &:hover, &:active, &:focus { background-color: transparent; border-color: $color-default-darker; color: $color-default-darker; }
+      a { background-color: transparent; border-color: rgba(0,0,0,.1); color: $color-grey-medium;
+        &:hover { background-color: transparent; border-color: rgba(0,0,0,.1); color: $color-grey-medium; }
       }
     }
-    a { @include border-radius(0px); background-color: transparent; border: none; border-top: 5px solid $color-grey-light; color: $color-grey-medium; padding: 10px 20px;
-      &:hover, &:active, &:focus { background-color: transparent; border-color: $color-default; color: $color-default; }
+    a { @include border-radius(50%); @include shadow; border: 2px solid transparent; color: $color-default; font-weight: bold; height: 40px; line-height: 36px; margin-left: 3px; text-align: center; padding: 0; width: 40px;
+      &:hover { background-color: transparent; border-color: rgba(0,0,0,.2); color: $color-grey-medium; }
+      &.previous { margin-left: 10px; }
     }
+  }
+}
+
+// Price box
+.price-box { text-align: center; margin-bottom: 30px; padding: 15px;
+  header { border-bottom: none; margin: 30px 0; position: relative;
+    &:after { background-color: $color-default; display: block; content: ""; height: 2px; width: 30px; position: absolute; left: 0; right: 0; margin: auto; }
+    h2 { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+  }
+  figure { color: $color-grey-medium; font-size: 18px; font-weight: bold; margin: 15px 0;
+    .price { color: $color-default; margin-right: 10px; }
+  }
+  ul { list-style: none; margin: 20px 0; line-height: 35px; padding-left: 0;
+    li {
+      &.not-available { text-decoration: line-through; }
+    }
+  }
+  &.white { @include shadow; @include rounded-border; background-color: #fff; border: 2px solid transparent;
+    &.featured { border-color: $color-grey-dark; }
+  }
+  &.framed { background-color: transparent;  border: 2px solid rgba(0,0,0,.1);
+    &.featured { border-color: $color-default; }
+  }
+  &.dark { background-color: $color-grey-dark; color: #fff; border: 2px solid $color-grey-dark;
+    &.featured { border-color: #000; }
+  }
+}
+
+// Price slider
+
+.ui-slider { @include border-radius(0px); @include box-shadow(none); border: none; background-color: transparent;
+  .noUi-base { @include border-radius(0px); @include box-shadow(none); border: none; height: 2px; background-color: #e4e4e2; margin-top: 10px;
+    .noUi-connect { @include box-shadow(none); background-color: $color-default; }
+    .noUi-background { @include box-shadow(none); background-color: #e4e4e2; }
+    .noUi-handle { @include transition(.2s); @include border-radius(50%); @include box-shadow(none); border: 2px solid $color-default; background-color: $color-default; cursor: pointer; height: 12px; width: 12px; left: 0px; top: -5px;
+      &:before, &:after { display: none; }
+      &:hover, &.noUi-active { @include box-shadow(0px 0px 0px 4px rgba(0,0,0,.07)); }
+      &.noUi-handle-upper { left: -10px; }
+    }
+  }
+  .values { font-size: 12px; //color: #fff;
+    input { background-color: transparent; border: none; width: 49%; }
+    input:first-child { float: left; }
+    input:last-child { float: right; text-align: right; }
+  }
+}
+
+// Promo Box
+
+.promo-box { @include rounded-border; @include shadow; background-color: #fff; display: table; width: 100%;
+  &:hover { color: $color-grey-dark; }
+  &.background-color-default {
+    &:hover { color: #fff; }
+  }
+  .image { display: table-cell; width: 150px; margin-right: 20px;
+    img { width: 100%; }
+  }
+  .wrapper { display: table-cell; padding: 0px 20px; text-align: left; vertical-align: middle;
+    h3 { margin-top: 0; margin-bottom: 2px; }
+    figure { @include opacity(.6); font-size: 12px; }
+  }
+  &.large {
+    .image { width: 200px; }
+  }
+  &.medium {
+    .image { width: 130px; }
   }
 }
 
 // Post Author
 
 .post-author { border: 2px solid $color-grey-light; display: table; margin-bottom: 60px; padding: 20px; position: relative; width: 100%;
-  img { display: table-cell; vertical-align: middle; width: 100px; /*position: absolute; height: 100px; top: 0; bottom: 0; margin: auto;*/ }
-  header { color: $color-default-darker; margin-bottom: 10px; }
+  img { display: table-cell; vertical-align: middle; width: 100px; }
+  header { border: none; color: $color-default; margin-bottom: 10px; }
   .wrapper { display: table-cell; vertical-align: middle; padding-left: 20px; }
 }
 
-// Pricing
-
-.price-box { @include transition(.4s); border: 2px solid $color-grey-light; text-align: center; padding-bottom: 20px; margin-bottom: 30px; position: relative; bottom: 0;
-  &:hover { bottom: 10px; }
-  &.promoted { background-color: darken($color-default-darker, 3%); border: none;
-    header, .price { margin: 0; }
-    ul { color: #fff;
-      li { border-bottom-color: rgba(255,255,255,.2); }
-    }
-  }
-  header {  background-color: $color-default; margin: -2px; padding: 20px 0;
-    h2 { border: none; color: #fff; font-size: 36px; font-weight: lighter; margin: 0; padding: 0; }
-  }
-  .price { @include shadow; background-color: $color-default-darker; color: #fff; margin: 0 -2px; padding: 10px 0;
-    figure { font-size: 18px; font-weight: bold; margin-bottom: -5px; }
-    small { font-size: 12px; }
-  }
-  ul { list-style: none; padding-left: 0; padding-bottom: 10px;
-    li { border-bottom: 2px solid $color-grey-light; padding: 10px 0;
-      &.not-available { @include opacity(.8); text-decoration: line-through; }
-      span { font-weight: bold; }
-    }
-  }
-}
-
-// Property
-
-.property { margin-bottom: 30px; overflow: hidden; position: relative; width: 100%;
-  &:hover, &:active, &:focus {
-    img { -moz-backface-visibility: hidden; top: -10px; }
-    &.big {
-      .overlay {  bottom: 0px; }
-    }
-    .overlay { bottom: 0px;
-      .additional-info {
-        li { @include opacity(1); }
-      }
-    }
-    .tag {
-      &.status { background-color: rgba(0,0,0,.8); }
-    }
-    .type { @include opacity(1); }
-  }
-  img { @include transition(.4s); -moz-backface-visibility: hidden; width: 100%; position: relative; top: 0; }
-  .overlay { @include transition(.4s); bottom: -50px; left: 0; position: absolute; width: 100%; z-index: 1;
-    h3 { @include text-shadow(0px 1px 1px rgba(0,0,0,.3)); color: #fff; font-size: 16px; font-weight: bold; margin: 5px 0 3px 0; }
-    figure { color: #fff; font-weight: lighter;  }
-    .additional-info { background-color: $color-default-darker; display: table; height: 30px; list-style: none; margin-bottom: 0; width: 100%; padding: 8px 12px;
-      li { @include transition(.8s); @include opacity(0); color: #fff; display: table-cell; width: 25%;
-        header { @include opacity(.5); font-size: 11px; }
-        figure { font-size: 11px; font-weight: bold; }
-      }
-    }
-    .info { @include property-gradient; padding: 12px; }
-  }
-  .property-image { /*height: 195px;*/ overflow: hidden; width: 100%; }
-  .tag {
-    &.status { @include transition(.4s); @include border-radius(0px); background-color: rgba(0,0,0,.6); color: #fff; left: 13px; font-size: 12px; padding: 6px 9px; position: absolute; top: 15px; z-index: 1;
-      &:after { bottom: -4px; width: 0; height: 0; border-style: solid; border-width: 4px 4px 0 0; border-color: rgba(0,0,0,.6) transparent transparent transparent; content: ""; left: 0; position: absolute; }
-    }
-  }
-  .type { @include transition(.4s); @include shadow; @include opacity(.9); background-color: #fff; position: absolute; right: 13px; z-index: 2; top: 15px; height: 29px; padding: 0 2px; text-align: center; line-height: 29px;
-    img { width: inherit; top: 0 !important; }
-  }
-  &.big { max-width: 440px;
-    .overlay { bottom: -70px;
-      h3 { font-size: 24px; font-weight: normal; margin: 8px 0 3px 0; }
-      li {
-        header, figure { font-size: 14px; }
-      }
-      .additional-info { height: 70px; padding: 15px 20px;
-      }
-      .price { font-size: 18px; }
-      .info { padding: 20px; }
-    }
-    .property-image { /*height: 285px;*/ }
-    .tag { left: 20px; top: 20px; }
-  }
-  &.small { margin-bottom: 30px !important;
-    &:hover {
-      img { top: inherit; }
-    }
-    .property-image { float: left; width: 100px; height: 75px; }
-    .info { padding-left: 110px;
-      a { color: $color-grey-dark;
-        &:hover { color: $color-default; }
-        h4 { border: none; font-size: 14px; font-weight: bold; margin-bottom: 0; margin-top: 0; }
-      }
-      figure { margin-bottom: 10px; }
-      .tag { font-size: 12px; }
-    }
-  }
-  &.masonry { @include transition(.4s); background-color: #fff; font-size: 12px; width: 32.1%; float: left; margin-bottom: 15px; overflow: visible;
-    .inner { /*-moz-backface-visibility: hidden;*/ @include transform3d(scale(1));  }
-    &:hover {
-      img { top: 0; }
-    }
-    aside { border: 2px solid $color-grey-light; background-color: #fff; padding: 15px 15px 10px 15px; position: relative; top: -2px;
-      h3 { -moz-backface-visibility: hidden; color: $color-default-darker; font-weight: bold; margin-top: 0; margin-bottom: 5px; }
-      figure { -moz-backface-visibility: hidden; margin-bottom: 10px }
-      p { -moz-backface-visibility: hidden; margin-bottom: 10px; }
-      .link-arrow { border-top: 2px solid $color-grey-light; display: block; font-size: 14px; padding-top: 10px; }
-
-    }
-    .property-image {  position: relative; margin-bottom: 0;
-      img { @include transition(.6s); @include backface-visibility(hidden); }
-      &:hover {
-        img { @include transform3d(scale(1.1) rotate(.01deg));  }
-        .type {
-          img { @include transform3d(scale(1) rotate(.0deg)); }
-        }
-      }
-      .overlay { bottom: 0; position: absolute;
-        .tag { -moz-backface-visibility: hidden; }
-      }
-      .ribbon { top: 15px; bottom: inherit; }
-    }
-  }
-}
-
-// Property Carousel
-
-.property-carousel {
-  .property-slide { position: relative;
-    .overlay { @include property-gradient; bottom: 0; left: 0; height: 40%; position: absolute; width: 100%;
-      h3 { bottom: 20px; color: #fff; left: 30px; font-size: 24px; position: absolute; }
-    }
-    img { width: 100%; }
-  }
-  .owl-controls { position: absolute; right: 0; top: 0;
-    .owl-prev, .owl-next { @include opacity(.7); @include transition(.4s); background-color: $color-default; display: inline-block !important; width: 50px; height: 50px; position: relative; z-index: 3 !important;
-      &:after { @include font-awesome; color: #fff; width: 5px; height: 15px; position: absolute; top: 0; left: 0; bottom: 0; right: 0; margin: auto; }
-    }
-    .owl-next {
-      &:hover { @include opacity(1); }
-      &:after { content: "\f105";  }
-    }
-    .owl-prev {
-      &:hover { @include opacity(1); }
-      &:after { content: "\f104";  }
-    }
-  }
-}
-
-#property-detail {
-  section { margin-bottom: 25px;
-    h2 { margin-bottom: 25px; }
-  }
-}
-
-.property-detail-map-wrapper { position: relative; height: 340px;
-    .property-detail-map { height: 100%; position: absolute; right: 0; width: 100%;  }
-}
-
-.property-features-list {
-  li { display: inline-block; padding: 5px 0; width: 49%;
-    &:before { @include font-awesome; content: "\f111"; color: $color-default; font-size: 8px; position: relative; bottom: 2px; margin-right: 10px; }
-  }
-}
-
-.property-title { margin-bottom: 30px; position: relative;
-  h1 { border: none; margin-bottom: 5px; margin-top: 0;  padding-bottom: 0;}
-  .actions { top: 0; bottom: 0; margin: auto; height: 20px; position: absolute; right: 0;
-    a { margin-left: 5px; }
-  }
-}
-
-#property-rating {
-  aside, figure { display: inline-block;
-    header { font-weight: bold; margin-bottom: 10px; }
-  }
-  aside { float: left; }
-  figure { float: right;
-    .rating { width: inherit !important; float: right; }
-  }
-  .rating-form { @include transition(.4s); height: 0px; overflow: hidden;
-    header { font-size: 18px; font-weight: lighter; margin: 20px 0; }
-  }
-}
-.show-rating-form { height: auto; }
-
-/****
-  R
-****/
+//----------------------------------------------------------------------------------------------------------------------
+// R
+//----------------------------------------------------------------------------------------------------------------------
 
 // Rating
-
-.rating {
+.rating { display: table; font-size: 12px; margin: 3px 0;
+  aside { @include opacity(.6); display: inline-block; }
   img { background-color: $color-default; }
   .inner {
     img { background-color: $color-default; }
   }
-  &.rating-individual { margin-bottom: 10px; }
-  &.rating-overall { }
-  &.rating-user { display: inline-block;
-    #hint { margin-top: 20px; height: 20px; }
+  .stars { float: left;
+    .fa { @include transition(.4s); @include opacity(.3); color: $color-grey-medium; font-size: 11px; margin-right: 2px; //margin: -1px;
+      &.active { @include opacity(1); color: $color-default;  }
+    }
+  }
+  &.big {
+    .stars {
+      .fa { font-size: 21px; }
+    }
+    .reviews { position: relative; top: 3px; }
+  }
+  &.color {
+    .stars {
+      .fa {
+        &.active { color: $color-default; }
+      }
+    }
+  }
+  &.active {
+    .stars {
+      .fa { @include opacity(.3); color: $color-grey-dark; cursor: pointer;
+        &.hover { @include opacity(1); color: $color-default; }
+        &.active { @include opacity(1); color: $color-default !important; }
+      }
+    }
+  }
+  &.stars-hidden {
+    i { display: none;
+      &.active { display: inline-block; }
+    }
   }
 }
 
 // Ribbon
-.ribbon { @include shadow; @include transform(translate3d(0,0,1px) rotate(45deg)); @include backface-visibility(hidden); background-color: $color-default; color: #fff; font-weight: bold; font-size: 12px; padding: 6px; position: absolute; z-index: 3; right: -30px; top: 15px; width: 120px; text-align: center; margin: auto; height: 30px; bottom: inherit; left: inherit; }
 
-/****
-  S
-****/
+.ribbon { background-color: $color-default; height: 25px; width: 30px; right: 35px; z-index: 4; position: relative; text-align: center; top: -2px;
+  &:before { border-color: $color-default transparent transparent transparent; border-style: solid; border-width: 12px 15px 0 0;  content: ""; position: absolute; bottom: -12px; left: 0; }
+  &:after { border-color: transparent $color-default transparent transparent; border-style: solid; border-width: 0 15px 12px 0;  content: ""; position: absolute; bottom: -12px; right: 0; }
+  i { color: #fff; font-size: 10px; margin-top: 8px; position: relative; }
 
-// Search filter
-
-#search-filter { margin-bottom: 40px; padding-top: 10px; position: relative;
-  h3 { display: inline-block; margin: 0 10px 0 0;
-    i { color: $color-default; font-size: 12px; margin-right: 5px; position: relative; top: -2px; }
+  &.approved { background-color: $color-green;
+    &:before { border-color: $color-green transparent transparent transparent; }
+    &:after { border-color: transparent $color-green transparent transparent; }
   }
-  .search-count { font-weight: bold; }
-  .sorting { position: absolute; right: 0; top: 0px;
-    span, .form-group { display: inline-block; }
-    span { margin-right: 10px; }
-    .form-group { min-width: 200px; }
+  &.in-queue { background-color: #ebebeb;
+    &:before { border-color: #ebebeb transparent transparent transparent; }
+    &:after { border-color: transparent #ebebeb transparent transparent; }
+    i { @include opacity(.7); color: $color-grey-dark; font-size: 13px; margin-top: 6px; }
   }
 }
 
-// Section title
+// Show More button
+.show-more { font-weight: bold; position: relative;
+  &.active {
+    &:before { @include opacity(0); }
+    &:after { @include opacity(1); }
+  }
+  &:before, &:after { @include transition(.8s); @include font-awesome; color: $color-default; display: block; font-size: 10px; position: absolute; right: -15px; top: 4px; }
+  &:before { @include opacity(1); content: "\f067"; }
+  &:after { @include opacity(0); content: "\f068"; }
+  //}
+}
 
-.section-title { position: relative;
-  .link-arrow { margin-top: 5px; right: 0; position: absolute; top: 0;
-
+// Review
+.review { display: block; margin-bottom: 60px;
+  &:hover, &:focus { color: inherit;
+    h3 { color: $color-default; }
+  }
+  &.small { margin-bottom: 30px;
+    h3 { @include transition(.4s); margin-bottom: 5px; margin-top: 0; }
+    p { display: block; height: 35px; margin-bottom: 0; margin-top: 10px; overflow: hidden; }
+    .info {
+      .rating { display: inline-block; margin-right: 10px;
+        .fa-star{
+          &.active { color: $color-default; }
+        }
+      }
+      .type { display: inline-block;
+        img { display: inline-block; width: 20px; }
+        span { @include opacity(.6); font-size: 12px; }
+      }
+    }
+  }
+  .author { font-size: 12px; float: left; width: 70px; margin-right: 20px; text-align: center;
+    img { @include border-radius(50%); margin-bottom: 10px; }
+  }
+  .wrapper { @include shadow; background-color: #fff; padding: 20px;
+    h5 { font-size: 18px; margin-top: 0; margin-bottom: 10px; }
+    .rating { margin: 15px 0; }
+    p { margin-bottom: 20px; }
+    .individual-rating { display: table; margin-top: 10px; width: 100%;
+      > span { float: left; }
+      .rating { float: right; margin: 0 }
+    }
   }
 }
 
-// Show on map button
+//----------------------------------------------------------------------------------------------------------------------
+// S
+//----------------------------------------------------------------------------------------------------------------------
 
-.show-on-map { color: $color-grey-dark; position: absolute; right: 0px; text-align: center;
-  .fa { color: $color-default; font-size: 24px; }
-}
+.show { visibility: visible; }
 
 // Sidebar
 
 #sidebar {
-  aside { margin-bottom: 50px; }
-  h3 { border-bottom: 1px solid rgba(0,0,0,.1); margin-bottom: 30px; margin-top: 21px; padding-bottom: 15px; }
-  form {
-    .btn { width: 100%; }
-  }
-  ul { padding-left: 15px;
-    &.list-links {
-      li { color: $color-default; }
+  button { width: 100%; }
+  section { padding: 15px 0px;
+    //&:first-child {
+    //  header { padding-top: 31px; }
+    //}
+    header { border-bottom: 1px solid $color-grey-light; margin-bottom: 25px; padding: 10px 0px 10px;
+      h2 { font-size: 16px; font-family: "Montserrat"; margin: 0; padding: 0; text-transform: uppercase; }
+    }
+    .bullets {
+      li { width: 100%; }
     }
   }
-  .sidebar-navigation { list-style: none; padding-left: 0;
-    li {
-      &.active {
-        a { @include shadow; background-color: $color-grey-light; border-color: $color-default-darker; padding-left: 10px;
-          &:after { @include opacity(1); border-color: transparent transparent transparent $color-default-darker; }
-          &:hover { padding-left: 10px; }
-        }
-        i { display: inline-block; }
-      }
-    }
-    > li { @include transition(.4s); margin-bottom: 5px; position: relative;
-      a { border-right: 3px solid transparent; color: $color-grey-dark; display: block; padding: 10px 0 10px 10px; position: relative;
-        &:after { @include transition(.4s); width: 0; height: 0; border-style: solid; border-width: 4px 0 4px 5px; border-color: transparent transparent transparent transparent; content: ""; position: absolute; right: -8px; top: 1px; bottom: 0; margin: auto; }
-        &:hover { border-color: $color-default; padding-left: 15px;
-          &:after { @include opacity(1); border-color: transparent transparent transparent $color-default; }
-        }
-      }
-      i { color: $color-default; margin-right: 8px; }
-
-      ul { padding-left: 30px; list-style: none;
-        > li { border-bottom: 1px solid $color-grey-light; position: relative;
-          &:before { content: "•"; color: $color-default; font-size: 24px; position: absolute; left: -5px; top: 2px; }
-          ul { padding-left: 10px;
-            li { @include opacity(.6); border-bottom: none;
-              &:before { display: none; }
-            }
-          }
-        }
-      }
-
+  .item-horizontal {
+    &:last-child { margin-bottom: 0; }
+    &.small {
+      h3 { font-size: 14px; }
     }
   }
 }
 
-// Slider
+// Sidebar box
 
-#slider { height: 650px; position: relative; overflow: hidden;
-  .homepage-slider {
-    .slide { height: 750px; position: relative; overflow: hidden;
-      &:after  { @include opacity(.8); @include property-gradient; bottom: 0; content: ""; height: 30%; left: 0; position: absolute; width: 100%; z-index: 1; }
-      .overlay { @include opacity(1); @include transition(.2s); color: #fff; position: absolute; bottom: 0; margin-bottom: 20px; width: 100%; z-index: 2;
-        .info { @include opacity(1); @include transition(.2s);
-          .tag { @include opacity(0); @include transition(.4s); font-size: 24px; position: relative; top: 20px;  }
-          h3 { @include text-shadow(0px 1px 2px rgba(0,0,0,.6)); @include opacity(0); @include transition(.4s); font-size: 30px; font-weight: normal; margin: 5px 0; position: relative; left: 20px;  }
-          figure { @include text-shadow(0px 1px 1px rgba(0,0,0,.6)); @include opacity(0); @include transition(.4s); font-size: 18px; position: relative; left: 20px; }
-          &.animate-description-out { @include opacity(0);
-            .tag, h3, figure { @include opacity(0); }
-          }
-          &.animate-description-in { @include opacity(1);
-            figure { @include opacity(1); @include transition-delay(.3s); left: 0px; }
-            h3 { @include opacity(1); @include transition-delay(.2s); left: 0px; }
-            .tag { @include opacity(1); top: 0px; }
-
-          }
-        }
-        hr { @include opacity(.2); border-color: #fff; }
-        .link-arrow { color: #fff; }
-      }
-      img { position: relative; }
-
-    }
-    .owl-controls {
-      .owl-prev, .owl-next { @include transition(.4s); background-color: transparent; bottom: 0; display: block; height: 100%; margin: auto; padding: 0 30px; position: absolute; top: 0;
-        &:hover { background-color: rgba(0,0,0,.2); }
-        &:after { @include font-awesome; bottom: 0; color: #fff; font-size: 40px; height: 40px; margin: auto; top: 0px; position: absolute; }
-      }
-      .owl-next { right: 0;
-        &:after { content: "\f105";  right: 20px; }
-      }
-      .owl-prev {
-        &:after { content: "\f104"; left: 20px; }
-      }
-    }
+.sidebar-box { background-color: #fff; margin-top: 30px; padding: 10px 20px;
+  .bullets {
+    li { width: 100%; }
   }
 }
 
-// Show All button
+// Social link with icon
 
-.show-all { color: $color-grey-dark; padding: 10px; display: inline-block;
-  &:hover { cursor: pointer; }
-  &:after { @include font-awesome; color: $color-default; content: "\f067"; margin-left: 10px; font-size: 11px; position: relative; top: -1px; }
-  &.layout-expanded {
-    &:after { content: "\f068"; }
+.social-button { color: $color-grey-dark; display: block; margin-bottom: 10px;
+  &:hover {
+    i { border-color: rgba(0,0,0,.2); }
   }
+  i { @include transition(.4s); @include border-radius(50%); border: 2px solid rgba(0,0,0,.1); color: $color-default; height: 30px; margin-right: 10px; vertical-align: middle; text-align: center; line-height: 27px; width: 30px; position: relative; top: -2px; }
 }
 
-// Submit pricing table
+//----------------------------------------------------------------------------------------------------------------------
+// T
+//----------------------------------------------------------------------------------------------------------------------
 
-.submit-pricing { border: 2px solid $color-grey-light; padding: 15px 20px; margin-bottom: 30px;
-  table { margin-bottom: 0;
-    thead {
-      tr {
-        th { border: none; font-weight: lighter; font-size: 18px; padding: 0; width: 25%; vertical-align: middle;
-          &.title { color: $color-default; font-size: 24px; text-align: center; }
-        }
-      }
-    }
-    tbody {
-      tr {
-        td { border: none; border-top: 2px solid $color-grey-light; font-size: 12px; width: 25%; vertical-align: middle; padding: 10px 0; text-align: center;
-          &:first-child { @include opacity(.6); text-align: left; }
-          &.not-available { @include opacity(.4); }
-          &.available { color: $color-default; }
-        }
-        &.buttons { padding-bottom: 0;
-          td { border: none;
-            &:after { @include font-awesome; color: $color-grey-medium; content: "\f05d"; display: none;  font-size: 20px; }
-            &.package-selected {
-              &:after { display: inline-block; }
-              .btn { display: none; }
-            }
-          }
-        }
-        &.prices {
-          td { border: none; color: $color-default-darker; font-size: 14px; padding-bottom: 15px; }
-        }
-      }
-    }
-  }
-}
+// Testimonials
 
-.submit-step { padding-left: 50px; padding-top: 10px; position: relative;
-  .step-number { background-color: $color-default; color: #fff; height: 35px; left: 0; width: 35px; position: absolute; top: 0; text-align: center; line-height: 35px;
-    &:after { bottom: -7px; content: ""; height: 0px; border-style: solid; border-width: 0px 10px 10px 10px; border-color: transparent transparent transparent $color-default; position: absolute; left: 0; width: 0px; }
-  }
-  .description {
-    h4 { color: $color-grey-dark; margin-top: 0; font-weight: bold; }
-  }
-}
-
-.submit-features { list-style: none; padding-left: 0;
-  li { display: inline-block; width: 33%;
-    label { font-weight: normal;  }
-  }
-}
-
-#submit-map { height: 320px; width: 100%; }
-
-.submission-message { margin-top: 100px;
-  header { color: $color-default-darker; font-size: 48px; font-weight: lighter; margin: 10px 0; }
-  p, a { margin-bottom: 60px; }
-}
-
-/****
-  T
-****/
-
-// Tag
-
-.tag { @include border-radius(2px); @include box-shadow(0px 1px 2px rgba(0,0,0,.3)); background-color: #fff; display: inline-block; padding: 3px 8px;
-  &.price { @include text-shadow(0px 1px 1px rgba(0,0,0,.3)); background-color: $color-default; color: #fff; font-size: 14px; font-weight: bold; }
-  &.article { background-color: $color-grey-light; border-left: 3px solid #c7c7c7; color: $color-grey-dark; font-size: 12px; font-weight: bold; }
-}
-
-// Testimonial carousel small
-
-.testimonials-carousel {
-  &.small {
-    .testimonial { padding: 20px 0;
-      figure {
-        .image { background-color: $color-grey-medium; height: 70px; position: relative; overflow: hidden; width: 60px;
-          &:after { bottom: 0px; content: ""; height: 0px; border-style: solid; border-width: 10px 0 0 10px; border-color: transparent transparent transparent #fff; position: absolute; right: 0; width: 0px; }
-          &:before { background-color: #fff; bottom: 0; content: ""; height: 10px; left: 0; width: calc(100% - 10px); position: absolute; }
-          img { height: 100%; }
-        }
-      }
-      .cite {
-        p { font-size: 14px; }
-      }
-    }
-  }
-  .testimonial {
-    img { height: 100%; width: initial !important; }
-  }
+.testimonials { padding: 80px;
+  .owl-controls { right: 100px; }
+  .owl-prev { left: inherit; right: 35px; }
 }
 
 // Text banner
-
-.text-banner { padding: 40px 0; }
-
-// Timeline
-
-//.timeline {
-//  .timeline-item {
-//    &:first-child {
-//      &:before { background-color: red !important; }
-//    }
-//  }
-//}
-
-.timeline-item { display: block; margin-bottom: 60px;
-  &:last-child {
-    &:after { display: none !important; }
-  }
-  &:hover {
-    .circle {
-      .date { left: 30px; }
-    }
-    .wrapper { background-color: $color-grey-light;
-      .social {
-        .btn { @include opacity(1); }
-      }
-    }
-  }
-  &:after { background-color: $color-grey-light; content: ""; width: 2px; height: 100%; position: absolute; top: 0; left: 21px; z-index: -1; }
-  .circle { @include border-radius(50%); background-color: #fff; border: 2px solid $color-grey-light; height: 43px; position: relative; width: 100%;
-    .dot { @include border-radius(50%); @include transition(.4s); background-color: $color-default;height: 7px; width: 7px; position: absolute; top: 0; right: 0; bottom: 0; left: 1px; margin: auto; }
-    .date { @include shadow; @include transition(.4s); background-color: $color-default; color: #fff; left: 40px; position: absolute; top: 0; bottom: 0; margin: auto; height: 29px; line-height: 29px; padding-left: 7px; padding-right: 7px; z-index: 2;
-      &:after { width: 0; height: 0; content: ""; border-style: solid; border-width: 4px 4px 4px 4px; border-color: transparent $color-default transparent transparent ; position: absolute; top: 0; left: -8px; bottom: 0; margin: auto; }
-    }
-  }
-  .wrapper { @include transition(.4s); background-color: transparent; border: 2px solid $color-grey-light; padding: 20px 20px 20px 80px; margin-top: -8px;
-    img { margin-bottom: 30px; width: 100%; }
-    h3 { margin-top: 0; }
-    .social { margin-top: 20px;
-      .btn { @include opacity(.3); padding: 3px 0; width: 25px;
-      }
-    }
+.text-banner { display: table; padding: 120px 0; width: 100%;
+  figure { display: table-cell; vertical-align: middle; float: left; margin-right: 40px; }
+  .description { display: table-cell; vertical-align: middle;
+    h2 { font-size: 30px; font-weight: normal; }
+    p { font-size: 18px; }
   }
 }
 
-// Thumbnail
+// Toggle navigation menu
+.toggle-navigation { display: inline-block; height: 12px; margin: 0px 0px 5px 10px; position: relative;
+  &:hover { cursor: pointer;
+    .icon {
+      .line { background-color: $color-default;
+        &:first-child { @include rotate(45deg); position: relative; top: 5px; }
+        &:nth-child(2) { @include opacity(0); }
+        &:last-child { @include rotate(-45deg); position: relative; top: -5px; }
+      }
+    }
+  }
+  .icon { padding: 7px;
+    .line { @include transition(.2s ease-in-out all); background-color: $color-grey-dark; direction: block; height: 2px; margin-bottom: 3px; width: 15px; }
+  }
+}
 
-.thumbnail { height: 100px; }
+// Title 404
+#title-404 { text-align: center;
+  aside { color: $color-default; font-size: 164px; font-weight: bold; position: relative;
+    img { bottom: 0; left: 0; height: 40px; margin: auto; position: absolute; right: 0; top: 0; width: 380px; }
+  }
+}
 
-// Tooltip
+//body { @include opacity(0); }
+.page-fade-out { -webkit-animation: animation-fade-out .2s forwards; animation: animation-fade-out .2s forwards; }
+.page-fade-in { -webkit-animation: animation-fade-in 1s forwards; animation: animation-fade-in 1s forwards; }
 
-.tool-tip { padding: 5px; cursor: pointer; color: $color-default-darker; }
+//----------------------------------------------------------------------------------------------------------------------
+// U
+//----------------------------------------------------------------------------------------------------------------------
 
-/****
-  U
-****/
+#ui-timepicker-div  { @include shadow; background-color: #fff; padding: 5px; margin-top: 5px; }
+.ui-timepicker {  }
+.ui-timepicker-table {
+  &.table { padding: 5px; }
+}
 
-.universal-button { @include box-shadow(0px 1px 1px rgba(0,0,0,.2)); background-color: $color-grey-light; color: $color-grey-dark; display: block; margin-bottom: 10px; padding: 20px; position: relative; top: 0;
-  &:hover { background-color: darken($color-grey-light, 2%); color: $color-grey-dark; }
-  &:active { @include box-shadow(0px 1px 0px rgba(0,0,0,.2)); top: 1px; }
-  figure, span { vertical-align: middle; display: table-cell; }
-  figure { color: $color-default; font-size: 28px; width: 40px; }
-  .arrow { bottom: 0; color: $color-default; height: 15px; margin: auto; position: absolute; right: 10px; top: 0; width: 10px; }
+table {
+  &.ui-timepicker-table { margin: 10px;
+    th {
+      &.periods { padding-right: 10px; }
+    }
+    td { padding: inherit; width: inherit;
+      a { padding: 5px 7px; width: inherit;
+        &.ui-state-hover, &.ui-state-active { background-color: $color-default; color: #fff; }
+      }
+    }
+    .ui-timepicker-minutes { padding-left: 15px; }
+  }
 }

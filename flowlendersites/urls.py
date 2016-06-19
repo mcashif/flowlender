@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', 'flowlendercms.views.index', name='index'),
     url(r'^index/', 'flowlendercms.views.index', name='index'),
+    url(r'^json/', 'flowlendercms.views.getjson', name='getjson'),
     url(r'^index-detail/', 'flowlendercms.views.indexdetail', name='indexdetail'),
     url(r'^index-list/', 'flowlendercms.views.indexlist', name='indexlist'),
     url(r'^index-login/', 'flowlendercms.views.indexlogin', name='indexlogin'),
