@@ -17,7 +17,7 @@ $(document).ready(function($) {
 
     adaptBackgroundHeight();
 
-    $('.quick-view, .results .item').live('click',  function(){
+    $('.quick-view').live('click',  function(){
         var id = $(this).attr('id');
         quickView(id);
         return false;
@@ -180,22 +180,7 @@ $(document).ready(function($) {
 
     $('body').addClass('page-fade-in');
 
-    $('a').on('click', function (e) {
-        var attr = $(this).attr('href');
-        //alert( $(this).attr('href') );
-        if ( attr.indexOf('#') != 0 ) {
-            e.preventDefault();
-            var goTo = this.getAttribute("href");
-            $('body').removeClass('page-fade-in');
-            $('body').addClass('page-fade-out');
-            setTimeout(function(){
-                window.location = goTo;
-            },200);
-        }
-        else if ( $(this).attr('href') == '#' ) {
-            e.preventDefault();
-        }
-    });
+  
 
 //  Dropzone -----------------------------------------------------------------------------------------------------------
 

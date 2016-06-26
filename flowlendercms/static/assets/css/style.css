@@ -6636,6 +6636,18 @@ body.navigation-top-header .header .wrapper .toggle-navigation {
     display: none;
   }
 
+  #submit-map {
+    margin-bottom: 20px;
+  }
+
+  .fade-map {
+    -moz-transition: 0.4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+  }
+  
   .map-canvas {
     height: auto;
     overflow: visible;

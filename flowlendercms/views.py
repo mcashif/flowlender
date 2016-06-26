@@ -113,3 +113,7 @@ def indexlogin(request):
 def indexaddrecord(request):
     template = loader.get_template("flowlendercms/index-addrecord.html")
     return HttpResponse(template.render())
+
+def submit(request):
+    template = loader.get_template("flowlendercms/submit.html")
+    return HttpResponse(template.render())

@@ -38,7 +38,7 @@
                         <ul class="user-area">
                             <li><a href="#">Sign In</a></li>
                         </ul>
-                        <a href="#" class="submit-item">
+                        <a href="/submit" class="submit-item">
                             <div class="content"><span>Add Your Event</span></div>
                             <div class="icon">
                                 <i class="fa fa-plus"></i>
@@ -119,24 +119,23 @@
                 <!--Items List-->
                 <div class="items-list">
 
-                  <div class="form-group">
-                                                    <h3>Results</h3>
-                                                    <select name="type" multiple title="All" data-live-search="true" id="type">
-                                                        <option value="1">Bracket</option>
-                                                        <option value="2" class="sub-category">Single Elimination</option>
-                                                        <option value="3" class="sub-category">Double Elimination</option>
-                                                        <option value="4" class="sub-category">Round Robbin</option>
-                                                        <option value="5">Results</option>
-                                                        <option value="6" class="sub-category">Point Only</option>
-                                                        <option value="7" class="sub-category">Submission Only</option>
-                                                        <option value="8" class="sub-category">Time Only</option>
-                                                        <option value="9">Catagory</option>
-                                                        <option value="10" class="sub-category">Professional</option>
-                                                        <option value="11" class="sub-category">Kids</option>
-                                                        <option value="12" class="sub-category">Purse Prize</option>
-                                                        <option value="13" class="sub-category">Adult</option>
-                                                    </select>
-                    </div>
+
+
+
+
+                  <header class="clearfix">
+                      <a href="#advanced-search" class="show-more pull-left" data-toggle="collapse" aria-expanded="false" aria-controls="advanced-search">Filter Results</a>
+                  </header>
+                  <div class="advanced-search collapse" id="advanced-search">
+                      <ul class="list-unstyled checkboxes">
+                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="GI">GI</label></div></li>
+                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="NOGI" >NOGI</label></div></li>
+                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="KIDS" >KIDS</label></div></li>
+                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="ADULT">ADULT</label></div></li>
+                      </ul>
+                  </div>
+
+
 
                     <div class="inner">
                         <header>
@@ -169,6 +168,7 @@
 <script type="text/javascript" src="{% static 'assets/js/smoothscroll.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/jquery.hotkeys.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/icheck.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/jquery.nouislider.all.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;libraries=places"></script>
@@ -182,21 +182,448 @@
 <script type="text/javascript" src="assets/js/ie-scripts.js"></script>
 <![endif]-->
 
+
 <script>
-    var _latitude = 34.443159;
-    var _longitude = -93.867188;
-    var jsonPath = '/static/assets/json/items.json';
 
-    // Load JSON data and create Google Maps
+var JSonData={
+    "data": [
+        {
+            "id": 1,
+            "category": "real_estate",
+            "title": "Decatur Central High School1",
+            "location": "Throwback EGO",
+            "latitude": 40.94554564607652,
+            "longitude":-74.14876356562502,
+            "url": "item-detail.html",
+            "type": "760.24 Miles",
+            "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+            "rating": 4,
+            "gallery":
+                [
+                    "/static/assets/img/items/imgp.jpg"
+                ],
+            "cattye": "Single Elimination",
+            "result": "Point Only",
+            "xyz": "NOGI"
 
-    $.getJSON(jsonPath)
-        .done(function(json) {
-            createHomepageGoogleMap(_latitude,_longitude,json);
-        })
-        .fail(function( jqxhr, textStatus, error ) {
-            console.log(error);
-        })
-    ;
+        },
+        {
+          "id": 2,
+          "category": "real_estate",
+          "title": "Decatur Central High School2",
+          "location": "Throwback EGO",
+          "latitude": 45.466751481830826,
+          "longitude": -75.66487684687502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Single Elimination",
+          "result": "Time Only",
+          "xyz": "GI"
+        },
+        {
+          "id": 3,
+          "category": "real_estate",
+          "title": "Decatur Central High School3",
+          "location": "Throwback EGO",
+          "latitude": 41.70457402349661,
+          "longitude":-76.55476942500002,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 4,
+          "category": "real_estate",
+          "title": "Decatur Central High School4",
+          "location": "Throwback EGO",
+          "latitude": 42.65706455427807,
+          "longitude": -73.76424208125002,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 5,
+          "category": "real_estate",
+          "title": "Decatur Central High School5",
+          "location": "Throwback EGO",
+          "latitude": 44.36202756319656,
+          "longitude": -73.68733778437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 6,
+          "category": "real_estate",
+          "title": "Decatur Central High School6",
+          "location": "Throwback EGO",
+          "latitude": 38.5727285412762,
+          "longitude": -80.98225965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 7,
+          "category": "real_estate",
+          "title": "Decatur Central High School7",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 8,
+          "category": "real_estate",
+          "title": "Decatur Central High School8",
+          "location": "Throwback EGO",
+          "latitude": 40.202869368654596,
+          "longitude": -78.16975965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 9,
+          "category": "real_estate",
+          "title": "Decatur Central High School9",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 10,
+          "category": "real_estate",
+          "title": "Decatur Central High School10",
+          "location": "Throwback EGO",
+          "latitude": 39.3925595374766,
+          "longitude": -79.13655653437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 11,
+          "category": "real_estate",
+          "title": "Decatur Central High School11",
+          "location": "Throwback EGO",
+          "latitude": 41.92565269297569,
+          "longitude": -75.35725965937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 12,
+          "category": "real_estate",
+          "title": "Decatur Central High School12",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 13,
+          "category": "real_estate",
+          "title": "Decatur Central High School13",
+          "location": "Throwback EGO",
+          "latitude": 40.0011873731205,
+          "longitude": -79.83968153437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 14,
+          "category": "real_estate",
+          "title": "Decatur Central High School14",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ]
+        },
+        {
+          "id": 15,
+          "category": "real_estate",
+          "title": "Decatur Central High School15",
+          "location": "Throwback EGO",
+          "latitude": 45.17320239118332,
+          "longitude": -77.55452528437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 16,
+          "category": "real_estate",
+          "title": "Decatur Central High School16",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 17,
+          "category": "real_estate",
+          "title": "Decatur Central High School17",
+          "location": "Throwback EGO",
+          "latitude": 39.324603199987635,
+          "longitude": -86.78304090937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 18,
+          "category": "real_estate",
+          "title": "Decatur Central High School18",
+          "location": "Throwback EGO",
+          "latitude": 33.604181673967695,
+          "longitude":-82.21272840937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 19,
+          "category": "real_estate",
+          "title": "Decatur Central High School19",
+          "location": "Throwback EGO",
+          "latitude": 51.541599,
+          "longitude": -0.112588,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 20,
+          "category": "real_estate",
+          "title": "Decatur Central High School20",
+          "location": "Throwback EGO",
+          "latitude": 39.52827380959531,
+          "longitude": -78.96077528437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+
+        {
+          "id": 21,
+          "category": "real_estate",
+          "title": "Decatur Central High School21",
+          "location": "Throwback EGO",
+          "latitude": 35.127629611726,
+          "longitude": -82.30061903437502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        },
+        {
+          "id": 22,
+          "category": "real_estate",
+          "title": "Decatur Central High School22",
+          "location": "Throwback EGO",
+          "latitude": 39.12033775845048,
+          "longitude": -82.91585340937502,
+          "url": "item-detail.html",
+          "type": "760.24 Miles",
+          "type_icon": "/static/assets/icons/store/apparel/umbrella-2.png",
+          "rating": 4,
+          "gallery":
+              [
+                  "/static/assets/img/items/imgp.jpg"
+              ],
+          "cattye": "Double Elimination",
+          "result": "Time Only",
+          "xyz": "KIDS"
+        }
+
+
+    ]
+}
+
+
+
+
+
+
+
+$(function() {
+
+  $('input').iCheck('check');
+
+  var _latitude = 24.443159;
+  var _longitude = -93.867188;
+  createHomepageGoogleMap(_latitude,_longitude,JSonData);
+
+});
 
     // Set if language is RTL and load Owl Carousel
 
