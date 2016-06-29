@@ -19,14 +19,12 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+admin.site.site_header = 'My administration'
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', 'flowlendercms.views.index', name='index'),
     url(r'^index/', 'flowlendercms.views.index', name='index'),
     url(r'^submit/', 'flowlendercms.views.submit', name='submit'),
     url(r'^json/', 'flowlendercms.views.getjson', name='getjson'),
-    url(r'^index-detail/', 'flowlendercms.views.indexdetail', name='indexdetail'),
-    url(r'^index-list/', 'flowlendercms.views.indexlist', name='indexlist'),
-    url(r'^index-login/', 'flowlendercms.views.indexlogin', name='indexlogin'),
-    url(r'^index-addrecord/', 'flowlendercms.views.indexaddrecord', name='indexaddrecord'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
