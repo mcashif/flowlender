@@ -4,4 +4,5 @@ db.sqlite3
 /media
 /static
 /migrations
+/flowlendercms/migrations
 .DS_Store
