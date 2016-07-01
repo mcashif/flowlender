@@ -23,14 +23,14 @@ class Promoter(models.Model):
 
 class EventDetail(models.Model):
 
-        SUB = 'Submission Only'
         PON = 'Points'
+        SUB = 'Submission Only'
         TIL = 'Time Limit'
 
 
         RULES = (
-            (SUB, 'Submission Only'),
             (PON, 'Points'),
+            (SUB, 'Submission Only'),
             (TIL, 'Time Limit'),
         )
 
@@ -53,6 +53,8 @@ class EventDetail(models.Model):
         )
         event_date = models.DateField(verbose_name='Event Date')
         event_geocode = GeopositionField(blank=True, null=True,verbose_name='GEO Code')
+        event_tentitive=models.BooleanField(default=False,verbose_name='Is Tentative?')
+
         end_date = models.DateField(verbose_name='Event End Date', blank=True, null=True)
         location = models.CharField(max_length=200,blank=True,null=True,verbose_name='Event Location')
         address = models.CharField(max_length=300,blank=True,null=True,verbose_name='Address')
@@ -65,11 +67,11 @@ class EventDetail(models.Model):
                             default=PON,verbose_name='Rules')
         bracket=models.CharField(max_length=25,
                             choices=BRACKET,
-                            default=RR,verbose_name='Brackets')
+                            default=SE,verbose_name='Brackets')
 
         kids_special_formats=models.CharField(max_length=25,
                             choices=BRACKET,
-                            default=RR,verbose_name='Kids Special Format')
+                            default=SE,verbose_name='Kids Special Format')
 
         kids_special_rules=models.CharField(max_length=25,
                                 choices=RULES,
@@ -85,14 +87,15 @@ class EventDetail(models.Model):
         purse=models.BooleanField(default=False,verbose_name='PURSE PRIZE')
         absolute=models.BooleanField(default=False,verbose_name='ABSOLUTE')
         adults=models.BooleanField(default=False,verbose_name='ADULTS')
-        kids_special_format=models.BooleanField(default=False,verbose_name='KIDS')
+        kids_special_format=models.BooleanField(default=False,verbose_name='KIDS SPECIAL FORMAT')
 
 
         cost=models.PositiveIntegerField(max_length=5,blank=True, null=True,verbose_name='Event Ticket Cost')
         predate=models.DateField(blank=True, null=True,verbose_name='Event Pre Date')
         cost_late=models.PositiveIntegerField(max_length=5,blank=True, null=True,verbose_name='Late Cost')
         cutoff_date=models.DateField(blank=True, null=True,verbose_name='Cut-off Date')
-        event_description=models.TextField(max_length=1024,blank=True, null=True,verbose_name='Event Description')
+        event_description=models.TextField(max_length=5024,blank=True, null=True,verbose_name='Event Description')
+        event_web = models.URLField(max_length=200, blank=True, verbose_name='Event Website')
 
         small_image=models.ImageField(upload_to='documents',default = 'documents/no-img.jpeg',verbose_name='Event Image(Small)')
         large_image=models.ImageField(upload_to='documents',default = 'documents/no-img.jpeg',verbose_name='Event Image(Large)')

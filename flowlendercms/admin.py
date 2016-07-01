@@ -4,6 +4,44 @@ from flowlendercms.models import EventDetail,Promoter
 
 
 class EventDetailAdmin(ImportExportModelAdmin):
+    fieldsets = [
+    (None, {
+            'fields': ['event_name', 'event_promoter', 'event_date', 'end_date','event_tentitive', 'event_geocode']}),
+
+    ('Address', {
+                    'classes': ('collapse',),
+                    'fields': ['location', 'address', 'city', 'state','zip_code']}),
+
+    ('Rules & Brackets', {
+
+                    'classes': ('collapse',),
+                    'fields': ['rule', 'bracket', 'kids_special_formats', 'kids_special_rules']}),
+
+    ('Catagories', {
+
+                    'classes': ('collapse',),
+                    'fields': ['gi', 'nogi', 'kids', 'pro', 'purse', 'absolute','adults', 'kids_special_format']}),
+
+    ('Cost & Details', {
+
+                    'classes': ('collapse',),
+                    'fields': ['cost', 'predate', 'cost_late', 'cutoff_date']}),
+
+    ('More Info', {
+
+                    'classes': ('collapse',),
+                    'fields': ['event_description','event_web']}),
+
+    ('Images', {
+
+                    'classes': ('collapse',),
+                    'fields': ['small_image','large_image']}),
+ ]
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "event_promoter":
+            kwargs["queryset"] = Promoter.objects.order_by('promoter_name')
+        return super(EventDetailAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
         list_display = ('image_tag','event_name', 'event_promoter', 'event_date','event_geocode','added','updated')
         list_display_links = ('event_name', 'event_promoter')
         readonly_fields = ('image_tag',)
@@ -11,36 +49,6 @@ class EventDetailAdmin(ImportExportModelAdmin):
         list_filter = ('event_name', 'event_promoter', 'event_date')
         date_hierarchy = 'event_date'
         ordering = ('-event_date',)
-
-        fieldsets = [
-        (None, {
-                'fields': ['event_name', 'event_promoter', 'event_date', 'event_geocode','end_date']}),
-
-        ('Address', {
-                        'classes': ('collapse',),
-                        'fields': ['location', 'address', 'city', 'state','zip_code']}),
-
-        ('Rules & Brackets', {
-
-                        'classes': ('collapse',),
-                        'fields': ['rule', 'bracket', 'kids_special_formats', 'kids_special_rules']}),
-
-        ('Catagories', {
-
-                        'classes': ('collapse',),
-                        'fields': ['gi', 'nogi', 'kids', 'pro', 'purse', 'absolute','adults', 'kids_special_format']}),
-
-        ('Cost & Details', {
-
-                        'classes': ('collapse',),
-                        'fields': ['cost', 'predate', 'cost_late', 'cutoff_date','event_description']}),
-
-        ('Images', {
-
-                        'classes': ('collapse',),
-                        'fields': ['small_image','large_image']}),
-    ]
-
         pass
 
 class PromoterAdmin(ImportExportModelAdmin):
