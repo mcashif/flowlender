@@ -52,7 +52,7 @@ class EventDetail(models.Model):
             on_delete=models.CASCADE, verbose_name='Promoter Name'
         )
         event_date = models.DateField(verbose_name='Event Date')
-        event_geocode = GeopositionField(blank=True, null=True,verbose_name='GEO Code')
+        event_geocode = GeopositionField(verbose_name='GEO Code')
         event_tentitive=models.BooleanField(default=False,verbose_name='Is Tentative?')
 
         end_date = models.DateField(verbose_name='Event End Date', blank=True, null=True)
