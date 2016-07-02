@@ -37,18 +37,21 @@ class EventDetailAdmin(ImportExportModelAdmin):
                     'classes': ('collapse',),
                     'fields': ['small_image','large_image']}),
  ]
+
+    list_display = ('image_tag','event_name', 'event_promoter', 'event_date','event_geocode','added','updated')
+    list_display_links = ('event_name', 'event_promoter')
+    readonly_fields = ('image_tag',)
+    search_fields = ['event_name', 'event_promoter']
+    list_filter = ('event_name', 'event_promoter', 'event_date')
+    date_hierarchy = 'event_date'
+    ordering = ('-event_date',)
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "event_promoter":
             kwargs["queryset"] = Promoter.objects.order_by('promoter_name')
         return super(EventDetailAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-        list_display = ('image_tag','event_name', 'event_promoter', 'event_date','event_geocode','added','updated')
-        list_display_links = ('event_name', 'event_promoter')
-        readonly_fields = ('image_tag',)
-        search_fields = ['event_name', 'event_promoter']
-        list_filter = ('event_name', 'event_promoter', 'event_date')
-        date_hierarchy = 'event_date'
-        ordering = ('-event_date',)
+
         pass
 
 class PromoterAdmin(ImportExportModelAdmin):
