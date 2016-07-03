@@ -94,7 +94,7 @@ class EventDetail(models.Model):
         predate=models.DateField(blank=True, null=True,verbose_name='Event Pre Date')
         cost_late=models.PositiveIntegerField(max_length=5,blank=True, null=True,verbose_name='Late Cost')
         cutoff_date=models.DateField(blank=True, null=True,verbose_name='Cut-off Date')
-        event_description=models.TextField(max_length=5024,blank=True, null=True,verbose_name='Event Description')
+        event_description=models.TextField(max_length=10024,blank=True, null=True,verbose_name='Event Description')
         event_web = models.URLField(max_length=200, blank=True, verbose_name='Event Website')
 
         small_image=models.ImageField(upload_to='documents',default = 'documents/no-img.jpeg',verbose_name='Event Image(Small)')
