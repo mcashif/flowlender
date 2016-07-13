@@ -66,9 +66,9 @@ def getjson(request):
         data['kids_special_format'] = obj.kids_special_format
 
         data['cost'] = obj.cost
-        data['predate'] = obj.predate
+        data['predate'] = str(obj.predate)
         data['cost_late'] = obj.cost_late
-        data['cutoff_date'] = obj.cutoff_date
+        data['cutoff_date'] = str(obj.cutoff_date)
         data['event_description'] = obj.event_description
         data['event_web'] = obj.event_web
 
