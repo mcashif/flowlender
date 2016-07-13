@@ -602,7 +602,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery[0] + '" alt="">' +
+                        '<img src="' + json.data[a].type_icon+ '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +

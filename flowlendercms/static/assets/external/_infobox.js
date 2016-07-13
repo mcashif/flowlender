@@ -14,7 +14,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                        { title = '' }
     if(json.data[i].location)       { var location = json.data[i].location }
         else                        { location = '' }
-    if(json.data[i].gallery[0])     { var gallery = json.data[i].gallery[0] }
+    if(json.data[i].type_icon)     { var gallery = json.data[i].type_icon }
         else                        { gallery[0] = '../img/default-item.jpg' }
 
     var ibContent = '';
