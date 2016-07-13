@@ -61,7 +61,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 markerContent.innerHTML =
                     '<div class="map-marker featured' + color + '">' +
                         '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
+                        '<img src="' + json.data[i].small_image +  '">' +
                         '</div>' +
                     '</div>';
             }
@@ -69,7 +69,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 markerContent.innerHTML =
                     '<div class="map-marker ' + json.data[i].color + '">' +
                         '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
+                        '<img src="' + json.data[i].small_image +  '">' +
                         '</div>' +
                     '</div>';
             }
@@ -472,7 +472,7 @@ function itemDetailMap(json){
     };
     var mapElement = document.getElementById('map-detail');
     var map = new google.maps.Map(mapElement, mapOptions);
-    if( json.type_icon ) var icon = '<img src="' + json.type_icon +  '">';
+    if( json.small_image ) var icon = '<img src="' + json.small_image +  '">';
     else icon = '';
 
     // Google map marker content -----------------------------------------------------------------------------------
@@ -602,19 +602,19 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].type_icon+ '" alt="">' +
+                        '<img src="' + json.data[a].small_image+ '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
                     '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
-                    '<figure>' + json.data[a].location + '</figure>' +
-                    drawPrice(json.data[a].price) +
+                    '<figure>' + json.data[a].promotor + '</figure>' +
+                    drawPrice(json.data[a].cost) +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
-                            '<span>' + json.data[a].type + '</span>' +
+                            '<i><img src="' + json.data[a].small_image + '" alt=""></i>' +
+                            '<span>' + json.data[a].event_date + '</span>' +
                         '</div>' +
-                        '<div class="rating" data-rating="' + json.data[a].rating + '"></div>' +
+                        '<div class="rating" data-rating="' + 4 + '"></div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
@@ -671,9 +671,34 @@ function multiChoice(sameLatitude, sameLongitude, json) {
 
 // MKS-
 
-function getCheckBoxStatus(chk){
+function getCheckBoxStatus(json,i){
 
-return $("#"+chk).prop("checked");
+
+    if(json.data[i].GI && $("#GI").prop("checked"))
+      return true;
+
+    if(json.data[i].NOGI && $("#NOGI").prop("checked"))
+      return true;
+
+    if(json.data[i].KIDS && $("#KIDS").prop("checked"))
+      return true;
+
+    if(json.data[i].PRO && $("#PRO").prop("checked"))
+      return true;
+
+    if(json.data[i].PURSE && $("#PURSE").prop("checked"))
+      return true;
+
+    if(json.data[i].ABSOLUTE && $("#ABSOLUTE").prop("checked"))
+      return true;
+
+    if(json.data[i].ADULTS && $("#ADULTS").prop("checked"))
+      return true;
+
+    if(json.data[i].KSF && $("#KSF").prop("checked"))
+      return true;
+
+    return false;
 
 }
 
@@ -684,7 +709,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
               var category;
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json.data[i].xyz)){
+                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json,i)){
                       category = json.data[i].category;
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);

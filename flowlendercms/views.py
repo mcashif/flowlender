@@ -34,12 +34,7 @@ def getjson(request):
         data['url'] = obj.event_web
 
         #XXXXXXXXXXXXXXXXX
-        data['type'] = "760.24 Miles"
         data['type_icon'] =  "/static/assets/icons/store/apparel/umbrella-2.png"
-        data['rating'] = 4
-        data['cattye'] = "Double Elimination"
-        data['result'] = "Time Only"
-        data['xyz'] = "KIDS"
         #XXXXXXXXXXXXXXXXX
         objP=Promoter.objects.get(pk=1)
         data['promotor'] = objP.promoter_name
@@ -51,19 +46,20 @@ def getjson(request):
         data['city'] = obj.city
         data['state'] = obj.state
         data['zip_code'] = obj.zip_code
+
         data['rule'] = obj.rule
         data['bracket'] = obj.bracket
         data['kids_special_formats'] = obj.kids_special_formats
-
         data['kids_special_rules'] = obj.kids_special_rules
-        data['gi'] = obj.gi
-        data['nogi'] = obj.nogi
-        data['kids'] = obj.kids
-        data['pro'] = obj.pro
-        data['purse'] = obj.purse
-        data['absolute'] = obj.absolute
-        data['adults'] = obj.adults
-        data['kids_special_format'] = obj.kids_special_format
+
+        data['GI'] = obj.gi
+        data['NOGI'] = obj.nogi
+        data['KIDS'] = obj.kids
+        data['PRO'] = obj.pro
+        data['PURSE'] = obj.purse
+        data['ABSOLUTE'] = obj.absolute
+        data['ADULTS'] = obj.adults
+        data['KSF'] = obj.kids_special_format
 
         data['cost'] = obj.cost
         data['predate'] = str(obj.predate)
