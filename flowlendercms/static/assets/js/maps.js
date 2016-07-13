@@ -594,6 +594,7 @@ function simpleMap(_latitude, _longitude, draggableMarker){
 
 function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
+    var priceIcon= "/static/assets/icons/store/apparel/umbrella-2.png" ;
     visibleItemsArray.push(
         '<li id="' + json.data[a].id + "li" +'">' +
             '<div class="item" id="' + json.data[a].id + '">' +
@@ -608,11 +609,11 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                 '<div class="wrapper">' +
                     '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
                     '<figure>' + json.data[a].promotor + '</figure>' +
-                    drawPrice(json.data[a].cost) +
+                    drawPrice(json.data[a].event_date) +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.data[a].small_image + '" alt=""></i>' +
-                            '<span>' + json.data[a].event_date + '</span>' +
+                            '<i><img src="' + priceIcon + '" alt=""></i>' +
+                            '<span>' + json.data[a].cost + '</span>' +
                         '</div>' +
                         '<div class="rating" data-rating="' + 4 + '"></div>' +
                     '</div>' +

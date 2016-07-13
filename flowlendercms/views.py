@@ -33,9 +33,6 @@ def getjson(request):
         data['longitude'] = float(listX[1])
         data['url'] = obj.event_web
 
-        #XXXXXXXXXXXXXXXXX
-        data['type_icon'] =  "/static/assets/icons/store/apparel/umbrella-2.png"
-        #XXXXXXXXXXXXXXXXX
         objP=Promoter.objects.get(pk=1)
         data['promotor'] = objP.promoter_name
 
