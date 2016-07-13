@@ -612,7 +612,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     drawPrice(json.data[a].event_date) +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + priceIcon + '" alt=""></i>' +
+                            '<i><img src="' + priceIcon  + '" alt=""></i>' +
                             '<span>' + json.data[a].cost + '</span>' +
                         '</div>' +
                         '<div class="rating" data-rating="' + 4 + '"></div>' +
