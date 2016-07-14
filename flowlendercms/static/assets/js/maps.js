@@ -694,18 +694,23 @@ function UCType(){
 function getCheckBoxStatus(json,i){
 
 
-    if($("#AD").prop("checked") && json.data[i].ABSOLUTE)
-            return true;
+    if($("#AD").prop("checked") || $("#KD").prop("checked") || $("#ABD").prop("checked")){
+
+          if($("#AD").prop("checked") && json.data[i].ABSOLUTE)
+                  return true;
 
 
 
-    if($("#KD").prop("checked") && json.data[i].KIDS)
-            return true;
+          if($("#KD").prop("checked") && json.data[i].KIDS)
+                  return true;
 
 
 
-    if($("#ABD").prop("checked") && json.data[i].ABSOLUTE)
-            return true;
+          if($("#ABD").prop("checked") && json.data[i].ABSOLUTE)
+              return true;
+
+          return false;
+      }
 
 
 
