@@ -118,40 +118,74 @@
                 <!-- end Map -->
                 <!--Items List-->
                 <div class="items-list">
-
-
-
-
-
-                  <header class="clearfix">
-                      <a href="#advanced-search" class="show-more pull-left" data-toggle="collapse" aria-expanded="false" aria-controls="advanced-search">Filter Results</a>
-                  </header>
-                  <div class="advanced-search collapse" id="advanced-search">
-                      <ul class="list-unstyled checkboxes">
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="GI">GI</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="NOGI" >NOGI</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="KIDS" >KIDS</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="PRO">PRO</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="PURSE">PURSE</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="ABSOLUTE">ABSOLUTE</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="ADULTS">ADULTS</label></div></li>
-                          <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="KSF">KIDS_SPECIAL_FORMAT</label></div></li>
-                      </ul>
-                  </div>
-
-
-
                     <div class="inner">
-                        <header>
-                            <h3>Results</h3>
+                      <div class="scroller1">
+                        <div class="filter">
+                                <header class="clearfix">
+                                    <a href="#advanced-search" class="show-more pull-right" data-toggle="collapse" aria-expanded="false" aria-controls="advanced-search">Filter</a>
+                                </header>
+                                <div class="advanced-search collapse" id="advanced-search">
+                                    <h4>Type</h4>
+                                    <ul class="list-unstyled checkboxes">
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="GI">Gi</label></div></li>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="NOGI" >Nogi</label></div></li>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="PRO">Pro</label></div></li>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="PURSE">Purse</label></div></li>
+                                    </ul>
+
+                                    <h4>Rules</h4>
+                                    <ul class="list-unstyled checkboxes">
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="PNT">Point</label></div></li>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="SON" >Sub Only</label></div></li>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="NTL" >No Time Limit</label></div></li>
+                                    </ul>
+
+                                    <h4>Brackets</h4>
+                                    <ul class="list-unstyled checkboxes">
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="SE">Single Elimination</label></div></li>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="DE" >Double Elimination</label></div></li>
+                                      <br>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="RR" >Round Robbin</label></div></li>
+                                    </ul>
+
+                                    <h4>Must have</h4>
+                                    <ul class="list-unstyled checkboxes">
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="AD">Adults Divisions</label></div></li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="KD" >Kids Divisions</label></div></li>
+                                      <br>
+                                      <li><div class="checkbox"><label><input type="checkbox" name="features[]" id="ABD" >Absolute Division</label></div></li>
+                                    </ul>
+
+                                </div>
+
+                            <!-- /.main-search -->
+                        </div>
+                        <!--end Filter-->
+                        <header class="clearfix">
+                            <h3 class="pull-left">Results</h3>
+                            <div class="buttons pull-right">
+                                <span>Sort:</span>
+                                <span class="icon active" id="display-grid"><i class="fa fa-th"></i></span>
+                                <span class="icon" id="display-list"><i class="fa fa-th-list"></i></span>
+                            </div>
                         </header>
                         <ul class="results list">
 
                         </ul>
+
+                        <div class="scroller__track">
+                            <div class="scroller__bar"></div>
+                        </div>
+
+                        </div>
+
                     </div>
                     <!--results-->
                 </div>
                 <!--end Items List-->
+
             </div>
             <!-- end Map Canvas-->
 
@@ -190,7 +224,33 @@
 <script>
 $(function() {
 
+  function toggleMH(){
+
+        $('#AD, #KD, #ABD').iCheck('toggle');
+
+  }
+
+  function toggleBracket(){
+
+        $('#SE, #DE, #RR').iCheck('toggle');
+
+  }
+
+  function toggleRules(){
+
+        $('#PNT, #SON, #NTL').iCheck('toggle');
+
+  }
+
+  function toggleType(){
+
+        $('#GI, #NOGI, #PRO, #PURSE').iCheck('toggle');
+
+  }
+
   $('input').iCheck('check');
+  toggleMH()
+
 
   var _latitude = 24.443159;
   var _longitude = -93.867188;

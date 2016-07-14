@@ -672,7 +672,41 @@ function multiChoice(sameLatitude, sameLongitude, json) {
 
 // MKS-
 
+
+function UCBracket(){
+
+      $('#SE, #DE, #RR').iCheck('uncheck');
+
+}
+
+function UCRules(){
+
+      $('#PNT, #SON, #NTL').iCheck('uncheck');
+
+}
+
+function UCType(){
+
+      $('#GI, #NOGI, #PRO, #PURSE').iCheck('uncheck');
+
+}
+
 function getCheckBoxStatus(json,i){
+
+
+    if($("#AD").prop("checked") && json.data[i].ABSOLUTE)
+            return false;
+
+
+
+    if($("#KD").prop("checked") && json.data[i].KIDS)
+            return false;
+
+
+
+    if($("#ABD").prop("checked") && json.data[i].ABSOLUTE)
+            return false;
+
 
 
     if(json.data[i].GI && $("#GI").prop("checked"))
@@ -698,6 +732,25 @@ function getCheckBoxStatus(json,i){
 
     if(json.data[i].KSF && $("#KSF").prop("checked"))
       return true;
+
+    if(json.data[i].rule=="Points" && $("#PNT").prop("checked"))
+        return true;
+
+    if(json.data[i].rule=="Submission Only" && $("#SON").prop("checked"))
+        return true;
+
+
+    if(json.data[i].rule=="Time Limit" && $("#NTL").prop("checked"))
+        return true;
+
+    if(json.data[i].bracket=="Single Elimination" && $("#SE").prop("checked"))
+        return true;
+
+    if(json.data[i].bracket=="Double Elimination" && $("#DE").prop("checked"))
+        return true;
+
+    if(json.data[i].bracket=="Round Robin" && $("#RR").prop("checked"))
+        return true;
 
     return false;
 
