@@ -696,7 +696,7 @@ function getCheckBoxStatus(json,i){
 
     if($("#AD").prop("checked") || $("#KD").prop("checked") || $("#ABD").prop("checked")){
 
-          if($("#AD").prop("checked") && json.data[i].ABSOLUTE)
+          if($("#AD").prop("checked") && json.data[i].ADULTS)
                   return true;
 
 
