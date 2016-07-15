@@ -720,24 +720,6 @@ function getCheckBoxStatus(json,i){
     if(json.data[i].NOGI && $("#NOGI").prop("checked"))
       return true;
 
-    if(json.data[i].KIDS && $("#KIDS").prop("checked"))
-      return true;
-
-    if(json.data[i].PRO && $("#PRO").prop("checked"))
-      return true;
-
-    if(json.data[i].PURSE && $("#PURSE").prop("checked"))
-      return true;
-
-    if(json.data[i].ABSOLUTE && $("#ABSOLUTE").prop("checked"))
-      return true;
-
-    if(json.data[i].ADULTS && $("#ADULTS").prop("checked"))
-      return true;
-
-    if(json.data[i].KSF && $("#KSF").prop("checked"))
-      return true;
-
     if(json.data[i].rule=="Points" && $("#PNT").prop("checked"))
         return true;
 
