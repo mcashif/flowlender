@@ -673,28 +673,135 @@ function multiChoice(sameLatitude, sameLongitude, json) {
 // MKS-
 
 
-function UCBracket(){
+function isBracketUnselected(){
 
-      $('#SE, #DE, #RR').iCheck('uncheck');
+      if($("#SE").prop("checked") || $("#DE").prop("checked") || $("#RR").prop("checked"))
+          return true;
 
-}
-
-function UCRules(){
-
-      $('#PNT, #SON, #NTL').iCheck('uncheck');
+      return false;
 
 }
 
-function UCType(){
+function isRulesUnselected(){
 
-      $('#GI, #NOGI, #PRO, #PURSE').iCheck('uncheck');
+      if($("#PNT").prop("checked") || $("#SON").prop("checked") || $("#NTL").prop("checked"))
+          return true;
+
+      return false;
+
+}
+
+function isTypeUnselected(){
+
+      if($("#GI").prop("checked") || $("#NOGI").prop("checked") || $("#ANY").prop("checked"))
+          return true;
+
+      return false;
+
+}
+
+function everySectionHasOnSelection(){
+
+
+  if(isBracketUnselected() && isRulesUnselected() && isTypeUnselected())
+      return true;
+
+
+}
+
+function checkBRacket(bracket){
+
+  if(bracket=="Single Elimination" && $("#SE").prop("checked"))
+      return true;
+
+  if(bracket=="Double Elimination" && $("#DE").prop("checked"))
+      return true;
+
+  if(bracket=="Round Robin" && $("#RR").prop("checked"))
+      return true;
+
+  return false;
+}
+
+function checkRule(rule){
+
+  if(rule=="Points" && $("#PNT").prop("checked"))
+      return true;
+
+  if(rule=="Submission Only" && $("#SON").prop("checked"))
+      return true;
+
+
+  if(rule=="Time Limit" && $("#NTL").prop("checked"))
+      return true;
+
+  return false;
+}
+
+
+function checkDivision(kids,adult,abs){
+
+  if($("#AD").prop("checked") && adult)
+          return true;
+
+  if($("#KD").prop("checked") && kids)
+          return true;
+
+  if($("#ABD").prop("checked") && abs)
+         return true;
+
+  return false;
+
+}
+
+function noDivisionSelected(){
+
+    if($("#AD").prop("checked") && $("#KD").prop("checked") && $("#ABD").prop("checked"))
+          return true;
+
+    return false;
 
 }
 
 function getCheckBoxStatus(json,i){
 
+  if(!everySectionHasOnSelection() && noDivisionSelected())
+      return false;
 
-    if($("#AD").prop("checked") || $("#KD").prop("checked") || $("#ABD").prop("checked")){
+     if($("#GI").prop("checked") && $("#NOGI").prop("checked") && !(json.data[i].GI && json.data[i].NOGI))
+     {
+
+        return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
+
+     }
+
+    if( $("#ANY").prop("checked") && (json.data[i].GI || json.data[i].NOGI))
+    {
+
+      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
+
+    }
+
+    if($("#GI").prop("checked") && json.data[i].GI && !json.data[i].NOGI)
+    {
+
+      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
+
+    }
+
+    if($("#NOGI").prop("checked") && json.data[i].NOGI && !json.data[i].GI)
+    {
+
+      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
+
+    }
+
+
+
+    return false;
+
+
+    /*if($("#AD").prop("checked") || $("#KD").prop("checked") || $("#ABD").prop("checked")){
 
           if($("#AD").prop("checked") && json.data[i].ADULTS)
                   return true;
@@ -739,7 +846,7 @@ function getCheckBoxStatus(json,i){
     if(json.data[i].bracket=="Round Robin" && $("#RR").prop("checked"))
         return true;
 
-    return false;
+    return false;*/
 
 }
 
