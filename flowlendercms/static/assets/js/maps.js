@@ -198,6 +198,11 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
         });
 
+        $('#type').on('change', function () {
+
+              dynamicLoadMarkers(map, newMarkers, json);
+        });
+
         redrawMap('google', map);
 
 
@@ -691,19 +696,10 @@ function isRulesUnselected(){
 
 }
 
-function isTypeUnselected(){
-
-      if($("#GI").prop("checked") || $("#NOGI").prop("checked") || $("#ANY").prop("checked"))
-          return true;
-
-      return false;
-
-}
-
 function everySectionHasOnSelection(){
 
 
-  if(isBracketUnselected() && isRulesUnselected() && isTypeUnselected())
+  if(isBracketUnselected() && isRulesUnselected())
       return true;
 
 
@@ -754,49 +750,57 @@ function checkDivision(kids,adult,abs){
 
 }
 
-function noDivisionSelected(){
+function checkDivision(kids,aduls,abs){
 
-    if($("#AD").prop("checked") && $("#KD").prop("checked") && $("#ABD").prop("checked"))
+    if(!$("#AD").prop("checked") && !$("#KD").prop("checked") && !$("#ABD").prop("checked"))
+          return true;
+
+    if($("#AD").prop("checked") && aduls)
+          return true;
+
+    if($("#KD").prop("checked") && kids)
+          return true;
+
+    if($("#ABD").prop("checked") && abs)
           return true;
 
     return false;
 
 }
 
+function getType(gi, nogi, both){
+
+  var type= $('#type').find('option:selected').val();
+
+  if(type=="0")
+      return true;
+
+//gi
+  if(type=="1" && (gi || both) )
+      return true;
+//nogi
+  if(type=="2" && (nogi || both))
+      return true;
+//both
+  if(type=="3" && both)
+      return true;
+
+  return false;
+
+
+}
+
 function getCheckBoxStatus(json,i){
 
-  if(!everySectionHasOnSelection() && noDivisionSelected())
+  if(!everySectionHasOnSelection())
       return false;
 
-     if($("#GI").prop("checked") && $("#NOGI").prop("checked") && !(json.data[i].GI && json.data[i].NOGI))
+     if( getType(json.data[i].GI , json.data[i].NOGI, (json.data[i].NOGI && json.data[i].GI)))
      {
 
-        return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
+        return checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE) && checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule);// && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
 
      }
-
-    if( $("#ANY").prop("checked") && (json.data[i].GI || json.data[i].NOGI))
-    {
-
-      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
-
-    }
-
-    if($("#GI").prop("checked") && json.data[i].GI && !json.data[i].NOGI)
-    {
-
-      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
-
-    }
-
-    if($("#NOGI").prop("checked") && json.data[i].NOGI && !json.data[i].GI)
-    {
-
-      return checkBRacket(json.data[i].bracket) && checkRule(json.data[i].rule) && checkDivision(json.data[i].KIDS,json.data[i].ADULTS,json.data[i].ABSOLUTE);
-
-    }
-
-
 
     return false;
 
