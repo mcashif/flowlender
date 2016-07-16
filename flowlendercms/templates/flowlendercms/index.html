@@ -74,7 +74,7 @@
                     <div id="map" class="has-parallax"></div>
                     <!--/#map-->
                     <div class="search-bar horizontal">
-                        <form class="main-search border-less-inputs" role="form" method="post">
+                        <form class="main-search border-less-inputs" id="searchForm">
                             <div class="input-row">
                               <!-- /.form-group -->
                               <div class="form-group">
@@ -86,18 +86,18 @@
                               <!-- /.form-group -->
 
                               <div class="form-group">
-                                  <select name="district">
-                                      <option value="">Distance</option>
-                                      <option value="1">30 KM</option>
-                                      <option value="2">50 KM</option>
-                                      <option value="3">100 KM</option>
-                                      <option value="4">200 KM</option>
-                                      <option value="5">300 KM</option>
+                                  <select name="distance" id="distance">
+                                      <option value="0">Distance</option>
+                                      <option value="30">30 KM</option>
+                                      <option value="50">50 KM</option>
+                                      <option value="100">100 KM</option>
+                                      <option value="200">200 KM</option>
+                                      <option value="300">300 KM</option>
                                   </select>
                               </div><!-- /.form-group -->
                               <div class="form-group">
-                                  <select name="Time">
-                                      <option value="">Time</option>
+                                  <select name="time" id="time">
+                                      <option value="0">Time</option>
                                       <option value="1">Next 30 Days</option>
                                       <option value="2">Next 60 Days</option>
                                       <option value="3">Next 90 Days</option>
@@ -260,6 +260,7 @@ $(function() {
 
   var _latitude = 24.443159;
   var _longitude = -93.867188;
+
   $.get( "/json", function( data ) {
       createHomepageGoogleMap(_latitude,_longitude,data);
   });

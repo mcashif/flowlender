@@ -15,6 +15,8 @@ if( $body.hasClass('map-fullscreen') ) {
     }
 }
 
+var _latitudeX = 24.443159;
+var _longitudeX = -93.867188;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -203,6 +205,17 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
               dynamicLoadMarkers(map, newMarkers, json);
         });
 
+        $("#searchForm").submit(function(e) {
+            e.preventDefault();
+            dynamicLoadMarkers(map, newMarkers, json);
+        });
+
+        $('#distance').on('change', function () {
+
+            dynamicLoadMarkers(map, newMarkers, json);
+        });
+
+
         redrawMap('google', map);
 
 
@@ -240,6 +253,8 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
         function success(position) {
             var locationCenter = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+            _latitudeX = position.coords.latitude;
+            _longitudeX = position.coords.longitude;
             map.setCenter( locationCenter );
             map.setZoom(14);
 
@@ -292,14 +307,16 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
             if (place.geometry.viewport) {
                 map.fitBounds(place.geometry.viewport);
-                map.setZoom(14);
+                map.setZoom(8);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(14);
+                map.setZoom(8);
             }
 
             //marker.setPosition(place.geometry.location);
             //marker.setVisible(true);
+            _latitudeX=place.geometry.location.lat();
+            _longitudeX=place.geometry.location.lng();
 
             var address = '';
             if (place.address_components) {
@@ -804,53 +821,23 @@ function getCheckBoxStatus(json,i){
 
     return false;
 
+}
 
-    /*if($("#AD").prop("checked") || $("#KD").prop("checked") || $("#ABD").prop("checked")){
-
-          if($("#AD").prop("checked") && json.data[i].ADULTS)
-                  return true;
+function getDistanceDateStatus(lat,lng){
 
 
+  var distance= $('#distance').find('option:selected').val();
 
-          if($("#KD").prop("checked") && json.data[i].KIDS)
-                  return true;
-
-
-
-          if($("#ABD").prop("checked") && json.data[i].ABSOLUTE)
-              return true;
-
-          return false;
-      }
-
-
-
-    if(json.data[i].GI && $("#GI").prop("checked"))
+  if(distance=="0")
       return true;
+  else{
 
-    if(json.data[i].NOGI && $("#NOGI").prop("checked"))
-      return true;
+          var dis=getDistance(lat,lng,_latitudeX,_longitudeX);
+          if(dis<=parseInt(distance))
+             return true;
+       }
 
-    if(json.data[i].rule=="Points" && $("#PNT").prop("checked"))
-        return true;
-
-    if(json.data[i].rule=="Submission Only" && $("#SON").prop("checked"))
-        return true;
-
-
-    if(json.data[i].rule=="Time Limit" && $("#NTL").prop("checked"))
-        return true;
-
-    if(json.data[i].bracket=="Single Elimination" && $("#SE").prop("checked"))
-        return true;
-
-    if(json.data[i].bracket=="Double Elimination" && $("#DE").prop("checked"))
-        return true;
-
-    if(json.data[i].bracket=="Round Robin" && $("#RR").prop("checked"))
-        return true;
-
-    return false;*/
+  return false;
 
 }
 
@@ -861,7 +848,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
               var category;
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json,i)){
+                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json,i) && getDistanceDateStatus(json.data[i].latitude,json.data[i].longitude)){
                       category = json.data[i].category;
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);
@@ -975,3 +962,22 @@ function redrawMap(mapProvider, map){
         });
     });
 }
+
+
+
+/////////
+var rad = function(x) {
+  return x * Math.PI / 180;
+};
+
+var getDistance = function(lat1,lng1, lat2,lng2) {
+  var R = 6378137; // Earth’s mean radius in meter
+  var dLat = rad(lat2 - lat1);
+  var dLong = rad(lng2 - lng1);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+  return d/1000; // returns the distance in KM
+};
