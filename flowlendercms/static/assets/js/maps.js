@@ -307,10 +307,10 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
             if (place.geometry.viewport) {
                 map.fitBounds(place.geometry.viewport);
-                map.setZoom(8);
+                map.setZoom(14);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(8);
+                map.setZoom(14);
             }
 
             //marker.setPosition(place.geometry.location);
@@ -754,34 +754,29 @@ function checkRule(rule){
 
 function checkDivision(kids,adult,abs){
 
-  if($("#AD").prop("checked") && adult)
-          return true;
 
-  if($("#KD").prop("checked") && kids)
-          return true;
+    if($("#AD").prop("checked") && $("#KD").prop("checked") && $("#ABD").prop("checked"))
+            return (adult && kids && abs);
 
-  if($("#ABD").prop("checked") && abs)
-         return true;
+    if($("#AD").prop("checked") && $("#KD").prop("checked"))
+            return (adult || kids);
 
-  return false;
+    if($("#KD").prop("checked") && $("#ABD").prop("checked"))
+            return (kids || abs);
 
-}
+    if($("#AD").prop("checked") && $("#ABD").prop("checked"))
+            return (adult || abs);
 
-function checkDivision(kids,aduls,abs){
+    if($("#AD").prop("checked") )
+            return adult;
 
-    if(!$("#AD").prop("checked") && !$("#KD").prop("checked") && !$("#ABD").prop("checked"))
-          return true;
+    if($("#KD").prop("checked"))
+            return kids;
 
-    if($("#AD").prop("checked") && aduls)
-          return true;
+    if($("#ABD").prop("checked"))
+            return abs;
 
-    if($("#KD").prop("checked") && kids)
-          return true;
-
-    if($("#ABD").prop("checked") && abs)
-          return true;
-
-    return false;
+    return true;
 
 }
 
