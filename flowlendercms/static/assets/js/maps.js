@@ -215,6 +215,10 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             dynamicLoadMarkers(map, newMarkers, json);
         });
 
+        $('#daysx').on('change', function () {
+            dynamicLoadMarkers(map, newMarkers, json);
+        });
+
 
         redrawMap('google', map);
 
@@ -818,17 +822,47 @@ function getCheckBoxStatus(json,i){
 
 }
 
-function getDistanceDateStatus(lat,lng){
+function getDistanceDateStatus(lat,lng,date){
 
 
   var distance= $('#distance').find('option:selected').val();
 
   if(distance=="0")
-      return true;
+      return true && DayCheck(date);
   else{
 
           var dis=getDistance(lat,lng,_latitudeX,_longitudeX);
           if(dis<=parseInt(distance))
+             return true && DayCheck(date);
+       }
+
+  return false;
+
+}
+
+function diffDays(d1, d2)
+{
+  var ndays;
+  var tv1 = d1.valueOf();  // msec since 1970
+  var tv2 = d2.valueOf();
+
+  ndays = (tv2 - tv1) / 1000 / 86400;
+  ndays = Math.round(ndays - 0.5);
+  return ndays;
+}
+
+function DayCheck(date){
+
+  var dataDate = new Date(date);
+  var currentDate = new Date();
+  var daysX=diffDays(currentDate,dataDate);
+
+  var timeX= $('#daysx').find('option:selected').val();
+
+  if(timeX=="0")
+      return true;
+  else{
+          if(daysX<=parseInt(timeX))
              return true;
        }
 
@@ -843,7 +877,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
               var category;
 
               for (var i = 0; i < json.data.length; i++) {
-                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json,i) && getDistanceDateStatus(json.data[i].latitude,json.data[i].longitude)){
+                  if ( map.getBounds().contains(loadedMarkers[i].getPosition()) &&  getCheckBoxStatus(json,i) && getDistanceDateStatus(json.data[i].latitude,json.data[i].longitude,json.data[i].event_date)){
                       category = json.data[i].category;
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);
