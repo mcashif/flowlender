@@ -772,13 +772,13 @@ function checkDivision(kids,adult,abs){
             return (adult && abs);
 
     if($("#AD").prop("checked") )
-            return adult && !kids && !abs;
+            return adult;
 
     if($("#KD").prop("checked"))
-            return kids && !adult && !abs;
+            return kids;
 
     if($("#ABD").prop("checked"))
-            return abs && !adult && !kids;
+            return abs;
 
     return true;
 
