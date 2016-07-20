@@ -174,8 +174,8 @@
                             <h3 class="pull-left">Results</h3>
                             <div class="buttons pull-right">
                                 <span>Sort:</span>
-                                <span class="icon active" id="display-grid"><i class="fa fa-th"></i></span>
-                                <span class="icon" id="display-list"><i class="fa fa-th-list"></i></span>
+                                <span class="icon" id="display-date"><i class="fa fa-th"></i></span>
+                                <span class="icon active" id="display-name"><i class="fa fa-th-list"></i></span>
                             </div>
                         </header>
                         <ul class="results list">
@@ -230,6 +230,40 @@
 
 <script>
 $(function() {
+
+
+  $('#display-date').on('click',function(){
+
+       if(!$('#display-date').hasClass('active')){
+
+           $('#display-date .active').removeClass('icon');
+           $(this).addClass('icon active');
+
+           $('#display-name').removeClass('icon active');
+           $('#display-name').addClass('icon');
+       }
+
+       $.get( "/jsond", function( data ) {
+           createHomepageGoogleMap(_latitude,_longitude,data);
+       });
+  });
+
+  $('#display-name').on('click',function(){
+
+     if(!$('#display-name').hasClass('active')){
+
+       $('#display-name .active').removeClass('icon');
+       $(this).addClass('icon active');
+
+       $('#display-date').removeClass('icon active');
+       $('#display-date').addClass('icon');
+     }
+
+     $.get( "/json", function( data ) {
+         createHomepageGoogleMap(_latitude,_longitude,data);
+     });
+     
+  });
 
   function toggleMH(){
 

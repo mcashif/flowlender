@@ -14,12 +14,74 @@ def index(request):
     template = loader.get_template("flowlendercms/index.html")
     return HttpResponse(template.render())
 
+
+def getjsond(request):
+    #leads_as_json = serializers.serialize('json', EventDetail.objects.all())
+    #return HttpResponse(leads_as_json, content_type='json')
+    dataX={}
+    DataM = []
+    QS=EventDetail.objects.all().order_by('event_date')
+
+    for obj in QS:
+        data={}
+        data['id'] = obj.id
+        data['category'] = "real_estate"
+        data['title'] = obj.event_name
+        data['location'] = obj.location
+        strX=str(obj.event_geocode)
+        listX=strX.split(",")
+        data['latitude'] = float(listX[0])
+        data['longitude'] = float(listX[1])
+        data['url'] = obj.event_web
+
+        objP=Promoter.objects.get(pk=1)
+        data['promotor'] = objP.promoter_name
+
+        data['event_date'] = str(obj.event_date)
+        data['event_tentitive'] = obj.event_tentitive
+        data['end_date'] = str(obj.end_date)
+        data['address'] = obj.address
+        data['city'] = obj.city
+        data['state'] = obj.state
+        data['zip_code'] = obj.zip_code
+
+        data['rule'] = obj.rule
+        data['bracket'] = obj.bracket
+        data['kids_special_formats'] = obj.kids_special_formats
+        data['kids_special_rules'] = obj.kids_special_rules
+
+        data['GI'] = obj.gi
+        data['NOGI'] = obj.nogi
+        data['KIDS'] = obj.kids
+        data['PRO'] = obj.pro
+        data['PURSE'] = obj.purse
+        data['ABSOLUTE'] = obj.absolute
+        data['ADULTS'] = obj.adults
+        data['KSF'] = obj.kids_special_format
+
+        data['cost'] = obj.cost
+        data['predate'] = str(obj.predate)
+        data['cost_late'] = obj.cost_late
+        data['cutoff_date'] = str(obj.cutoff_date)
+        data['event_description'] = obj.event_description
+        data['event_web'] = obj.event_web
+
+        data['small_image'] = obj.small_image.url
+        data['large_image'] = obj.large_image.url
+
+
+        DataM.append(data)
+
+    dataX['data']=DataM
+    json_data = json.dumps(dataX)
+    return HttpResponse(json_data, content_type='json')
+
 def getjson(request):
     #leads_as_json = serializers.serialize('json', EventDetail.objects.all())
     #return HttpResponse(leads_as_json, content_type='json')
     dataX={}
     DataM = []
-    QS=EventDetail.objects.all()
+    QS=EventDetail.objects.all().order_by('event_name')
 
     for obj in QS:
         data={}
