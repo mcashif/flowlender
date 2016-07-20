@@ -21,10 +21,11 @@ def getjsond(request):
     dataX={}
     DataM = []
     QS=EventDetail.objects.all().order_by('event_date')
-
+    count=1
     for obj in QS:
         data={}
-        data['id'] = obj.id
+        data['id'] = count
+        count=count+1
         data['category'] = "real_estate"
         data['title'] = obj.event_name
         data['location'] = obj.location
@@ -34,8 +35,8 @@ def getjsond(request):
         data['longitude'] = float(listX[1])
         data['url'] = obj.event_web
 
-        objP=Promoter.objects.get(pk=1)
-        data['promotor'] = objP.promoter_name
+        #objP=Promoter.objects.get(pk=obj.event_promoter)
+        data['promotor'] = str(obj.event_promoter)
 
         data['event_date'] = str(obj.event_date)
         data['event_tentitive'] = obj.event_tentitive
@@ -82,10 +83,11 @@ def getjson(request):
     dataX={}
     DataM = []
     QS=EventDetail.objects.all().order_by('event_name')
-
+    count=1
     for obj in QS:
         data={}
-        data['id'] = obj.id
+        data['id'] = count
+        count=count+1
         data['category'] = "real_estate"
         data['title'] = obj.event_name
         data['location'] = obj.location
@@ -95,8 +97,8 @@ def getjson(request):
         data['longitude'] = float(listX[1])
         data['url'] = obj.event_web
 
-        objP=Promoter.objects.get(pk=1)
-        data['promotor'] = objP.promoter_name
+        #objP=Promoter.objects.get(pk=obj.event_promoter)
+        data['promotor'] = str(obj.event_promoter)
 
         data['event_date'] = str(obj.event_date)
         data['event_tentitive'] = obj.event_tentitive

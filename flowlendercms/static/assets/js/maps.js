@@ -84,6 +84,8 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 draggable: false,
                 content: markerContent,
                 markerId: json.data[i].id,
+                markerDate: json.data[i].event_date,
+                markerName: json.data[i].title,
                 flat: true
             });
 
@@ -134,8 +136,6 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                         markerClicked = 1;
                         var item="#"+newMarkers[i].markerId+"li"
                         $(".items-list").mCustomScrollbar('scrollTo',  item);
-
-
 
                     }
                 }
@@ -220,7 +220,8 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
         });
 
 
-        redrawMap('google', map);
+
+       redrawMap('google', map);
 
 
 
@@ -903,6 +904,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
               $('.items-list .results').html( visibleItemsArray );
 
               var $singleItem = $('.results .item');
+
               $singleItem.hover(
                   function(){
                       loadedMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-active marker-loaded';

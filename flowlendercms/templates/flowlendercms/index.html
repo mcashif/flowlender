@@ -232,7 +232,7 @@
 $(function() {
 
 
-  $('#display-date').on('click',function(){
+ $('#display-date').on('click',function(){
 
        if(!$('#display-date').hasClass('active')){
 
@@ -262,8 +262,8 @@ $(function() {
      $.get( "/json", function( data ) {
          createHomepageGoogleMap(_latitude,_longitude,data);
      });
-     
-  });
+
+  }); 
 
   function toggleMH(){
 
