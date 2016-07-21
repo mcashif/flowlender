@@ -232,7 +232,7 @@
 $(function() {
 
 
- $('#display-date').on('click',function(){
+ /*$('#display-date').on('click',function(){
 
        if(!$('#display-date').hasClass('active')){
 
@@ -244,8 +244,9 @@ $(function() {
        }
 
        $.get( "/jsond", function( data ) {
-           createHomepageGoogleMap(_latitude,_longitude,data);
+             createHomepageGoogleMap(data,false);
        });
+
   });
 
   $('#display-name').on('click',function(){
@@ -260,10 +261,11 @@ $(function() {
      }
 
      $.get( "/json", function( data ) {
-         createHomepageGoogleMap(_latitude,_longitude,data);
+          createHomepageGoogleMap(data,false);
      });
 
-  }); 
+
+  });*/
 
   function toggleMH(){
 
@@ -292,11 +294,9 @@ $(function() {
   $('input').iCheck('check');
   toggleMH()
 
-  var _latitude = 24.443159;
-  var _longitude = -93.867188;
 
   $.get( "/json", function( data ) {
-      createHomepageGoogleMap(_latitude,_longitude,data);
+      createHomepageGoogleMap(data,true);
   });
 
 

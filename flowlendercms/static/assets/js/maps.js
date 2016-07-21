@@ -17,36 +17,50 @@ if( $body.hasClass('map-fullscreen') ) {
 
 var _latitudeX = 24.443159;
 var _longitudeX = -93.867188;
+var map;
+var newMarkers = [];
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function createHomepageGoogleMap(_latitude,_longitude,json){
+function createHomepageGoogleMap(json,refresh){
+
+    function CreateMap(){
+
+      var mapCenter = new google.maps.LatLng(_latitudeX,_longitudeX);
+      var mapOptions = {
+          zoom: 4,
+          center: mapCenter,
+          disableDefaultUI: false,
+          scrollwheel: false,
+          styles: mapStyles,
+          mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.BOTTOM_CENTER
+          },
+          panControl: false,
+          zoomControl: true,
+          zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.LARGE,
+              position: google.maps.ControlPosition.BOTTOM_LEFT
+          }
+      };
+      var mapElement = document.getElementById('map');
+      return new google.maps.Map(mapElement, mapOptions);
+
+    }
+
     $.get("/static/assets/external/_infobox.js", function() {
         gMap();
     });
+
     function gMap(){
-        var mapCenter = new google.maps.LatLng(_latitude,_longitude);
-        var mapOptions = {
-            zoom: 4,
-            center: mapCenter,
-            disableDefaultUI: false,
-            scrollwheel: false,
-            styles: mapStyles,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                position: google.maps.ControlPosition.BOTTOM_CENTER
-            },
-            panControl: false,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.LARGE,
-                position: google.maps.ControlPosition.BOTTOM_LEFT
-            }
-        };
-        var mapElement = document.getElementById('map');
-        var map = new google.maps.Map(mapElement, mapOptions);
-        var newMarkers = [];
+
+
+        if(refresh)
+          map=CreateMap();
+
         var markerClicked = 0;
         var activeMarker = false;
         var lastClicked = false;
@@ -59,25 +73,15 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             else color = '';
 
             var markerContent = document.createElement('DIV');
-            if( json.data[i].featured == 1 ) {
-                markerContent.innerHTML =
-                    '<div class="map-marker featured' + color + '">' +
-                        '<div class="icon">' +
-                        '<img src="' + json.data[i].small_image +  '">' +
-                        '</div>' +
-                    '</div>';
-            }
-            else {
-                markerContent.innerHTML =
+            markerContent.innerHTML =
                     '<div class="map-marker ' + json.data[i].color + '">' +
                         '<div class="icon">' +
                         '<img src="' + json.data[i].small_image +  '">' +
                         '</div>' +
                     '</div>';
-            }
+
 
             // Create marker on the map ------------------------------------------------------------------------------------
-
             var marker = new RichMarker({
                 position: new google.maps.LatLng( json.data[i].latitude, json.data[i].longitude ),
                 map: map,
@@ -92,7 +96,6 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             newMarkers.push(marker);
 
             // Create infobox for marker -----------------------------------------------------------------------------------
-
             var infoboxContent = document.createElement("div");
             var infoboxOptions = {
                 content: infoboxContent,
@@ -140,7 +143,6 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                     }
                 }
             })(marker, i));
-
 
             // Fade infobox after close is clicked -------------------------------------------------------------------------
 
@@ -219,35 +221,42 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             dynamicLoadMarkers(map, newMarkers, json);
         });
 
+        $('#display-date').on('click',function(){
+
+              if(!$('#display-date').hasClass('active')){
+
+                  $('#display-date .active').removeClass('icon');
+                  $(this).addClass('icon active');
+
+                  $('#display-name').removeClass('icon active');
+                  $('#display-name').addClass('icon');
+              }
+
+              dynamicLoadMarkers(map, newMarkers, json,true);
+
+         });
+
+         $('#display-name').on('click',function(){
+
+            if(!$('#display-name').hasClass('active')){
+
+              $('#display-name .active').removeClass('icon');
+              $(this).addClass('icon active');
+
+              $('#display-date').removeClass('icon active');
+              $('#display-date').addClass('icon');
+            }
+
+            dynamicLoadMarkers(map, newMarkers, json,false);
+
+         });
+
 
 
        redrawMap('google', map);
 
 
-
-        function is_cached(src, a) {
-            var image = new Image();
-            var loadedImage = $('.results li #' + json.data[a].id + ' .image');
-            image.src = src;
-            if( image.complete ){
-                $(".results").each(function() {
-                    loadedImage.removeClass('loading');
-                    loadedImage.addClass('loaded');
-                });
-            }
-            else {
-                $(".results").each(function() {
-                    $('.results li #' + json.data[a].id + ' .image').addClass('loading');
-                });
-                $(image).load(function(){
-                    loadedImage.removeClass('loading');
-                    loadedImage.addClass('loaded');
-                });
-            }
-        }
-
         // Geolocation of user -----------------------------------------------------------------------------------------
-
         $('.geolocation').on("click", function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(success);
@@ -271,7 +280,6 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 				'</div>';
 
 			// Create marker on the map ------------------------------------------------------------------------------------
-
 			var marker = new RichMarker({
 				position: locationCenter,
 				map: map,
@@ -337,287 +345,10 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// OpenStreetMap - Homepage
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function createHomepageOSM(_latitude,_longitude,json,mapProvider){
-
-    $.get("/static/assets/external/_infobox.js", function() {
-        osmMap();
-    });
-
-    function osmMap(){
-        var map = L.map('map', {
-                center: [_latitude,_longitude],
-                zoom: 14,
-                scrollWheelZoom: false
-        });
-
-        L.tileLayer.provider(mapProvider).addTo(map);
-
-        var markers = L.markerClusterGroup({
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: false
-        });
-
-        var loadedMarkers = [];
-
-        // Create markers on the map -----------------------------------------------------------------------------------
-
-        for (var i = 0; i < json.data.length; i++) {
-
-            // Set icon for marker -------------------------------------------------------------------------------------
-
-            if( json.data[i].type_icon ) var icon = '<img src="' + json.data[i].type_icon +  '">';
-            else icon = '';
-
-            if( json.data[i].color ) var color = json.data[i].color;
-            else color = '';
-
-            var markerContent =
-                '<div class="map-marker ' + color + '">' +
-                    '<div class="icon">' +
-                    icon +
-                    '</div>' +
-                '</div>';
-
-            var _icon = L.divIcon({
-                html: markerContent,
-                iconSize:     [36, 46],
-                iconAnchor:   [18, 32],
-                popupAnchor:  [130, -28],
-                className: ''
-            });
-
-            var title = json.data[i].title;
-            var marker = L.marker(new L.LatLng( json.data[i].latitude, json.data[i].longitude ), {
-                title: title,
-                icon: _icon
-            });
-
-            loadedMarkers.push(marker);
-
-            // Infobox HTML element ------------------------------------------------------------------------------------
-
-            var category = json.data[i].category;
-            var infoboxContent = document.createElement("div");
-            marker.bindPopup(
-                drawInfobox(category, infoboxContent, json, i)
-            );
-            markers.addLayer(marker);
-
-            // Set hover states for marker -----------------------------------------------------------------------------
-
-            marker.on('popupopen', function () {
-                this._icon.className += ' marker-active';
-            });
-            marker.on('popupclose', function () {
-                this._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded';
-            });
-
-        }
-
-        map.addLayer(markers);
-
-        // Animate already created markers -----------------------------------------------------------------------------
-
-        animateOSMMarkers(map, loadedMarkers, json);
-        map.on('moveend', function() {
-            animateOSMMarkers(map, loadedMarkers, json);
-        });
-
-        markers.on('clusterclick', function (a) {
-
-            var markersInCLuster = a.layer.getAllChildMarkers();
-            var latitudeArray = [];
-            var longitudeArray = [];
-
-            for (var b=0; b < markersInCLuster.length; b++)
-            {
-                var formattedLatitude = parseFloat( markersInCLuster[b]._latlng.lat ).toFixed(6);
-                var formattedLongitude = parseFloat( markersInCLuster[b]._latlng.lng ).toFixed(6);
-                latitudeArray.push( formattedLatitude );
-                longitudeArray.push( formattedLongitude );
-            }
-
-            Array.prototype.allValuesSame = function() {
-                for(var i = 1; i < this.length; i++)
-                {
-                    if(this[i] !== this[0])
-                        return false;
-                }
-                return true;
-            };
-
-            if( latitudeArray.allValuesSame() && longitudeArray.allValuesSame() ){
-                multiChoice(latitudeArray[0], longitudeArray[0], json);
-            }
-            else {
-                a.layer.zoomToBounds();
-            }
-        });
-
-        $('.results .item').hover(
-            function(){
-                loadedMarkers[ $(this).attr('id') - 1 ]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded marker-active';
-            },
-            function() {
-                loadedMarkers[ $(this).attr('id') - 1 ]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded';
-            }
-        );
-
-        $('.geolocation').on("click", function() {
-            map.locate({setView : true})
-        });
-
-        $('body').addClass('loaded');
-        setTimeout(function() {
-            $('body').removeClass('has-fullscreen-map');
-        }, 1000);
-        $('#map').removeClass('fade-map');
-
-        redrawMap('osm', map);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Item Detail Map - Google
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function itemDetailMap(json){
-    var mapCenter = new google.maps.LatLng(json.latitude,json.longitude);
-    var mapOptions = {
-        zoom: 14,
-        center: mapCenter,
-        disableDefaultUI: true,
-        scrollwheel: false,
-        styles: mapStyles,
-        panControl: false,
-        zoomControl: false,
-        draggable: true
-    };
-    var mapElement = document.getElementById('map-detail');
-    var map = new google.maps.Map(mapElement, mapOptions);
-    if( json.small_image ) var icon = '<img src="' + json.small_image +  '">';
-    else icon = '';
-
-    // Google map marker content -----------------------------------------------------------------------------------
-
-    var markerContent = document.createElement('DIV');
-    markerContent.innerHTML =
-        '<div class="map-marker">' +
-            '<div class="icon">' +
-            icon +
-            '</div>' +
-        '</div>';
-
-    // Create marker on the map ------------------------------------------------------------------------------------
-
-    var marker = new RichMarker({
-        position: new google.maps.LatLng( json.latitude, json.longitude ),
-        map: map,
-        draggable: false,
-        content: markerContent,
-        flat: true
-    });
-
-    marker.content.className = 'marker-loaded';
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Simple Google Map (contat, submit...)
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function simpleMap(_latitude, _longitude, draggableMarker){
-    //console.log(_latitude,_longitude,draggableMarker );
-    var mapCenter = new google.maps.LatLng(_latitude, _longitude);
-    var mapOptions = {
-        zoom: 6,
-        center: mapCenter,
-        disableDefaultUI: false,
-        scrollwheel: false,
-        styles: mapStyles,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.BOTTOM_CENTER
-        },
-        panControl: false,
-        zoomControl: true,
-        zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.LARGE,
-            position: google.maps.ControlPosition.BOTTOM_LEFT
-        }
-    };
-    var mapElement = document.getElementById('map-simple');
-    var map = new google.maps.Map(mapElement, mapOptions);
-
-    // Google map marker content -----------------------------------------------------------------------------------
-
-    var markerContent = document.createElement('DIV');
-    markerContent.innerHTML =
-        '<div class="map-marker">' +
-            '<div class="icon"></div>' +
-        '</div>';
-
-    // Create marker on the map ------------------------------------------------------------------------------------
-
-    var marker = new RichMarker({
-        //position: mapCenter,
-        position: new google.maps.LatLng( _latitude, _longitude ),
-        map: map,
-        draggable: draggableMarker,
-        content: markerContent,
-        flat: true
-    });
-
-    marker.content.className = 'marker-loaded';
-
-    google.maps.event.addListener(marker, "position_changed", function() {
-      var latitude = this.position.lat();
-      var longitude = this.position.lng();
-      $('#latitude').val( this.position.lat() );
-      $('#longitude').val( this.position.lng() );
-    });
-
-
-
-    //      Autocomplete
-            var input = /** @type {HTMLInputElement} */( document.getElementById('address-map') );
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-            google.maps.event.addListener(autocomplete, 'place_changed', function() {
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    return;
-                }
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                }
-                marker.setPosition(place.geometry.location);
-                marker.setVisible(true);
-                $('#latitude').val( marker.getPosition().lat() );
-                $('#longitude').val( marker.getPosition().lng() );
-                var address = '';
-                if (place.address_components) {
-                    address = [
-                        (place.address_components[0] && place.address_components[0].short_name || ''),
-                        (place.address_components[1] && place.address_components[1].short_name || ''),
-                        (place.address_components[2] && place.address_components[2].short_name || '')
-                    ].join(' ');
-                }
-            });
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Push items to array and create <li> element in Results sidebar ------------------------------------------------------
 
 function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
@@ -673,32 +404,8 @@ function centerMapToMarker(){
     });
 }
 
-// Create modal if more items are on the same location (example: one building with floors) -----------------------------
-
-function multiChoice(sameLatitude, sameLongitude, json) {
-    //if (clickedCluster.getMarkers().length > 1){
-        var multipleItems = [];
-        $.each(json.data, function(a) {
-            if( json.data[a].latitude == sameLatitude && json.data[a].longitude == sameLongitude ) {
-                pushItemsToArray(json, a, json.data[a].category, multipleItems);
-            }
-        });
-        $('body').append('<div class="modal-window multichoice fade_in"></div>');
-        $('.modal-window').load( 'assets/external/_modal-multichoice.html', function() {
-            $('.modal-window .modal-wrapper .items').html( multipleItems );
-            rating('.modal-window');
-        });
-        $('.modal-window .modal-background, .modal-close').live('click',  function(e){
-            $('.modal-window').addClass('fade_out');
-            setTimeout(function() {
-                $('.modal-window').remove();
-            }, 300);
-        });
-    //}
-}
 
 // MKS-
-
 
 function isBracketUnselected(){
 
@@ -829,19 +536,19 @@ function getDistanceDateStatus(lat,lng,date){
   var distance= $('#distance').find('option:selected').val();
 
   if(distance=="0")
-      return true && DayCheck(date);
+      return true && CheckDays(date);
   else{
 
           var dis=getDistance(lat,lng,_latitudeX,_longitudeX);
           if(dis<=parseInt(distance))
-             return true && DayCheck(date);
+             return true && CheckDays(date);
        }
 
   return false;
 
 }
 
-function diffDays(d1, d2)
+function daysDifference(d1, d2)
 {
   var ndays;
   var tv1 = d1.valueOf();  // msec since 1970
@@ -852,11 +559,11 @@ function diffDays(d1, d2)
   return ndays;
 }
 
-function DayCheck(date){
+function CheckDays(date){
 
   var dataDate = new Date(date);
   var currentDate = new Date();
-  var daysX=diffDays(currentDate,dataDate);
+  var daysX=daysDifference(currentDate,dataDate);
 
   var timeX= $('#daysx').find('option:selected').val();
 
@@ -871,9 +578,10 @@ function DayCheck(date){
 
 }
 
-function dynamicLoadMarkers(map, loadedMarkers, json){
+function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
 
               var visibleArray = [];
+              var sortedArray  = [];
               var visibleItemsArray = [];
               var category;
 
@@ -882,6 +590,9 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
                       category = json.data[i].category;
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);
+
+                      sortedArray.push({id:json.data[i].id - 1,name:json.data[i].title,date:json.data[i].event_date});
+
 
                       $.each( visibleArray, function (i) {
                           setTimeout(function(){
@@ -900,6 +611,8 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
               }
 
               // Create list of items in Results sidebar ---------------------------------------------------------------------
+
+              sortArray(sortedArray,visibleItemsArray,sortbyDate);
 
               $('.items-list .results').html( visibleItemsArray );
 
@@ -930,54 +643,37 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
 }
 
-// Animate OSM marker --------------------------------------------------------------------------------------------------
+function sortArray(sortedArray, visiableItemArray,sortbyDate){
 
-function animateOSMMarkers(map, loadedMarkers, json){
-    var bounds = map.getBounds();
-    var visibleItemsArray = [];
-    var multipleItems = [];
+      if(sortbyDate){
 
-    $.each( loadedMarkers, function (i) {
-        if ( bounds.contains( loadedMarkers[i].getLatLng() ) ) {
-            var category = json.data[i].category;
-            pushItemsToArray(json, i, category, visibleItemsArray);
+                         sortedArray.sort(function(a, b){
+                         var dateA=new Date(a.date), dateB=new Date(b.date)
+                         return dateA-dateB //sort by date ascending
+                        })
 
-            setTimeout(function(){
-                if( loadedMarkers[i]._icon != null ){
-                    loadedMarkers[i]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded';
-                }
-            }, i* 50);
+                    }else{
+
+                           sortedArray.sort(function(a, b){
+                           var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+                           if (nameA < nameB) //sort string ascending
+                            return -1
+                           if (nameA > nameB)
+                            return 1
+                           return 0 //default return value (no sorting)
+                          })
         }
-        else {
-            if( loadedMarkers[i]._icon != null ){
-                loadedMarkers[i]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable';
-            }
+
+        var newArray = visiableItemArray.slice();
+
+       for (var i = 0; i < sortedArray.length; i++)
+        {
+              var idX = parseInt(sortedArray[i].id);
+              visiableItemArray[i] = newArray[idX] ;
+
         }
-    });
-
-    // Create list of items in Results sidebar -------------------------------------------------------------------------
-
-    $('.items-list .results').html( visibleItemsArray );
-
-    rating('.results .item');
-
-    $('.results .item').hover(
-        function(){
-            if( loadedMarkers[ $(this).attr('id') - 1 ]._icon ){
-                loadedMarkers[ $(this).attr('id') - 1 ]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded marker-active';
-
-            }
-
-        },
-        function() {
-            if( loadedMarkers[ $(this).attr('id') - 1 ]._icon ){
-                loadedMarkers[ $(this).attr('id') - 1 ]._icon.className = 'leaflet-marker-icon leaflet-zoom-animated leaflet-clickable marker-loaded';
-            }
-        }
-    );
 
 }
-
 // Redraw map after item list is closed --------------------------------------------------------------------------------
 
 function redrawMap(mapProvider, map){
@@ -996,12 +692,11 @@ function redrawMap(mapProvider, map){
 
 
 
-/////////
-var rad = function(x) {
+////////////////////////////////////////////////////////////
+var rad = function(x){
   return x * Math.PI / 180;
 };
-
-var getDistance = function(lat1,lng1, lat2,lng2) {
+var getDistance = function(lat1,lng1, lat2,lng2){
   var R = 6378137; // Earth’s mean radius in meter
   var dLat = rad(lat2 - lat1);
   var dLong = rad(lng2 - lng1);
@@ -1012,3 +707,4 @@ var getDistance = function(lat1,lng1, lat2,lng2) {
   var d = R * c;
   return d/1000; // returns the distance in KM
 };
+////////////////////////////////////////////////////////////
