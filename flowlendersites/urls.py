@@ -27,5 +27,4 @@ urlpatterns = [
     url(r'^index/', 'flowlendercms.views.index', name='index'),
     url(r'^submit/', 'flowlendercms.views.submit', name='submit'),
     url(r'^json/', 'flowlendercms.views.getjson', name='getjson'),
-    url(r'^jsond/', 'flowlendercms.views.getjsond', name='getjsond'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -17,53 +17,42 @@ if( $body.hasClass('map-fullscreen') ) {
 
 var _latitudeX = 24.443159;
 var _longitudeX = -93.867188;
-var map;
-var newMarkers = [];
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function createHomepageGoogleMap(json,refresh){
-
-    function CreateMap(){
-
-      var mapCenter = new google.maps.LatLng(_latitudeX,_longitudeX);
-      var mapOptions = {
-          zoom: 4,
-          center: mapCenter,
-          disableDefaultUI: false,
-          scrollwheel: false,
-          styles: mapStyles,
-          mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.BOTTOM_CENTER
-          },
-          panControl: false,
-          zoomControl: true,
-          zoomControlOptions: {
-              style: google.maps.ZoomControlStyle.LARGE,
-              position: google.maps.ControlPosition.BOTTOM_LEFT
-          }
-      };
-      var mapElement = document.getElementById('map');
-      return new google.maps.Map(mapElement, mapOptions);
-
-    }
-
+function createHomepageGoogleMap(_latitude,_longitude,json){
     $.get("/static/assets/external/_infobox.js", function() {
         gMap();
     });
-
     function gMap(){
-
-
-        if(refresh)
-          map=CreateMap();
-
+        var mapCenter = new google.maps.LatLng(_latitude,_longitude);
+        var mapOptions = {
+            zoom: 4,
+            center: mapCenter,
+            disableDefaultUI: false,
+            scrollwheel: false,
+            styles: mapStyles,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.BOTTOM_CENTER
+            },
+            panControl: false,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.LARGE,
+                position: google.maps.ControlPosition.RIGHT_TOP
+            }
+        };
+        var mapElement = document.getElementById('map');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        var newMarkers = [];
         var markerClicked = 0;
         var activeMarker = false;
         var lastClicked = false;
+
 
         for (var i = 0; i < json.data.length; i++) {
 
@@ -591,8 +580,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);
 
-                      sortedArray.push({id:json.data[i].id - 1,name:json.data[i].title,date:json.data[i].event_date});
-
+                      sortedArray.push({id:json.data[i].id,name:json.data[i].title,date:json.data[i].event_date});
 
                       $.each( visibleArray, function (i) {
                           setTimeout(function(){
@@ -612,7 +600,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
 
               // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-              sortArray(sortedArray,visibleItemsArray,sortbyDate);
+             sortArray(sortedArray,visibleItemsArray,sortbyDate);
 
               $('.items-list .results').html( visibleItemsArray );
 
@@ -666,12 +654,33 @@ function sortArray(sortedArray, visiableItemArray,sortbyDate){
 
         var newArray = visiableItemArray.slice();
 
+
        for (var i = 0; i < sortedArray.length; i++)
         {
-              var idX = parseInt(sortedArray[i].id);
-              visiableItemArray[i] = newArray[idX] ;
+              
+              var fnd=findIndex(visiableItemArray,sortedArray[i].id+"li");
+
+
+              visiableItemArray[i] = newArray[fnd];
 
         }
+
+}
+
+function findIndex(visiableItemArray,index){
+
+
+
+  for (var i = 0; i < visiableItemArray.length; i++)
+   {
+
+         if(visiableItemArray[i].search(index)>-1){
+              return i;
+            }
+
+   }
+
+   return 0;
 
 }
 // Redraw map after item list is closed --------------------------------------------------------------------------------

@@ -232,41 +232,6 @@
 $(function() {
 
 
- /*$('#display-date').on('click',function(){
-
-       if(!$('#display-date').hasClass('active')){
-
-           $('#display-date .active').removeClass('icon');
-           $(this).addClass('icon active');
-
-           $('#display-name').removeClass('icon active');
-           $('#display-name').addClass('icon');
-       }
-
-       $.get( "/jsond", function( data ) {
-             createHomepageGoogleMap(data,false);
-       });
-
-  });
-
-  $('#display-name').on('click',function(){
-
-     if(!$('#display-name').hasClass('active')){
-
-       $('#display-name .active').removeClass('icon');
-       $(this).addClass('icon active');
-
-       $('#display-date').removeClass('icon active');
-       $('#display-date').addClass('icon');
-     }
-
-     $.get( "/json", function( data ) {
-          createHomepageGoogleMap(data,false);
-     });
-
-
-  });*/
-
   function toggleMH(){
 
         $('#AD, #KD, #ABD').iCheck('toggle');
@@ -294,9 +259,11 @@ $(function() {
   $('input').iCheck('check');
   toggleMH()
 
+  var _latitude = 24.443159;
+  var _longitude = -93.867188;
 
   $.get( "/json", function( data ) {
-      createHomepageGoogleMap(data,true);
+      createHomepageGoogleMap(_latitude,_longitude,data);
   });
 
 
