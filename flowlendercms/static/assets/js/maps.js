@@ -570,7 +570,6 @@ function CheckDays(date){
 function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
 
               var visibleArray = [];
-              var sortedArray  = [];
               var visibleItemsArray = [];
               var category;
 
@@ -579,9 +578,6 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
                       category = json.data[i].category;
                       pushItemsToArray(json, i, category, visibleItemsArray);
                       visibleArray.push(loadedMarkers[i]);
-
-                      sortedArray.push({id:json.data[i].id,name:json.data[i].title,date:json.data[i].event_date});
-
                       $.each( visibleArray, function (i) {
                           setTimeout(function(){
                               if ( map.getBounds().contains(visibleArray[i].getPosition()) ){
@@ -600,7 +596,7 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
 
               // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-             sortArray(sortedArray,visibleItemsArray,sortbyDate);
+             //sortArray(sortedArray,visibleItemsArray,sortbyDate);
 
               $('.items-list .results').html( visibleItemsArray );
 
@@ -657,7 +653,7 @@ function sortArray(sortedArray, visiableItemArray,sortbyDate){
 
        for (var i = 0; i < sortedArray.length; i++)
         {
-              
+
               var fnd=findIndex(visiableItemArray,sortedArray[i].id+"li");
 
 
