@@ -259,7 +259,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             _latitudeX = position.coords.latitude;
             _longitudeX = position.coords.longitude;
             map.setCenter( locationCenter );
-            map.setZoom(14);
+            map.setZoom(4);
 
 			var markerContent = document.createElement('DIV');
 			markerContent.innerHTML =
@@ -309,10 +309,10 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
             if (place.geometry.viewport) {
                 map.fitBounds(place.geometry.viewport);
-                map.setZoom(14);
+                map.setZoom(4);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(14);
+                map.setZoom(4);
             }
 
             //marker.setPosition(place.geometry.location);
