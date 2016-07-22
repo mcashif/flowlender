@@ -221,7 +221,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                   $('#display-name').addClass('icon');
               }
 
-              dynamicLoadMarkers(map, newMarkers, json,true);
+              //dynamicLoadMarkers(map, newMarkers, json,true);
 
          });
 
@@ -236,7 +236,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
               $('#display-date').addClass('icon');
             }
 
-            dynamicLoadMarkers(map, newMarkers, json,false);
+            //dynamicLoadMarkers(map, newMarkers, json,false);
 
          });
 
