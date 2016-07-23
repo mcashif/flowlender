@@ -331,14 +331,17 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" id="' + json.data[a].id + '"><h1>' + json.data[a].promotor + '</h1></a>' +
-                    '<h3>' + json.data[a].title + '</h3>' +
+                    '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].promotor + '</h3></a>' +
+                    '<h4>' + json.data[a].title + '</h4>' +
                     drawPrice(json.data[a].event_date) +
-                    '<a href="#">More Info...</a>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<span>' + "$"+json.data[a].cost + '</span>' +
                             '<span>' + json.data[a].city + ","+ json.data[a].city + ","+ json.data[a].zip_code+ '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="info">' +
+                        '<div class="type">' +
+                            '<a href="www.google.com" ><span>' +"More info..."+ '</span></a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
