@@ -18,6 +18,10 @@ if( $body.hasClass('map-fullscreen') ) {
 var _latitude = 24.443159;
 var _longitude = -93.867188;
 var map;
+var markerClicked = 0;
+var activeMarker = false;
+var lastClicked = false;
+var sorting = "promotor";
 
 function setMap(){
 
@@ -54,9 +58,6 @@ function createHomepageGoogleMap(json){
         map=setMap();
 
         var newMarkers = [];
-        var markerClicked = 0;
-        var activeMarker = false;
-        var lastClicked = false;
         for (var i = 0; i < json.data.length; i++) {
 
             // Google map marker content -----------------------------------------------------------------------------------
@@ -104,18 +105,19 @@ function createHomepageGoogleMap(json){
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     google.maps.event.addListener(map, 'click', function(event) {
-                        lastClicked = newMarkers[i];
+                        lastClicked = marker;
                     });
-                    activeMarker = newMarkers[i];
+                    activeMarker = marker;
                     if( activeMarker != lastClicked ){
+
                         for (var h = 0; h < newMarkers.length; h++) {
                             newMarkers[h].content.className = 'marker-loaded';
                             newMarkers[h].infobox.close();
                         }
 
-                        newMarkers[i].infobox.open(map, this);
-                        newMarkers[i].infobox.setOptions({ boxClass:'fade-in-marker'});
-                        newMarkers[i].content.className = 'marker-active marker-loaded';
+                        marker.infobox.open(map, this);
+                        marker.infobox.setOptions({ boxClass:'fade-in-marker'});
+                        marker.content.className = 'marker-active marker-loaded';
                         markerClicked = 1;
                         var item="#"+json.data[i].id+"li"
                         $(".items-list").mCustomScrollbar('scrollTo',  item);
@@ -160,7 +162,7 @@ function createHomepageGoogleMap(json){
             });
 
 
-            AddEvents(newMarkers, json);
+            addEvents(newMarkers, json);
 
             redrawMap('google', map);
 
@@ -257,22 +259,22 @@ function UserLocationAutoComplete(){
           });
 }
 
-function AddEvents(newMarkers, json){
+function addEvents(newMarkers, json){
 
               google.maps.event.addListener(map, 'idle', function() {
                 dynamicLoadMarkers(map, newMarkers, json);
               });
 
               $('input').on('ifChecked', function(event){
-                    dynamicLoadMarkers(map, newMarkers, json);
+                      dynamicLoadMarkers(map, newMarkers, json);
               });
 
               $('input').on('ifUnchecked', function(event){
-                    dynamicLoadMarkers(map, newMarkers, json);
+                      dynamicLoadMarkers(map, newMarkers, json);
               });
 
               $('#type').on('change', function () {
-                    dynamicLoadMarkers(map, newMarkers, json);
+                      dynamicLoadMarkers(map, newMarkers, json);
               });
 
               $("#searchForm").submit(function(e) {
@@ -281,7 +283,7 @@ function AddEvents(newMarkers, json){
               });
 
               $('#distance').on('change', function () {
-                  dynamicLoadMarkers(map, newMarkers, json);
+                    dynamicLoadMarkers(map, newMarkers, json);
               });
 
               $('#daysx').on('change', function () {
@@ -290,11 +292,18 @@ function AddEvents(newMarkers, json){
 
               $('#display-date').on('click',function(){
                     if(!$('#display-date').hasClass('active')){
+
                         $('#display-date .active').removeClass('icon');
                         $(this).addClass('icon active');
+
                         $('#display-name').removeClass('icon active');
                         $('#display-name').addClass('icon');
+
+                        $('#display-promotor').removeClass('icon active');
+                        $('#display-promotor').addClass('icon');
                     }
+                      sorting="date";
+                      dynamicLoadMarkers(map, newMarkers, json);
                });
 
                $('#display-name').on('click',function(){
@@ -306,7 +315,30 @@ function AddEvents(newMarkers, json){
 
                     $('#display-date').removeClass('icon active');
                     $('#display-date').addClass('icon');
+
+                    $('#display-promotor').removeClass('icon active');
+                    $('#display-promotor').addClass('icon');
                   }
+                      sorting="name";
+                      dynamicLoadMarkers(map, newMarkers, json);
+               });
+
+
+               $('#display-promotor').on('click',function(){
+
+                  if(!$('#display-promotor').hasClass('active')){
+
+                    $('#display-promotor .active').removeClass('icon');
+                    $(this).addClass('icon active');
+
+                    $('#display-date').removeClass('icon active');
+                    $('#display-date').addClass('icon');
+
+                    $('#display-name').removeClass('icon active');
+                    $('#display-name').addClass('icon');
+                  }
+                      sorting="promotor";
+                      dynamicLoadMarkers(map, newMarkers, json);
                });
 
 }
@@ -319,8 +351,8 @@ function AddEvents(newMarkers, json){
 function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
     var priceIcon= "/static/assets/icons/store/apparel/umbrella-2.png" ;
-    visibleItemsArray.push(
-        '<li id="' + json.data[a].id + "li" +'">' +
+    visibleItemsArray.push({id:json.data[a].id, name:json.data[a].title , promotor: json.data[a].promotor , date:json.data[a].event_date,
+        html: '<li id="' + json.data[a].id + "li" +'">' +
             '<div class="item" id="' + json.data[a].id + '">' +
                 '<a href="www.google.com" class="image">' +
                     '<div class="inner">' +
@@ -341,13 +373,14 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '</div>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<a href="www.google.com" ><span>' +"More info..."+ '</span></a>' +
+                             '<a id="' + json.data[a].id +'"class="som">' +
+                             '<span>' +"Show on Map..."+ '</span></a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
         '</li>'
-    );
+    });
 
     function drawPrice(price){
         if( price ){
@@ -547,10 +580,11 @@ function CheckDays(date){
 
 }
 
-function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
+function dynamicLoadMarkers(map, loadedMarkers, json){
 
               var visibleArray = [];
               var visibleItemsArray = [];
+              var visibleItemsArrayX = [];
               var category;
 
               for (var i = 0; i < json.data.length; i++) {
@@ -576,11 +610,12 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
 
               // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-             //sortArray(sortedArray,visibleItemsArray,sortbyDate);
+             sortArray(visibleItemsArray,visibleItemsArrayX);
 
-              $('.items-list .results').html( visibleItemsArray );
+              $('.items-list .results').html( visibleItemsArrayX );
 
               var $singleItem = $('.results .item');
+              var $showonmap = $('.som');
 
               $singleItem.hover(
                   function(){
@@ -591,20 +626,32 @@ function dynamicLoadMarkers(map, loadedMarkers, json,sortbyDate){
                   }
               );
 
+              $showonmap.click(
+
+                function(){
+
+                    google.maps.event.trigger(loadedMarkers[ $(this).attr('id') - 1 ], 'click');
+
+                }
+
+              );
+
 }
 
-function sortArray(sortedArray, visiableItemArray,sortbyDate){
+function sortArray(visibleItemsArray, visiableItemArrayX,sortbyDate){
 
-      if(sortbyDate){
+      if(sorting=="date"){
 
-                         sortedArray.sort(function(a, b){
+                         visibleItemsArray.sort(function(a, b){
                          var dateA=new Date(a.date), dateB=new Date(b.date)
                          return dateA-dateB //sort by date ascending
                         })
 
-                    }else{
+                    }
 
-                           sortedArray.sort(function(a, b){
+      if(sorting=="name"){
+
+                           visibleItemsArray.sort(function(a, b){
                            var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
                            if (nameA < nameB) //sort string ascending
                             return -1
@@ -614,37 +661,27 @@ function sortArray(sortedArray, visiableItemArray,sortbyDate){
                           })
         }
 
-        var newArray = visiableItemArray.slice();
+        if(sorting=="promotor"){
+
+                             visibleItemsArray.sort(function(a, b){
+                             var nameA=a.promotor.toLowerCase(), nameB=b.promotor.toLowerCase()
+                             if (nameA < nameB) //sort string ascending
+                              return -1
+                             if (nameA > nameB)
+                              return 1
+                             return 0 //default return value (no sorting)
+                            })
+          }
 
 
-       for (var i = 0; i < sortedArray.length; i++)
-        {
+        for (var key in visibleItemsArray) {
 
-              var fnd=findIndex(visiableItemArray,sortedArray[i].id+"li");
-
-
-              visiableItemArray[i] = newArray[fnd];
-
+              visiableItemArrayX.push(visibleItemsArray[key].html);
         }
 
 }
 
-function findIndex(visiableItemArray,index){
 
-
-
-  for (var i = 0; i < visiableItemArray.length; i++)
-   {
-
-         if(visiableItemArray[i].search(index)>-1){
-              return i;
-            }
-
-   }
-
-   return 0;
-
-}
 // Redraw map after item list is closed --------------------------------------------------------------------------------
 
 function redrawMap(mapProvider, map){

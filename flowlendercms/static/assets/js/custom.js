@@ -493,15 +493,6 @@ function initializeOwl(_rtl){
     });
 }
 
-// Specific data for each item -----------------------------------------------------------------------------------------
-
-function drawItemSpecific(category, json, a){
-    var itemSpecific = '';
-     itemSpecific += '<h1>' +"XXXXX"+ '</h1>';
-            return itemSpecific;
-
-}
-
 // Quick View ----------------------------------------------------------------------------------------------------------
 
 function quickView(id){
