@@ -35,7 +35,7 @@
                     <div class="wrapper">
                         <ul class="main-navigation navigation-top-header"></ul>
                         <ul class="user-area">
-                            <li><a href="sign-in.html">Home</a></li>
+                            <li><a href="/index">Home</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -61,7 +61,6 @@
                             <section class="block" id="main-content">
                                 <header class="page-title">
                                     <div class="title">
-                                        <h1>{{ event.event_date }}</h1>
                                         <h1>{{ event.event_name }}</h1>
                                         <figure>{{ event.event_promoter }}</figure>
                                     </div>
@@ -141,15 +140,15 @@
                                                   {% endif %}
 
                                                   {% if event.purse  %}
-                                                    <li>purse</li>
+                                                    <li>Purse</li>
                                                   {% endif %}
 
                                                   {% if event.absolute  %}
-                                                    <li>absolute</li>
+                                                    <li>Absolute</li>
                                                   {% endif %}
 
                                                   {% if event.adults  %}
-                                                    <li>adults</li>
+                                                    <li>Adults</li>
                                                   {% endif %}
 
                                                   {% if event.kids_special_format  %}
@@ -167,17 +166,35 @@
                                         <figure>
                                             <div class="info">
                                                 <i class="fa fa-globe"></i>
-                                                <a href="#">{{ event.event_web }}</a>
+                                                <a href={{ event.event_web }}>{{ event.event_web }}</a>
                                             </div>
                                         </figure>
 
                                     </div>
                                     <!-- /.col-md-8-->
+
                                 </div>
                                 <!-- /.row -->
                             </section>
                             <!-- /#main-content-->
                         </div>
+                        <!--Sidebar-->
+                        <div class="col-md-3">
+                            <aside id="sidebar">
+                                <section>
+                                    <header><h2>{{ event.event_date }}</h2></header>
+                                        <div class="wrapper">
+                                            <div class="image"><img src="{{ event.large_image.url }}" alt=""></div>
+                                        </div>
+
+                                </section>
+
+
+                            </aside>
+                            <!-- /#sidebar-->
+                        </div>
+                        <!-- /.col-md-3-->
+                        <!--end Sidebar-->
                         <!-- /.col-md-8-->
                         <!-- /.col-md-3-->
                         <!--end Sidebar-->

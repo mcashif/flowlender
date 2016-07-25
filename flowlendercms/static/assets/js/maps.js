@@ -372,7 +372,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].promotor + '</h3></a>' +
+                    '<a href="/detail/' + json.data[a].id +'" id="' + json.data[a].id + '"><h3>' + json.data[a].promotor + '</h3></a>' +
                     '<h4>' + json.data[a].title + '</h4>' +
                     drawPrice(json.data[a].event_date) +
                     '<div class="info">' +
