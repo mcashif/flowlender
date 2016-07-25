@@ -77,22 +77,16 @@
                                                 <div><b>City:</b>{{ event.city }}</div>
                                                 <div><b>State:</b>{{ event.state }}</div>
                                                 <div><b>Zip:</b>{{ event.zip_code }}</div>
-                                                <figure>
-                                                    <div class="info">
-                                                        <i class="fa fa-globe"></i>
-                                                        <a href="#">{{ event.event_web }}</a>
-                                                    </div>
-                                                </figure>
                                             </address>
                                         </section>
                                         <!--end Contact-->
                                         <!--Rating-->
                                         <section>
-                                            <header<h3>Pricing</h3></header>
+                                            <header><h3>Pricing</h3></header>
                                             <address>
-                                                <div><b>Cost:</b>{{ event.cost }}</div>
+                                                <div><b>Cost:</b>${{ event.cost }}</div>
                                                 <div><b>Pre Date:</b>{{ event.predate }}</div>
-                                                <div><b>Late Cost:</b>{{ event.cost_late }}</div>
+                                                <div><b>Late Cost:</b>${{ event.cost_late }}</div>
                                                 <div><b>Cutt Date:</b>{{ event.cutoff_date }}</div>
                                             </address>
                                         </section>
@@ -102,7 +96,6 @@
                                     <!--Content-->
                                     <div class="col-md-8 col-sm-8">
                                         <section>
-
                                             <!-- /.item-gallery -->
                                             <article class="block">
                                                 <header><h2>Description</h2></header>
@@ -119,8 +112,8 @@
                                                     <li><b>Rule:</b> {{ event.rule }}</li>
                                                     <li><b>Bracket:</b> {{ event.bracket }}</li>
                                                     {% if event.kids_special_format  %}
-                                                    <li><b>Kids Special Format:</b>{{ event.kids_special_formats }}</li>
                                                     <li><b>Kids Special Rule:</b> {{ event.kids_special_rules }}</li>
+                                                    <li><b>Kids Special Format:</b>{{ event.kids_special_formats }}</li>
                                                     {% endif %}
 
                                                 </ul>
@@ -170,6 +163,13 @@
                                             </article>
                                             <!-- /.block -->
                                         </section>
+
+                                        <figure>
+                                            <div class="info">
+                                                <i class="fa fa-globe"></i>
+                                                <a href="#">{{ event.event_web }}</a>
+                                            </div>
+                                        </figure>
 
                                     </div>
                                     <!-- /.col-md-8-->
