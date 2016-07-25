@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', 'flowlendercms.views.index', name='index'),
     url(r'^index/', 'flowlendercms.views.index', name='index'),
+    url(r'^detail/(?P<event_id>[0-9]+)/$', 'flowlendercms.views.detail', name='detail'),
     url(r'^submit/', 'flowlendercms.views.submit', name='submit'),
     url(r'^json/', 'flowlendercms.views.getjson', name='getjson'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

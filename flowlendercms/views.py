@@ -14,6 +14,9 @@ def index(request):
     template = loader.get_template("flowlendercms/index.html")
     return HttpResponse(template.render())
 
+def detail(request,event_id):
+    event = get_object_or_404(EventDetail, pk=event_id)
+    return render(request, 'flowlendercms/event_detail.html', {'event': event})
 
 def getjson(request):
     dataX={}

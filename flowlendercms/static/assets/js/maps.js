@@ -22,6 +22,7 @@ var markerClicked = 0;
 var activeMarker = false;
 var lastClicked = false;
 var sorting = "promotor";
+var outside = false;
 
 function setMap(){
 
@@ -106,6 +107,7 @@ function createHomepageGoogleMap(json){
                 return function() {
                     google.maps.event.addListener(map, 'click', function(event) {
                         lastClicked = marker;
+                        outside=false;
                     });
                     activeMarker = marker;
                     if( activeMarker != lastClicked ){
@@ -118,7 +120,10 @@ function createHomepageGoogleMap(json){
                         marker.infobox.open(map, this);
                         marker.infobox.setOptions({ boxClass:'fade-in-marker'});
                         marker.content.className = 'marker-active marker-loaded';
-                        markerClicked = 1;
+
+                        if(!outside)
+                          markerClicked = 1;
+
                         var item="#"+json.data[i].id+"li"
                         $(".items-list").mCustomScrollbar('scrollTo',  item);
 
@@ -138,12 +143,13 @@ function createHomepageGoogleMap(json){
             // Close infobox after click on map --------------------------------------------------------------------------------
             google.maps.event.addListener(map, 'click', function(event) {
                 if( activeMarker != false && lastClicked != false ){
-                    if( markerClicked == 1 ){
+                    if( markerClicked == 1 && !outside){
                         activeMarker.infobox.open(map);
                         activeMarker.infobox.setOptions({ boxClass:'fade-in-marker'});
                         activeMarker.content.className = 'marker-active marker-loaded';
                     }
                     else {
+                        outside = false;
                         markerClicked = 0;
                         activeMarker.infobox.setOptions({ boxClass:'fade-out-marker' });
                         activeMarker.content.className = 'marker-loaded';
@@ -152,13 +158,16 @@ function createHomepageGoogleMap(json){
                         }, 350);
                     }
                     markerClicked = 0;
+                    outside=false;
                 }
+
                 if( activeMarker != false ){
                     google.maps.event.addListener(activeMarker, 'click', function(event) {
                         markerClicked = 1;
                     });
                 }
                 markerClicked = 0;
+                outside=false;
             });
 
 
@@ -354,7 +363,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
     visibleItemsArray.push({id:json.data[a].id, name:json.data[a].title , promotor: json.data[a].promotor , date:json.data[a].event_date,
         html: '<li id="' + json.data[a].id + "li" +'">' +
             '<div class="item" id="' + json.data[a].id + '">' +
-                '<a href="www.google.com" class="image">' +
+                '<a href="/detail/' + json.data[a].id +'" class="image">' +
                     '<div class="inner">' +
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
@@ -630,6 +639,9 @@ function dynamicLoadMarkers(map, loadedMarkers, json){
 
                 function(){
 
+                    outside = true;
+                    activeMarker = true;
+                    lastClicked = true;
                     google.maps.event.trigger(loadedMarkers[ $(this).attr('id') - 1 ], 'click');
 
                 }
@@ -723,7 +735,7 @@ function drawInfobox(category, infoboxContent, json, i){
 
     if(json.data[i].color)          { var color = json.data[i].color }
         else                        { color = '' }
-    if( json.data[i].price )        { var price = '<div class="price">' + json.data[i].price +  '</div>' }
+    if( json.data[i].event_date )        { var price = '<div class="price">' + json.data[i].event_date +  '</div>' }
         else                        { price = '' }
     if(json.data[i].id)             { var id = json.data[i].id }
         else                        { id = '' }
@@ -746,7 +758,7 @@ function drawInfobox(category, infoboxContent, json, i){
                 '<div class="item-specific">' + drawItemSpecific(category, json, i) + '</div>' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#" class="quick-view" data-toggle="modal" data-target="#modal" id="' + id + '">Event Details</a>' +
+                        '<a href="/detail/' + json.data[i].id + '" class="detail">More Info</a>' +
                         '<hr>' +
                         '<a href="' + json.data[i].event_web +  '" class="detail">Go to Web</a>' +
                     '</div>' +
@@ -777,4 +789,45 @@ function drawItemSpecific(category, json, i){
      itemSpecific += '<h1>'+val+ '</h1>';
             return itemSpecific;
 
+}
+
+////////////
+
+function itemDetailMap(latitude,longitude){
+    var mapCenter = new google.maps.LatLng(latitude,longitude);
+    var mapOptions = {
+        zoom: 8,
+        center: mapCenter,
+        disableDefaultUI: true,
+        scrollwheel: false,
+        styles: mapStyles,
+        panControl: false,
+        zoomControl: false,
+        draggable: true
+    };
+    var mapElement = document.getElementById('map-detail');
+    var map = new google.maps.Map(mapElement, mapOptions);
+    var icon = '';
+
+    // Google map marker content -----------------------------------------------------------------------------------
+
+    var markerContent = document.createElement('DIV');
+    markerContent.innerHTML =
+        '<div class="map-marker">' +
+            '<div class="icon">' +
+            icon +
+            '</div>' +
+        '</div>';
+
+    // Create marker on the map ------------------------------------------------------------------------------------
+
+    var marker = new RichMarker({
+        position: new google.maps.LatLng( latitude, longitude ),
+        map: map,
+        draggable: false,
+        content: markerContent,
+        flat: true
+    });
+
+    marker.content.className = 'marker-loaded';
 }
