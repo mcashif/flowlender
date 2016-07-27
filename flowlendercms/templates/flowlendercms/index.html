@@ -229,7 +229,7 @@ $(function() {
 
   $.get( "/json", function( data1 ) {
 
-      $.get( "http://freegeoip.net/json/github.com", function( data) {
+      $.get( "http://freegeoip.net/json/", function( data) {
         var _latitude = data.latitude;
         var _longitude = data.longitude;
         createHomepageGoogleMap(data1,_latitude,_longitude);
