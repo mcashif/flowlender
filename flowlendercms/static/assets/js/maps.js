@@ -53,8 +53,10 @@ function setMap(){
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function createHomepageGoogleMap(json){
+function createHomepageGoogleMap(json,lat,lng){
 
+      _latitude = lat;
+      _longitude = lng;
 
         map=setMap();
 
