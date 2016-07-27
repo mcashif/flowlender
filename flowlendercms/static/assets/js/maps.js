@@ -368,7 +368,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].small_image+ '" alt="">' +
+                        '<img src="' + json.data[a].large_image+ '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
@@ -747,7 +747,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                        { title = '' }
     if(json.data[i].location)       { var location = json.data[i].location }
         else                        { location = '' }
-    if(json.data[i].small_image)     { var gallery = json.data[i].small_image }
+    if(json.data[i].large_image)     { var gallery = json.data[i].large_image }
         else                        { gallery[0] = '../img/default-item.jpg' }
 
     var ibContent = '';

@@ -36,7 +36,7 @@ def getjson(request):
         data['longitude'] = float(listX[1])
         data['url'] = obj.event_web
 
-        #objP=Promoter.objects.get(pk=obj.event_promoter)
+
         data['promotor'] = str(obj.event_promoter)
 
         data['event_date'] = str(obj.event_date)
@@ -68,7 +68,8 @@ def getjson(request):
         data['event_description'] = obj.event_description
         data['event_web'] = obj.event_web
 
-        data['small_image'] = obj.small_image.url
+        objP=Promoter.objects.get(promoter_name=obj.event_promoter)
+        data['small_image'] = objP.promoter_logo.url
         data['large_image'] = obj.large_image.url
 
 
