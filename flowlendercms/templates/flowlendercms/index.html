@@ -225,23 +225,19 @@
 
 <script>
 
+var _latitude = 24.443159;
+var _longitude = -93.867188;
 
   $.get( "/json", function( data1 ) {
 
-      $.get( "http://freegeoip.net/json/", function( data) {
-        var _latitude = data.latitude;
-        var _longitude = data.longitude;
-
-        {% if lat  %}
-        _latitude={{lat}}
-          {% if lng  %}
-        _longitude={{lng}}
-          {% endif %}
-          {% endif %}
-
-        createHomepageGoogleMap(data1,_latitude,_longitude);
-      });
-
+        $.get( "http://freegeoip.net/json/", function(data) {
+              _latitude = data.latitude;
+              _longitude = data.longitude;
+              createHomepageGoogleMap(data1,_latitude,_longitude);
+        })
+        .fail(function() {
+              createHomepageGoogleMap(data1,_latitude,_longitude);
+        })
   });
 
 //  $(window).on('popstate', function(event) {
