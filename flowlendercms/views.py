@@ -13,7 +13,7 @@ import json
 def index(request):
 
     latitude=0
-    latitude=0
+    longitude=0
 
     if "latitude" in request.session:
         latitude = request.session["latitude"]
