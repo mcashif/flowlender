@@ -230,9 +230,13 @@ $(function() {
 
       var strX="{{ event.event_geocode }}";
       var array = strX.split(',');
-      var latitude=array[0];
-      var longitude=array[1];
-      itemDetailMap(latitude,longitude)
+      var _latitude=array[0];
+      var _longitude=array[1];
+      itemDetailMap(_latitude,_longitude);
+
+      $.get( "/session",{ latitude:_latitude, longitude:_longitude},function( data ) {
+          alert(data);
+      });
 
 
 })
@@ -241,6 +245,8 @@ $(function() {
         var rtl = false; // Use RTL
         initializeOwl(rtl);
     });
+
+
 </script>
 
 <!--[if lte IE 9]>

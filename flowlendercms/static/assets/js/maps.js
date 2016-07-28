@@ -833,3 +833,11 @@ function itemDetailMap(latitude,longitude){
 
     marker.content.className = 'marker-loaded';
 }
+
+
+function setSession(){
+
+  $.get( "/session",{ latitude:_latitude, longitude:_longitude},function( data ) {
+      alert(data);
+  });
+}

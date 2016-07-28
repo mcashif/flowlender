@@ -11,12 +11,33 @@ import json
 
 
 def index(request):
-    template = loader.get_template("flowlendercms/index.html")
-    return HttpResponse(template.render())
+
+    latitude=0
+    latitude=0
+
+    if "latitude" in request.session:
+        latitude = request.session["latitude"]
+
+    if "longitude" in request.session:
+        longitude = request.session["longitude"]
+
+    return render(request, 'flowlendercms/index.html', {'lat': latitude, 'lng': longitude})
 
 def detail(request,event_id):
     event = get_object_or_404(EventDetail, pk=event_id)
     return render(request, 'flowlendercms/event_detail.html', {'event': event})
+
+def setSessionData(request):
+
+    if "latitude" in request.GET:
+        del request.session['latitude']
+        request.session['latitude'] = request.GET["latitude"]
+
+    if "longitude" in request.GET:
+        del request.session['longitude']
+        request.session['longitude'] = request.GET["longitude"]
+
+    return HttpResponse(request.session['latitude'])
 
 def getjson(request):
     dataX={}
