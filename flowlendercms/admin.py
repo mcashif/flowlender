@@ -1,67 +1,40 @@
 from django.contrib import admin
+from flowlendercms.models import ClientDetail
 from import_export.admin import ImportExportModelAdmin
-from flowlendercms.models import EventDetail,Promoter
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from flowlendercms.models import Profile
+
+class UserProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'profile'
+
+# Define a new User admin
+class UserAdmin(UserAdmin):
+    inlines = (UserProfileInline, )
 
 
-class EventDetailAdmin(ImportExportModelAdmin):
-    fieldsets = [
-    (None, {
-            'fields': ['event_name', 'event_promoter', 'event_date', 'end_date','event_tentitive', 'event_geocode']}),
 
-    ('Address', {
-                    'classes': ('collapse',),
-                    'fields': ['location', 'address', 'city', 'state','zip_code']}),
+class ClientDetailAdmin(ImportExportModelAdmin):
+        fieldsets = (
+            (None, {
+                'fields': ('business_name', 'reffering_party', 'data_date','payment_plan','ammount_request','debit_for','credit_score',
+                'debit_ratio','current_status', 'contact_name')
+            }),
+            ('More Contact Info', {
+                'classes': ('collapse',),
+                'fields': ('mailing_address', 'office_number','mobile_number', 'fax_number','email')
+            }),
+        )
 
-    ('Rules & Brackets', {
-
-                    'classes': ('collapse',),
-                    'fields': ['rule', 'bracket', 'kids_special_formats', 'kids_special_rules']}),
-
-    ('Catagories', {
-
-                    'classes': ('collapse',),
-                    'fields': ['gi', 'nogi', 'kids', 'pro', 'purse', 'absolute','adults', 'kids_special_format']}),
-
-    ('Cost & Details', {
-
-                    'classes': ('collapse',),
-                    'fields': ['cost', 'predate', 'cost_late', 'cutoff_date']}),
-
-    ('More Info', {
-
-                    'classes': ('collapse',),
-                    'fields': ['event_description','event_web']}),
-
-    ('Images', {
-
-                    'classes': ('collapse',),
-                    'fields': ['small_image','large_image']}),
- ]
-
-    list_display = ('image_tag','event_name', 'event_promoter', 'event_date','event_geocode','added','updated')
-    list_display_links = ('event_name', 'event_promoter')
-    readonly_fields = ('image_tag',)
-    search_fields = ['event_name', 'event_promoter']
-    list_filter = ('event_name', 'event_promoter', 'event_date')
-    date_hierarchy = 'event_date'
-    ordering = ('-event_date',)
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "event_promoter":
-            kwargs["queryset"] = Promoter.objects.order_by('promoter_name')
-        return super(EventDetailAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
-
+        list_display = ('business_name', 'reffering_party', 'data_date', 'current_status','debit_ratio')
+        list_display_links = ('business_name', 'reffering_party')
+        search_fields = ['business_name', 'reffering_party']
+        list_filter = ('business_name', 'reffering_party', 'current_status')
         pass
 
-class PromoterAdmin(ImportExportModelAdmin):
-
-        list_display = ('image_tag', 'promoter_name', 'promoter_web')
-        readonly_fields = ('image_tag',)
-        search_fields = ['promoter_name']
-        list_filter = ('promoter_name', 'promoter_web')
-        pass
-
-
-admin.site.register(Promoter,PromoterAdmin)
-admin.site.register(EventDetail,EventDetailAdmin)
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+admin.site.register(ClientDetail,ClientDetailAdmin)

@@ -27,18 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-GEOPOSITION_GOOGLE_MAPS_API_KEY = "AIzaSyDExc5yWgZwyrXGlD9pFbuh17vP9lqvYT8"
-
-GEOPOSITION_MAP_OPTIONS = {
-    'center': {'lat': 39.7036, 'lng': -101.6405},
-    'zoom':5
-}
-
-GEOPOSITION_MARKER_OPTIONS = {
-    'cursor': 'move' ,
-    'position': {'lat': 39.7036, 'lng': -101.6405}
-}
-
 
 # Application definition
 
@@ -51,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     "geoposition",
 ]
 
 MIDDLEWARE_CLASSES = [

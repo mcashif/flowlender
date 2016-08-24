@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en"><head>
+  <head>
+  	<title>Flowlenders &middot; Client Data Entry Application</title>
+  	<link rel="stylesheet" type="text/css" href="{% static 'gridforms/gridforms.css' %}">
+  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  	<script type="text/javascript" src="{% static 'gridforms/gridforms.js' %}"></script>
+  	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  	<style type="text/css">
+  	body {font-family:arial, sans-serif}
+  	</style>
+  </head>
+  <body>
+  	<h1 align="center">Flowlanders Login Page</h1>
+
+<body>
+
+					{% if form.errors %}
+					<p>Your username and password didn't match. Please try again.</p>
+					{% endif %}
+
+					{% if next %}
+					    {% if user.is_authenticated %}
+					    <p>Your account doesn't have access to this page. To proceed,
+					    please login with an account that has access.</p>
+					    {% else %}
+					    <p>Please login to see this page.</p>
+					    {% endif %}
+					{% endif %}
+
+					<form method="post" action="">
+					{% csrf_token %}
+				  <table align="center">
+					<tr>
+					    <td>{{ form.username.label_tag }}</td>
+					    <td>{{ form.username }}</td>
+					</tr>
+					<tr>
+					    <td>{{ form.password.label_tag }}</td>
+					    <td>{{ form.password }}</td>
+					</tr>
+					</table>
+
+					<p style="text-align: center;"><input type="submit" value="login" /></p>
+					<input type="hidden" name="next" value="{{ next }}" />
+					</form>
+
+
+
+</body></html>
